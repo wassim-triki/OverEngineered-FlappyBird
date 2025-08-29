@@ -15,7 +15,7 @@ public class ScoreService : MonoBehaviour
         High = PlayerPrefs.GetInt("HighScore", 0);
     }
 
-    public void Reset()
+    public void ResetScore()
     {
         Current = 0;
         OnScoreChanged?.Invoke(Current);
