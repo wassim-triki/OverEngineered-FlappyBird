@@ -26,13 +26,11 @@ public class PillarPair : MonoBehaviour
         float half = gap * 0.5f;
         if (topAnchor)    topAnchor.localPosition    = new Vector3(0f, +half, 0f);
         if (bottomAnchor) bottomAnchor.localPosition = new Vector3(0f, -half, 0f);
-        if (scoreGate) scoreGate.SetHeight(gap);
     }
     
     private void OnValidate()
     {
         if (topAnchor && bottomAnchor) SetGap(gap);
-        if (scoreGate) scoreGate.SetHeight(gap);
     }
 
     public void Initialize(ScoreService score)     // ← called by spawner
