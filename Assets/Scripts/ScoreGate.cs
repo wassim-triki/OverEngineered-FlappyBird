@@ -3,6 +3,7 @@ using UnityEngine;
 public class ScoreGate : MonoBehaviour
 {
     [SerializeField] private string playerTag = "Player";
+    private BoxCollider2D _collider;
     private ScoreService _score;
     private bool _consumed;
     
@@ -11,7 +12,9 @@ public class ScoreGate : MonoBehaviour
     public void SetScoreService(ScoreService s) => _score = s;
     public void SetHeight(float gap)
     {
-        transform.localScale = new Vector3(1,gap,1);
+        _collider = GetComponent<BoxCollider2D>();
+        _collider.isTrigger = true;
+        _collider.size = new Vector2(_collider.size.x, gap); 
     }
     
     void OnTriggerEnter2D(Collider2D other)

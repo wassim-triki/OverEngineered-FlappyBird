@@ -31,7 +31,8 @@ public class PillarPair : MonoBehaviour
     
     private void OnValidate()
     {
-        if (topAnchor && bottomAnchor) SetGap(gap); // preview the gap instantly in the editor
+        if (topAnchor && bottomAnchor) SetGap(gap);
+        if (scoreGate) scoreGate.SetHeight(gap);
     }
 
     public void Initialize(ScoreService score)     // ← called by spawner

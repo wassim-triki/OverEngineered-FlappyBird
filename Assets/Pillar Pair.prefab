@@ -256,6 +256,7 @@ GameObject:
   - component: {fileID: 3527340491801804261}
   - component: {fileID: 8389130156718048962}
   - component: {fileID: -3893295848812649242}
+  - component: {fileID: -7763393364385385994}
   m_Layer: 0
   m_Name: Pillar Pair
   m_TagString: Untagged
@@ -324,6 +325,33 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: '::'
   playerTag: Player
+--- !u!50 &-7763393364385385994
+Rigidbody2D:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4359974746486848618}
+  m_BodyType: 1
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDamping: 0
+  m_AngularDamping: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_Interpolate: 1
+  m_SleepingMode: 1
+  m_CollisionDetection: 1
+  m_Constraints: 0
 --- !u!1 &9142099155324606591
 GameObject:
   m_ObjectHideFlags: 0
@@ -352,7 +380,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 4.7, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 0, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 8845984266437005931}
@@ -414,5 +442,5 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 1, y: 0.0001}
   m_EdgeRadius: 0

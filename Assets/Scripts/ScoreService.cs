@@ -6,8 +6,6 @@ public class ScoreService : MonoBehaviour
 {
     public event Action<int> OnScoreChanged;
     public event Action<int> OnHighScoreChanged;
-    
-    private int  current;
     public int Current { get; private set; }
     public int High { get; private set; }
 
