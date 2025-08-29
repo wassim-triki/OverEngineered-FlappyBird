@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class PillarsMover : MonoBehaviour
 {
-    [SerializeField] private float speed = 2f; // units/sec to the left
+    [SerializeField] private float speed = 2f; 
+    private bool _frozen;
     private Rigidbody2D _rigidbody;
 
     private void Awake()
@@ -14,7 +15,12 @@ public class PillarsMover : MonoBehaviour
 
     private void FixedUpdate()
     {
-        _rigidbody.linearVelocity = Vector2.left * speed;
+        if (_frozen) return;
+        _rigidbody.MovePosition(_rigidbody.position + Vector2.left * speed * Time.fixedDeltaTime);
+    }
+    public void Freeze()
+    {
+        _frozen = true;
     }
 
 }

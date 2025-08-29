@@ -28,7 +28,7 @@ public class PillarsSpawner : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if (!enabled) return;
         _timer += Time.deltaTime;
         if (_timer >= spawnRate)
         {
@@ -49,4 +49,7 @@ public class PillarsSpawner : MonoBehaviour
         pair.Initialize(scoreService);
         pair.SetGap(gap);
     }
+    
+    public void Freeze() => enabled = false;
+
 }

@@ -19,7 +19,6 @@ public class ScoreGate : MonoBehaviour
     
     void OnTriggerEnter2D(Collider2D other)
     {
-        Debug.Log(other.tag);
         if (_consumed || _score == null) return;
         if (!other.CompareTag(playerTag)) return;
 

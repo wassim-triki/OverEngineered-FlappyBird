@@ -26,4 +26,17 @@ public class BirdScript : MonoBehaviour
             _rigidbody2D.linearVelocity = Vector2.up * jumpForce;
         }
     }
+    
+
+
+    public void EnableControls()
+    {
+        _jumpAction?.Enable();
+    }
+    public void DisableControls()
+    {
+        _jumpAction?.Disable();
+    }
+    
+
 }
