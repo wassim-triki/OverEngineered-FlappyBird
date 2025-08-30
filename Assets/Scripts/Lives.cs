@@ -11,6 +11,7 @@ public sealed class Lives : MonoBehaviour
     
     public event Action<int,int> OnLivesChanged;
     public event Action<DamageContext>OnDeath;
+    public event Action<DamageContext> OnLifeLost;
 
 
     public void ResetRun()
@@ -39,7 +40,8 @@ public sealed class Lives : MonoBehaviour
         CurrentLives = Mathf.Clamp(CurrentLives-amount,0,MaxLives);
 
         OnLivesChanged?.Invoke(CurrentLives,MaxLives);
-        Debug.Log($"[Lives] -{amount} → {CurrentLives}/{MaxLives}", this);
+        OnLifeLost?.Invoke(ctx);
+        Debug.Log($"[Lives] -{amount} → {CurrentLives}/{MaxLives} [Source] {ctx?.Source}", this);
         
         if (CurrentLives == 0)
         {

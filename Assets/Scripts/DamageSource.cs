@@ -12,7 +12,10 @@ namespace DefaultNamespace
         [SerializeField] private LayerMask targetLayers = ~0;     // who we can hurt   
         [SerializeField] private bool ignoreSelfHierarchy = true;
 
-        private void OnTriggerEnter2D(Collider2D other)
+        void OnTriggerEnter2D(Collider2D other)  => TryDamage(other);
+        void OnCollisionEnter2D(Collision2D col) => TryDamage(col.collider);
+
+        void TryDamage(Collider2D other)
         {
             if (((1 << other.gameObject.layer) & targetLayers) == 0) return;
             if (ignoreSelfHierarchy && other.gameObject.transform.IsChildOf(transform.root)) return;

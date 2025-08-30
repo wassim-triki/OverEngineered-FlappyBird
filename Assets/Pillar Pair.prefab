@@ -78,9 +78,9 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_GlobalIlluminationMeshLod: 0
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingLayerID: -1741034357
+  m_SortingLayer: 1
+  m_SortingOrder: 1
   m_Sprite: {fileID: 3310002292416464744, guid: 0d0006642ec8f5f4a8ce5671c6da4f8a, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -180,7 +180,7 @@ Transform:
   m_GameObject: {fileID: 3398660091466588201}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 7.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -212,7 +212,7 @@ Transform:
   m_GameObject: {fileID: 3928393254387986027}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -0, z: 0}
+  m_LocalPosition: {x: 0, y: -7.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -297,9 +297,9 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_GlobalIlluminationMeshLod: 0
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingLayerID: -1741034357
+  m_SortingLayer: 1
+  m_SortingOrder: 1
   m_Sprite: {fileID: 3310002292416464744, guid: 0d0006642ec8f5f4a8ce5671c6da4f8a, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -427,7 +427,7 @@ MonoBehaviour:
   topAnchor: {fileID: 3450757431338019715}
   bottomAnchor: {fileID: 2864243888677939285}
   scoreGate: {fileID: 5362849866704262360}
-  gap: 0
+  gap: 15
   deadZone: -50
 --- !u!114 &8389130156718048962
 MonoBehaviour:
@@ -441,7 +441,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d8b233b1d294bd542979409f77733187, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PillarsMover
-  speed: 10
+  speed: 15
 --- !u!114 &-3893295848812649242
 MonoBehaviour:
   m_ObjectHideFlags: 0

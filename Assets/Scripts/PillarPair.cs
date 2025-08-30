@@ -37,4 +37,11 @@ public class PillarPair : MonoBehaviour
     {
         if (scoreGate) scoreGate.SetScoreService(score);
     }
+
+    public void DisableScoring()
+    {
+        Debug.Log($"[PillarPair] DisableScoring", this);
+        if(!scoreGate) return;
+        Destroy(scoreGate.gameObject);
+    }
 }

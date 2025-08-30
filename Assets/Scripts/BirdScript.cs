@@ -10,7 +10,8 @@ public class BirdScript : MonoBehaviour
     
 
     
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    void OnEnable()  => _jumpAction?.Enable();
+
     void Start()
     {
         _rigidbody2D = gameObject.GetComponent<Rigidbody2D>();
@@ -27,16 +28,12 @@ public class BirdScript : MonoBehaviour
         }
     }
     
+    
 
 
-    public void EnableControls()
-    {
-        _jumpAction?.Enable();
-    }
-    public void DisableControls()
-    {
-        _jumpAction?.Disable();
-    }
+
+    public void EnableControls()  => _jumpAction?.Enable();
+    public void DisableControls() => _jumpAction?.Disable();
     
 
 }
