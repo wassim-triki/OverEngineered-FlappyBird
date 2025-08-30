@@ -41,5 +41,11 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: Pillars
+    uniqueID: 2553932939
+    locked: 0
+  - name: Player
+    uniqueID: 802203557
+    locked: 0
   m_RenderingLayers:
   - Default
