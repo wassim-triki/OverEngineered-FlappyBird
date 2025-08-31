@@ -506,8 +506,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b3d4f96c777416848b4ba3cfec29663d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BirdScript
-  jumpForce: 35
-  gravityScale: 10
+  initialJumpVel: 45
+  maxHoldTime: 0.05
+  holdBoostVelPerSec: 80
+  baseGravityScale: 15
+  fallGravityScale: 25
+  cutGravityScale: 35
+  holdGravityScale: 8
 --- !u!58 &444666083
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -712,7 +717,7 @@ Camera:
   m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 2
-  m_BackGroundColor: {r: 0.735849, g: 0.735849, b: 0.735849, a: 0}
+  m_BackGroundColor: {r: 1, g: 1, b: 1, a: 0}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
   m_FOVAxisMode: 0
@@ -963,15 +968,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::DifficultyController
   rampScore: 30
   score: {fileID: 491258287}
-  enableGapScaling: 0
+  enableGapScaling: 1
   enableSpeedScaling: 1
   enableSpawnScaling: 1
   minSpeed: 10
   maxSpeed: 50
   maxInterval: 3
   minInterval: 0.5
-  maxGap: 20
-  minGap: 11
+  maxGap: 15
+  minGap: 1
 --- !u!4 &830024061
 Transform:
   m_ObjectHideFlags: 0
