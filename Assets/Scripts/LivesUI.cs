@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+
 public class LivesUI : MonoBehaviour
 {
     [SerializeField] private Lives playerLives;
@@ -27,6 +28,7 @@ public class LivesUI : MonoBehaviour
     
     public void HandleLivesChanged(int currentLives, int maxLives)
     {
+        Debug.Log("triggered from editor");
         if (_cells.Count > 0 && _cells.Count != maxLives)
         {
             ClearCells();

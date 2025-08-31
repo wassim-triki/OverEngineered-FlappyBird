@@ -9,6 +9,4 @@ public class LifeCell : MonoBehaviour
         if (full != null)
             full.SetActive(fill);
     }
-
-    
 }

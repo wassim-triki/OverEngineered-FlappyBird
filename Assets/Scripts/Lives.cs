@@ -65,6 +65,7 @@ public sealed class Lives : MonoBehaviour
         }
     }
     
+#if UNITY_EDITOR
     [ContextMenu("Debug/Reset Run")]
     private void Debug_Reset() => ResetRun();
     
@@ -77,3 +78,4 @@ public sealed class Lives : MonoBehaviour
     [ContextMenu("Debug/Gain Max Life")]
     private void Debug_GainMaxLife() => GainMaxLife(1);
 }
+#endif
