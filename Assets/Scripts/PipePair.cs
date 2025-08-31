@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-public class PillarPair : MonoBehaviour
+public class PipePair : MonoBehaviour
 {
     [Header("Children")]
     [SerializeField] private Transform topAnchor;
@@ -40,7 +40,7 @@ public class PillarPair : MonoBehaviour
 
     public void DisableScoring()
     {
-        Debug.Log($"[PillarPair] DisableScoring", this);
+        Debug.Log($"[PipePair] DisableScoring", this);
         if(!scoreGate) return;
         Destroy(scoreGate.gameObject);
     }

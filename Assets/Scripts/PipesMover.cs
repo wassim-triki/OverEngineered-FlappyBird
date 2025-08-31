@@ -2,7 +2,7 @@ using System;
 using System.Xml.Schema;
 using UnityEngine;
 
-public class PillarsMover : MonoBehaviour
+public class PipesMover : MonoBehaviour
 {
     [SerializeField] private float speed = 2f; 
     private bool _frozen;

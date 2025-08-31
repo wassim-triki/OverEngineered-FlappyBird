@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class BirdScript : MonoBehaviour
+public class Player : MonoBehaviour
 {
     private Rigidbody2D _rigidbody2D;
     [SerializeField] private int jumpForce = 35;

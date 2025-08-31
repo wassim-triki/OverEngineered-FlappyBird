@@ -1,13 +1,14 @@
 using DefaultNamespace;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class GameManager : MonoBehaviour
 {
     [SerializeField] private Lives playerLives;
-    [SerializeField] private BirdScript playerScript;
-    [SerializeField] private PillarsSpawner pillarsSpawner;
-    [SerializeField] private PillarsMover pillarsMover;
+    [SerializeField] private Player playerScript;
+    [SerializeField] private PipesSpawner pipesSpawner;
+    [SerializeField] private PipesMover pipesMover;
     
     void OnEnable()
     {
@@ -28,8 +29,8 @@ public class GameManager : MonoBehaviour
     void HandleGameOver(DamageContext ctx)
     {
         playerScript.DisableControls();
-        pillarsSpawner.Freeze();
-        foreach (PillarsMover mover in FindObjectsByType<PillarsMover>(FindObjectsSortMode.None))
+        pipesSpawner.Freeze();
+        foreach (PipesMover mover in FindObjectsByType<PipesMover>(FindObjectsSortMode.None))
         {
             mover.Freeze();
         }
@@ -40,7 +41,7 @@ public class GameManager : MonoBehaviour
         if (ctx != null)
         {
             // if the ctx source is a top pillar or a bottom pillar than its parent must be a PillarPair
-            var pair = ctx.Source.GetComponentInParent<PillarPair>();
+            var pair = ctx.Source.GetComponentInParent<PipePair>();
             pair?.DisableScoring();                 
         }
     }

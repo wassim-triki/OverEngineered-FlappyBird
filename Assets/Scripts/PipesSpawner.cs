@@ -1,10 +1,11 @@
 using System;
 using UnityEngine;
+using UnityEngine.Serialization;
 
-public class PillarsSpawner : MonoBehaviour
+public class PipesSpawner : MonoBehaviour
 {
     [Header("Prefabs")]
-    [SerializeField] private PillarPair pillarPairPrefab;
+    [SerializeField] private PipePair pipePairPrefab;
     [Header("Services")]
     [SerializeField] private ScoreService scoreService;
     [Header("Spawn")]
@@ -45,7 +46,7 @@ public class PillarsSpawner : MonoBehaviour
         float centerMax = transform.position.y + heightOffset - gap * 0.75f;
         float centerY = UnityEngine.Random.Range(centerMin, centerMax);
         Vector3 spawnPos = new Vector3(transform.position.x, centerY, 0f);
-        PillarPair pair = Instantiate(pillarPairPrefab, spawnPos, Quaternion.identity);
+        PipePair pair = Instantiate(pipePairPrefab, spawnPos, Quaternion.identity);
         pair.Initialize(scoreService);
         pair.SetGap(gap);
     }
