@@ -6,7 +6,8 @@ public sealed class Lives : MonoBehaviour
 {
     [field: SerializeField, Min(1)]
     public int MaxLives {get; private set;} = 3;
-    public int CurrentLives {get; private set;}
+
+    [field: SerializeField, Min(1)] public int CurrentLives { get; private set; } = 2;
     public bool IsAlive => CurrentLives > 0;
     
     public event Action<int,int> OnLivesChanged;
@@ -16,7 +17,7 @@ public sealed class Lives : MonoBehaviour
 
     public void ResetRun()
     {
-        CurrentLives = MaxLives;
+        // CurrentLives = MaxLives;
         OnLivesChanged?.Invoke(CurrentLives,MaxLives);
         Debug.Log($"[Lives] ResetRun → {CurrentLives}/{MaxLives}", this);
     }
@@ -31,6 +32,20 @@ public sealed class Lives : MonoBehaviour
         {
             OnLivesChanged?.Invoke(CurrentLives,MaxLives);
             Debug.Log($"[Lives] +{amount} → {CurrentLives}/{MaxLives}", this);
+        }
+    }
+    
+    public void GainMaxLife(int amount = 1)
+    {
+        if(amount <= 0 ||!IsAlive) return;
+        int oldMaxLives = MaxLives;
+        MaxLives = Mathf.Clamp(MaxLives+amount,1,99);
+        CurrentLives = MaxLives;
+        bool maxLifeGained = oldMaxLives != MaxLives;
+        if (maxLifeGained)
+        {
+            OnLivesChanged?.Invoke(CurrentLives,MaxLives);
+            Debug.Log($"[Lives] Max +{amount} → {CurrentLives}/{MaxLives}", this);
         }
     }
 
@@ -59,4 +74,6 @@ public sealed class Lives : MonoBehaviour
     [ContextMenu("Debug/Gain Life")]
     private void Debug_GainLife() => GainLife(1);
 
+    [ContextMenu("Debug/Gain Max Life")]
+    private void Debug_GainMaxLife() => GainMaxLife(1);
 }

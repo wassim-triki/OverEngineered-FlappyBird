@@ -7,7 +7,6 @@ public class PipePair : MonoBehaviour
     [SerializeField] private Transform topAnchor;
     [SerializeField] private Transform bottomAnchor;
     [SerializeField] private ScoreGate scoreGate;
-    
     [Header("Design")]
     [SerializeField, Min(0f)] private float gap = 0f;
     [SerializeField] private float deadZone = -50;

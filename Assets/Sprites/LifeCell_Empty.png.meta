@@ -100,7 +100,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: pixel-heart-Empty_0
+      name: LifeCell_Empty
       rect:
         serializedVersion: 2
         x: 93
@@ -108,7 +108,7 @@ TextureImporter:
         width: 1086
         height: 939
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -125,7 +125,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: 41370b4f38f23354da9b93c804f923f3
     internalID: 0
     vertices: []
     indices: 
@@ -135,7 +135,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      pixel-heart-Empty_0: 1906179667584715834
+      LifeCell_Empty: 1906179667584715834
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

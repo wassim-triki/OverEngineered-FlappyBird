@@ -7,21 +7,37 @@ public class LivesUI : MonoBehaviour
     [SerializeField] private Lives playerLives;
     [SerializeField] private LifeCell lifeCellPrefab;
     private readonly List<LifeCell> _cells = new();
+    
 
     private void Start()
     {
-        BuildCells(playerLives.MaxLives);
-        // ClearLives();
-        // BuildLives(LifeCell.LifeCellStatus.Full);
+        ClearCells();
+        BuildCells();
     }
 
-    public void BuildCells(int count)
+    public void BuildCells()
     {
-        for (int i = 0; i < count; i++)
+        for (int i = 0; i < playerLives.MaxLives; i++)
         {
             var cell = Instantiate<LifeCell>(lifeCellPrefab, transform);
             _cells.Add(cell);
+            cell.SetFull(i<playerLives.CurrentLives);
         }
+    }
+    
+    public void HandleLivesChanged(int currentLives, int maxLives)
+    {
+        if (_cells.Count > 0 && _cells.Count != maxLives)
+        {
+            ClearCells();
+            BuildCells();
+        }
+
+        for (int i = 0; i < _cells.Count; i++)
+        {
+            _cells[i].SetFull(i < currentLives);
+        }
+            
     }
 
     private void OnEnable()
@@ -34,36 +50,13 @@ public class LivesUI : MonoBehaviour
         playerLives.OnLivesChanged -= HandleLivesChanged;
     }
 
-    public void BuildLives(LifeCell.LifeCellStatus lifeCellStatus)
+    public void ClearCells()
     {
-        for (int i = 0; i < _cells.Count; i++)
+        foreach (Transform child in this.transform)
         {
-            var lifeCell = Instantiate(lifeCellPrefab,this.transform);
-            lifeCell.SetImage(lifeCellStatus);
-            _cells.Add(lifeCell);
+            Destroy((child.gameObject));
         }
-    }
-
-
-    public void ClearLives()
-    {
-        // foreach (Transform child in this.transform)
-        // {
-        //     Destroy((child.gameObject));
-        // }
         _cells.Clear();
     }
 
-    public void HandleLivesChanged(int currentLives, int maxLives)
-    {
-        for (int i = 0; i < currentLives; i++)
-        {
-            BuildLives(LifeCell.LifeCellStatus.Full);
-        }
-
-        for (int i = currentLives; i < maxLives; i++)
-        {
-            BuildLives(LifeCell.LifeCellStatus.Empty);
-        }
-    }
 }
