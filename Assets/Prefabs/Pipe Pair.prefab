@@ -122,7 +122,7 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 1, y: 59.07}
+  m_Size: {x: 1, y: 10}
   m_EdgeRadius: 0
 --- !u!1 &1367876255701826999
 GameObject:
@@ -177,6 +177,7 @@ MonoBehaviour:
   topAnchor: {fileID: 1632262376715730933}
   bottomAnchor: {fileID: 2502930234485400981}
   scoreGate: {fileID: 867095471380406236}
+  mover: {fileID: 999632331269653655}
   gap: 10
   deadZone: -50
 --- !u!114 &999632331269653655
@@ -191,7 +192,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d8b233b1d294bd542979409f77733187, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PillarsMover
-  speed: 15
 --- !u!114 &7945160731471277502
 MonoBehaviour:
   m_ObjectHideFlags: 0

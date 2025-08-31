@@ -23,7 +23,10 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         playerLives.ResetRun();
-        playerScript.EnableControls();   
+        playerScript.EnableControls();
+
+        var diff = FindObjectsByType<DifficultyController>(FindObjectsSortMode.None)[0];
+        if (diff != null) diff.ResetRun();
     }
 
     void HandleGameOver(DamageContext ctx)

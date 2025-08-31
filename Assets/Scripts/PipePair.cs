@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 
 public class PipePair : MonoBehaviour
@@ -7,16 +6,17 @@ public class PipePair : MonoBehaviour
     [SerializeField] private Transform topAnchor;
     [SerializeField] private Transform bottomAnchor;
     [SerializeField] private ScoreGate scoreGate;
+    [SerializeField] private PipesMover mover;
+
     [Header("Design")]
     [SerializeField, Min(0f)] private float gap = 0f;
     [SerializeField] private float deadZone = -50;
-    
+
     public float Gap => gap;
 
-    private void Update()
+    void Update()
     {
-        bool reachedDeadZone = transform.position.x <= deadZone;
-        if(reachedDeadZone) Destroy(gameObject);
+        if (transform.position.x <= deadZone) Destroy(gameObject);
     }
 
     public void SetGap(float newGap)
@@ -25,22 +25,22 @@ public class PipePair : MonoBehaviour
         float half = gap * 0.5f;
         if (topAnchor)    topAnchor.localPosition    = new Vector3(0f, +half, 0f);
         if (bottomAnchor) bottomAnchor.localPosition = new Vector3(0f, -half, 0f);
+        if (scoreGate)    scoreGate.SetHeight(gap);
     }
-    
-    private void OnValidate()
+
+    void OnValidate()
     {
         if (topAnchor && bottomAnchor) SetGap(gap);
     }
 
-    public void Initialize(ScoreService score)     // ← called by spawner
+    public void Initialize(ScoreService score, DifficultyController difficulty)
     {
         if (scoreGate) scoreGate.SetScoreService(score);
+        if (mover)     mover.Initialize(difficulty);
     }
 
     public void DisableScoring()
     {
-        Debug.Log($"[PipePair] DisableScoring", this);
-        if(!scoreGate) return;
-        Destroy(scoreGate.gameObject);
+        if (scoreGate) Destroy(scoreGate.gameObject);
     }
 }
