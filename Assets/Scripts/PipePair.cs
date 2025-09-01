@@ -9,7 +9,10 @@ public class PipePair : MonoBehaviour
     [SerializeField] private PipesMover mover;
 
     [Header("Design")]
-    [SerializeField, Min(0f)] private float gap = 0f;
+    [SerializeField]
+    [Range(0f, 16f)]
+    private float gap = 0f;
+    
     [SerializeField] private float deadZone = -50;
 
     public float Gap => gap;

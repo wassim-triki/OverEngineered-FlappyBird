@@ -10,7 +10,7 @@ public class PipesSpawner : MonoBehaviour
     [SerializeField] private ScoreService scoreService;
     [SerializeField] private DifficultyController difficulty;
     [Header("Spawn Geometry")]
-    [SerializeField] private float heightOffset = 9f;
+    [SerializeField] private float heightOffset = 12f;
     
     
     
@@ -42,7 +42,7 @@ public class PipesSpawner : MonoBehaviour
 
     void Spawn()
     {
-        float gap = difficulty ? difficulty.NextGap() : 20f;
+        float gap = difficulty ? difficulty.NextGap() : pipePairPrefab.Gap;
 
         float centerMin = transform.position.y - heightOffset + gap;
         float centerMax = transform.position.y + heightOffset - gap;
