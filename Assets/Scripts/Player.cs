@@ -8,22 +8,24 @@ public class Player : MonoBehaviour
     private InputAction _jump;
 
     [Header("Jump")]
-    [Range(5f, 200f)] 
-    [SerializeField] private float initialJumpVel = 45f;    // massive jump for huge sprite
-    [Range(0.01f, 0.2f)] 
-    [SerializeField] private float maxHoldTime = 0.05f;     // tiny hold time for snappy feel
-    [Range(50f, 200f)] 
-    [SerializeField] private float holdBoostVelPerSec = 80f; // strong brief boost
+    [Range(5f, 20f)] 
+    [SerializeField] private float initialJumpVel = 13.5f;    // massive jump for huge sprite
+    [Range(0.01f, 0.5f)] 
+    [SerializeField] private float maxHoldTime = 0.16f;     // tiny hold time for snappy feel
+    [Range(5f, 40f)] 
+    [SerializeField] private float holdBoostVelPerSec = 16.0f; // strong brief boost
 
     [Header("Gravity Tuning")]
-    [Range(0f, 200f)] 
-    [SerializeField] private float baseGravityScale = 15f;   // heavy baseline for big object
-    [Range(0f, 200f)] 
-    [SerializeField] private float fallGravityScale = 25f;   // fast drops
-    [Range(0f, 200f)] 
-    [SerializeField] private float cutGravityScale = 35f;    // immediate plummet
-    [Range(0f, 200f)] 
-    [SerializeField] private float holdGravityScale = 8f;    // still heavy while holding
+    [Range(0f, 15f)] 
+    [SerializeField] private float baseGravityScale = 5.8f;   // heavy baseline for big object
+    [Range(0f, 15f)] 
+    [SerializeField] private float holdGravityScale = 4.8f; 
+    [Range(0f, 20f)]  
+    [SerializeField] private float cutGravityScale = 10.5f;    // immediate plummet// still heavy while holding
+    [Range(0f, 20f)]
+    [SerializeField] private float fallGravityScale = 7.5f;   // fast drops
+   
+    
 
     private float _holdTimer;         // counts down from maxHoldTime
     private bool _wasHeldLastFrame;   // for detecting release
