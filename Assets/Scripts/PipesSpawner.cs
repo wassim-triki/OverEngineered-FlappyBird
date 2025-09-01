@@ -9,9 +9,6 @@ public class PipesSpawner : MonoBehaviour
     [Header("Services")]
     [SerializeField] private ScoreService scoreService;
     [SerializeField] private DifficultyController difficulty;
-    [Header("Spawn Geometry")]
-    [SerializeField] private float heightOffset = 12f;
-    
     
     
     private float _timer = 0;
@@ -44,8 +41,8 @@ public class PipesSpawner : MonoBehaviour
     {
         float gap = difficulty ? difficulty.NextGap() : pipePairPrefab.Gap;
 
-        float centerMin = transform.position.y - heightOffset + gap;
-        float centerMax = transform.position.y + heightOffset - gap;
+        float centerMin = transform.position.y + gap;
+        float centerMax = transform.position.y - gap;
         float centerY = UnityEngine.Random.Range(centerMin, centerMax);
         Vector3 spawnPos = new Vector3(transform.position.x, centerY, 0f);
         PipePair pair = Instantiate(pipePairPrefab, spawnPos, Quaternion.identity);
