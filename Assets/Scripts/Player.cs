@@ -23,6 +23,7 @@ public class Player : MonoBehaviour
     private InputAction _jump;
     private float _holdTimer;
     private bool _movementsEnabled;
+    private bool _controlsEnabled;
 
     void Awake()
     {
@@ -37,22 +38,36 @@ public class Player : MonoBehaviour
     public void EnableMovements()
     {
         _movementsEnabled = true;
-        _jump?.Enable();
+        EnableControls();
         _rigidbody.bodyType = RigidbodyType2D.Dynamic;
     }
     public void DisableMovements()
     {
         _movementsEnabled = false;
-        _jump?.Disable();
+        DisableControls();
         _rigidbody.bodyType = RigidbodyType2D.Kinematic;
+    }
+
+    public void EnableControls()
+    {
+        _controlsEnabled = true;
+        _jump?.Enable();
+    }
+    public void DisableControls()
+    {
+        _controlsEnabled = false;
+        _jump?.Disable();
     }
 
     void Update()
     {
         if (!_movementsEnabled || _jump == null) return;
 
+        if (_controlsEnabled)
+        {
+            HandleJump();
+        }
         HandleAutoJump();
-        HandleJump();
         HandleGravity();
         HandleRotation();
     }
