@@ -56,6 +56,7 @@ public class PipesSpawner : MonoBehaviour
         pair.SetGap(gap);
     }
     
-    public void Freeze() => enabled = false;
+    public void Disable() => enabled = false;
+    public void Enable() => enabled = true;
 
 }

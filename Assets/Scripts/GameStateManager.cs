@@ -16,6 +16,7 @@ namespace DefaultNamespace
         public static GameStateManager Instance { get; private set; }
         // TODO: change this to Menu state
         [SerializeField] private GameState currentState = GameState.Playing;
+        private GameState _previousState;
         public GameState CurrentState => currentState;
 
         public static event Action<GameState,GameState> OnStateChanged;
@@ -29,19 +30,34 @@ namespace DefaultNamespace
             {
                 Instance = this;
                 DontDestroyOnLoad(gameObject);
+                _previousState = currentState;
             }
             else
             {
                 Destroy(gameObject);
             }
         }
+        private void Update()
+        {
+#if UNITY_EDITOR
+            if (_previousState != currentState)
+            {
+                SetState(currentState);
+                _previousState = currentState;
+            }
+#endif
+        }
 
         public void SetState(GameState newState)
         {
-            if (newState == currentState) return;
-            var oldState = currentState;
+            if (newState == currentState && _previousState == currentState) return;
+            
+            var oldState = _previousState != currentState ? _previousState : currentState;
             currentState = newState;
+            _previousState = newState;
+            
             OnStateChanged?.Invoke(oldState, newState);
+            
             switch (newState)
             {
                 case GameState.Menu:
@@ -51,12 +67,10 @@ namespace DefaultNamespace
                     {
                         OnGameResumed?.Invoke();
                     }
-
-                    if (oldState == GameState.GameOver || oldState == GameState.Menu)
+                    else if (oldState == GameState.GameOver || oldState == GameState.Menu)
                     {
                         OnGameStarted?.Invoke();
                     }
-
                     break;
                 case GameState.Paused:
                     OnGamePaused?.Invoke();
@@ -68,11 +82,13 @@ namespace DefaultNamespace
 
             Debug.Log($"[GameState] {oldState} → {newState}");
         }
-
         public void ReturnToMenu() => SetState(GameState.Menu);
         public void StartGame() => SetState(GameState.Playing);
         public void PauseGame() => SetState(GameState.Paused);
         public void ResumeGame() => SetState(GameState.Playing);
-        public void GameOver() => SetState(GameState.GameOver);
+        public void EndGame() => SetState(GameState.GameOver);
+        
+
     }
+    
 }
