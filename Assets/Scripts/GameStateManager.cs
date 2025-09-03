@@ -11,9 +11,9 @@ namespace DefaultNamespace
         Paused,
         GameOver
     }
-    public class GameStateManger:MonoBehaviour
+    public class GameStateManager:MonoBehaviour
     {
-        public static GameStateManger Instance { get; private set; }
+        public static GameStateManager Instance { get; private set; }
         // TODO: change this to Menu state
         [SerializeField] private GameState currentState = GameState.Playing;
         public GameState CurrentState => currentState;
