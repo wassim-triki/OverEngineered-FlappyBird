@@ -48,13 +48,14 @@ public class GameManager : MonoBehaviour
     }
     void HandleGameOverState()
     {
-        playerScript.DisableControls();
+        playerScript.DisableMovements();
+        playerScript.ResetAutoJump();
         pipesSpawner.Disable();
         groundLoop.Freeze();
     }
     void HandleGamePausedState()
     {
-        playerScript.DisableControls();
+        playerScript.DisableMovements();
         pipesSpawner.Disable();
         groundLoop.Freeze();
     }
@@ -63,7 +64,7 @@ public class GameManager : MonoBehaviour
     {
         playerLives.ResetRun();
         pipesSpawner.Enable();
-        playerScript.EnableControls();
+        playerScript.EnableMovements();
         difficulty.ResetRun();
         groundLoop.Unfreeze();
     }

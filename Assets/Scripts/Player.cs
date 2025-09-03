@@ -3,109 +3,122 @@ using UnityEngine.InputSystem;
 
 public class Player : MonoBehaviour
 {
-    [Header("Refs")]
-    private Rigidbody2D _rb;
-    private InputAction _jump;
-
-    [Header("Jump")]
-    [Range(5f, 20f)] 
-    [SerializeField] private float initialJumpVel = 13.5f;    // massive jump for huge sprite
-    [Range(0.01f, 0.5f)] 
-    [SerializeField] private float maxHoldTime = 0.16f;     // tiny hold time for snappy feel
-    [Range(5f, 40f)] 
-    [SerializeField] private float holdBoostVelPerSec = 16.0f; // strong brief boost
-
-    [Header("Gravity Tuning")]
-    [Range(0f, 15f)] 
-    [SerializeField] private float baseGravityScale = 5.8f;   // heavy baseline for big object
-    [Range(0f, 15f)] 
-    [SerializeField] private float holdGravityScale = 4.8f; 
-    [Range(0f, 20f)]  
-    [SerializeField] private float cutGravityScale = 10.5f;    // immediate plummet// still heavy while holding
-    [Range(0f, 20f)]
-    [SerializeField] private float fallGravityScale = 7.5f;   // fast drops
-   
+    [Header("Jump Settings")]
+    [SerializeField] private float jumpForce = 13.5f;
+    [SerializeField] private float holdTime = 0.16f;
+    [SerializeField] private float holdBoost = 16f;
     
+    [Header("Rotation Settings")]
+    [SerializeField] private float maxRotation = 45f; // degrees
+    [SerializeField] private float rotationSpeed = 10f; // how fast to rotate
 
-    private float _holdTimer;         // counts down from maxHoldTime
-    private bool _wasHeldLastFrame;   // for detecting release
-    private bool _controlsEnabled;
+    [Header("Gravity")]
+    [SerializeField] private float normalGravity = 5.8f;
+    [SerializeField] private float holdGravity = 4.8f;
+    [SerializeField] private float fallGravity = 10.5f;
+
+    private bool _hasAutoJumped = false;
+
+    private Rigidbody2D _rigidbody;
+    private InputAction _jump;
+    private float _holdTimer;
+    private bool _movementsEnabled;
 
     void Awake()
     {
-        _rb = GetComponent<Rigidbody2D>();
+        _rigidbody = GetComponent<Rigidbody2D>();
         _jump = InputSystem.actions.FindAction("Jump");
-        _rb.gravityScale = baseGravityScale;
+        _rigidbody.gravityScale = normalGravity;
     }
 
-    void OnEnable()
+    void OnEnable() => EnableMovements();
+    void OnDisable() => DisableMovements();
+
+    public void EnableMovements()
     {
-        _controlsEnabled = true;
+        _movementsEnabled = true;
         _jump?.Enable();
+        _rigidbody.bodyType = RigidbodyType2D.Dynamic;
     }
-
-    void OnDisable()
+    public void DisableMovements()
     {
-        _controlsEnabled = false;
+        _movementsEnabled = false;
         _jump?.Disable();
+        _rigidbody.bodyType = RigidbodyType2D.Kinematic;
     }
-
-    public void EnableControls()  { _controlsEnabled = true;  _jump?.Enable(); }
-    public void DisableControls() { _controlsEnabled = false; _jump?.Disable(); }
 
     void Update()
     {
-        if (!_controlsEnabled || _jump == null) return;
+        if (!_movementsEnabled || _jump == null) return;
 
-        // 1) Start of jump: set a clean upward velocity and prime hold timer
+        HandleAutoJump();
+        HandleJump();
+        HandleGravity();
+        HandleRotation();
+    }
+
+    void HandleJump()
+    {
+        // Start jump
         if (_jump.WasPerformedThisFrame())
         {
-            var v = _rb.linearVelocity;
-            v.y = initialJumpVel;
-            _rb.linearVelocity = v;
-            _holdTimer = maxHoldTime;
+            PerformJump();
         }
 
-        bool held = _jump.IsPressed();
-        bool rising = _rb.linearVelocity.y > 3f;    // much higher threshold for massive sprite
-        bool falling = _rb.linearVelocity.y < -3f;
-
-        // 2) While held (and we still have hold time), add upward acceleration
-        if (held && _holdTimer > 0f && rising)
+        // Hold boost
+        if (_jump.IsPressed() && _holdTimer > 0f && _rigidbody.linearVelocity.y > 0f)
         {
-            // Apply boost more smoothly - scale down as hold time expires
-            float holdStrength = _holdTimer / maxHoldTime;
-            _rb.linearVelocity += Vector2.up * (holdBoostVelPerSec * holdStrength * Time.deltaTime);
+            float strength = _holdTimer / holdTime;
+            _rigidbody.linearVelocity += Vector2.up * (holdBoost * strength * Time.deltaTime);
             _holdTimer -= Time.deltaTime;
         }
+    }
 
-        // 3) Gravity shaping for feel
-        if (falling)
+    void HandleGravity()
+    {
+        if (_rigidbody.linearVelocity.y < -3f)
         {
-            _rb.gravityScale = fallGravityScale;      
+            // Falling fast
+            _rigidbody.gravityScale = fallGravity;
         }
-        else if (rising)
+        else if (_rigidbody.linearVelocity.y > 0f && _jump.IsPressed() && _holdTimer > 0f)
         {
-            // Check for early release (cut jump)
-            if (!held && _wasHeldLastFrame && _holdTimer > 0f)
-            {
-                _rb.gravityScale = cutGravityScale;   // immediate heavy gravity on release
-                _holdTimer = 0f; // prevent further hold boost
-            }
-            else if (held && _holdTimer > 0f)
-            {
-                _rb.gravityScale = holdGravityScale;  // light gravity while boosting
-            }
-            else
-            {
-                _rb.gravityScale = baseGravityScale;  // normal gravity
-            }
+            // Rising with hold
+            _rigidbody.gravityScale = holdGravity;
         }
         else
         {
-            _rb.gravityScale = baseGravityScale;      // at apex or stationary
+            // Normal state
+            _rigidbody.gravityScale = normalGravity;
         }
-
-        _wasHeldLastFrame = held;
     }
+
+    void HandleRotation()
+    {
+        // Map velocity to rotation angle (-maxRotation to +maxRotation)
+        float targetRotation = Mathf.Clamp(_rigidbody.linearVelocity.y * 5f, -maxRotation, maxRotation);
+        
+        // Smoothly rotate towards target
+        float currentZ = transform.eulerAngles.z;
+        // Handle angle wrapping (convert 350° to -10°)
+        if (currentZ > 180f) currentZ -= 360f;
+        
+        float newZ = Mathf.LerpAngle(currentZ, targetRotation, rotationSpeed * Time.deltaTime);
+        transform.rotation = Quaternion.Euler(0f, 0f, newZ);
+    }
+    
+    void PerformJump()
+    {
+        _rigidbody.linearVelocity = new Vector2(_rigidbody.linearVelocity.x, jumpForce);
+        _holdTimer = holdTime;
+    }
+    
+    void HandleAutoJump()
+    {
+        if (_hasAutoJumped) return;
+        PerformJump();
+        _hasAutoJumped = true;
+    }
+    
+    public void ResetAutoJump() => _hasAutoJumped = false;
 }

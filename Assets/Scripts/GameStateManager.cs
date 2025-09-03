@@ -41,7 +41,6 @@ namespace DefaultNamespace
 #if UNITY_EDITOR
             if (_previousState != currentState)
             {
-                Debug.Log("Triggered from update");
                 SetState(currentState);
                 _previousState = currentState;
                 
