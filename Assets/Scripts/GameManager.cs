@@ -18,6 +18,7 @@ public class GameManager : MonoBehaviour
         GameStateManager.OnGameOver += HandleGameOverState;
         GameStateManager.OnGamePlaying += HandleGamePlayingState;
         GameStateManager.OnGamePaused += HandleGamePausedState;
+        GameStateManager.OnMenu += HandleOnMenuState;
     }
     void OnDisable()
     {
@@ -29,6 +30,7 @@ public class GameManager : MonoBehaviour
             GameStateManager.OnGameOver -= HandleGameOverState;
             GameStateManager.OnGamePlaying -= HandleGamePlayingState;
             GameStateManager.OnGamePaused -= HandleGamePausedState;
+            GameStateManager.OnMenu -= HandleOnMenuState;
         }
     }
     void Start()
@@ -36,6 +38,13 @@ public class GameManager : MonoBehaviour
         InitializeGame();
     }
 
+    
+    void HandleOnMenuState()
+    {
+        playerScript.DisableMovements();
+        pipesSpawner.Disable();
+        groundLoop.Unfreeze();
+    }
     void HandleGameOver(DamageContext ctx)
     {
         GameStateManager.Instance.EndGame();
@@ -44,7 +53,7 @@ public class GameManager : MonoBehaviour
     void InitializeGame()
     {
         // TODO: change this to Menu state
-        GameStateManager.Instance.PauseGame();
+        GameStateManager.Instance.ReturnToMenu();
     }
     void HandleGameOverState()
     {

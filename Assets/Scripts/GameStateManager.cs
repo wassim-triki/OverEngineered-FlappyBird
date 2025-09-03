@@ -6,7 +6,7 @@ namespace DefaultNamespace
 {
     public enum GameState
     {
-        // Menu,
+        Menu,
         Playing,
         Paused,
         GameOver
@@ -23,6 +23,7 @@ namespace DefaultNamespace
         public static event Action OnGameOver;
         public static event Action OnGamePaused;
         public static event Action OnGamePlaying;
+        public static event Action OnMenu;
         private void Awake()
         {
             if (Instance == null)
@@ -50,7 +51,7 @@ namespace DefaultNamespace
 
         public void SetState(GameState newState)
         {
-            if (newState == currentState && _previousState == currentState) return;
+            // if (newState == currentState && _previousState == currentState) return;
             
             var oldState = _previousState != currentState ? _previousState : currentState;
             currentState = newState;
@@ -60,8 +61,9 @@ namespace DefaultNamespace
             
             switch (newState)
             {
-                // case GameState.Menu:
-                //     break;
+                case GameState.Menu:
+                    OnMenu?.Invoke();
+                    break;
                 case GameState.Playing:
                     OnGamePlaying?.Invoke();
                     break;
@@ -75,7 +77,7 @@ namespace DefaultNamespace
 
             Debug.Log($"[GameState] {oldState} → {newState}");
         }
-        // public void ReturnToMenu() => SetState(GameState.Menu);
+        public void ReturnToMenu() => SetState(GameState.Menu);
         public void StartGame() => SetState(GameState.Playing);
         public void PauseGame() => SetState(GameState.Paused);
         public void EndGame() => SetState(GameState.GameOver);
