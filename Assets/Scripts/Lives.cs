@@ -68,6 +68,8 @@ public sealed class Lives : MonoBehaviour
         }
     }
     
+    public void Kill(DamageContext ctx = null) => LoseLife(CurrentLives,ctx);
+    
 #if UNITY_EDITOR
 #if UNITY_EDITOR
     void OnValidate()
@@ -88,6 +90,9 @@ public sealed class Lives : MonoBehaviour
 
     [ContextMenu("Debug/Gain Max Life")]
     private void Debug_GainMaxLife() => GainMaxLife(1);
+    
+    [ContextMenu("Debug/Kill")]
+    private void Debug_Kill() => Kill(new DamageContext{Source = gameObject});
 #endif
     
 }

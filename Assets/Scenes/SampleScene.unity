@@ -486,8 +486,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c0a5645a9f71c7c438c709866ee7af9b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Lives
-  <MaxLives>k__BackingField: 6
-  <CurrentLives>k__BackingField: 6
+  <MaxLives>k__BackingField: 3
+  <CurrentLives>k__BackingField: 3
+  <InitMaxLives>k__BackingField: 3
 --- !u!114 &444666085
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -918,7 +919,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7c77629639014f1468b53a7f46172df5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DifficultyController
-  rampScore: 1
+  rampScore: 20
   score: {fileID: 491258287}
   enableGapScaling: 1
   enableSpeedScaling: 1
@@ -1190,6 +1191,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 307db016f1818784dafd35f12f5db7b8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PillarsSpawner
+  spawnMinY: -7
+  spawnMaxY: 8
   pipePairPrefab: {fileID: 1530110248339373564, guid: c535d4abc4878f941ac6ab0975854f0b, type: 3}
   scoreService: {fileID: 491258287}
   difficulty: {fileID: 830024060}
@@ -1401,6 +1404,7 @@ GameObject:
   - component: {fileID: 2005838961}
   - component: {fileID: 2005838960}
   - component: {fileID: 2005838959}
+  - component: {fileID: 2005838963}
   m_Layer: 0
   m_Name: Ground
   m_TagString: Untagged
@@ -1540,6 +1544,25 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2005838963
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2005838958}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8bd2a426a0f745c0bca9207205cd70b7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::DefaultNamespace.DamageSource
+  fatal: 1
+  damage: 1
+  targetLayers:
+    serializedVersion: 2
+    m_Bits: 64
+  requiredTag: 
+  ignoreSelfHierarchy: 1
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

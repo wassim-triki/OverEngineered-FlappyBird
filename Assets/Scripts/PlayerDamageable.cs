@@ -15,6 +15,10 @@ public class PlayerDamageable : MonoBehaviour, IDamageable
     public void TakeDamage(int amount, DamageContext ctx = null)
     {
         if (_lives == null || !_lives.IsAlive) return;
+        if (ctx != null && ctx.IsFatal)
+        {
+            _lives.Kill();
+        }
         _lives.LoseLife(amount,ctx);
     }
 }
