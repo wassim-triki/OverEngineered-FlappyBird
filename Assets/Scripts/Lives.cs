@@ -6,9 +6,11 @@ public sealed class Lives : MonoBehaviour
 {
     [field: SerializeField, Min(1)]
     public int MaxLives {get; private set;} = 3;
-
-    [field: SerializeField, Min(1)] public int CurrentLives { get; private set; } = 2;
+    [field: SerializeField, Min(1)] public int CurrentLives { get; private set; } = 3;
     public bool IsAlive => CurrentLives > 0;
+    
+    [field: SerializeField, Min(1)]
+    public int InitMaxLives {get; private set;} = 3;
     
     public event Action<int,int> OnLivesChanged;
     public event Action<DamageContext>OnDeath;
@@ -17,7 +19,8 @@ public sealed class Lives : MonoBehaviour
 
     public void ResetRun()
     {
-        // CurrentLives = MaxLives;
+        MaxLives = InitMaxLives;
+        CurrentLives = MaxLives;
         OnLivesChanged?.Invoke(CurrentLives,MaxLives);
         Debug.Log($"[Lives] ResetRun → {CurrentLives}/{MaxLives}", this);
     }
@@ -66,6 +69,14 @@ public sealed class Lives : MonoBehaviour
     }
     
 #if UNITY_EDITOR
+#if UNITY_EDITOR
+    void OnValidate()
+    {
+        MaxLives     = Mathf.Max(1, MaxLives);
+        CurrentLives = Mathf.Clamp(CurrentLives, 0, MaxLives);
+    }
+#endif
+
     [ContextMenu("Debug/Reset Run")]
     private void Debug_Reset() => ResetRun();
     
@@ -77,5 +88,6 @@ public sealed class Lives : MonoBehaviour
 
     [ContextMenu("Debug/Gain Max Life")]
     private void Debug_GainMaxLife() => GainMaxLife(1);
-}
 #endif
+    
+}

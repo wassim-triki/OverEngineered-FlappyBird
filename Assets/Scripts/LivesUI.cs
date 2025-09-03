@@ -54,10 +54,8 @@ public class LivesUI : MonoBehaviour
 
     public void ClearCells()
     {
-        foreach (Transform child in this.transform)
-        {
-            Destroy((child.gameObject));
-        }
+        for (int i = transform.childCount - 1; i >= 0; --i)
+            Destroy(transform.GetChild(i).gameObject);
         _cells.Clear();
     }
 
