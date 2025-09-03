@@ -6,7 +6,7 @@ namespace DefaultNamespace
 {
     public enum GameState
     {
-        Menu,
+        // Menu,
         Playing,
         Paused,
         GameOver
@@ -15,7 +15,7 @@ namespace DefaultNamespace
     {
         public static GameStateManager Instance { get; private set; }
         
-        [SerializeField] private GameState currentState = GameState.Menu;
+        [SerializeField] private GameState currentState = GameState.Paused;
         private GameState _previousState;
         public GameState CurrentState => currentState;
 
@@ -60,8 +60,8 @@ namespace DefaultNamespace
             
             switch (newState)
             {
-                case GameState.Menu:
-                    break;
+                // case GameState.Menu:
+                //     break;
                 case GameState.Playing:
                     OnGamePlaying?.Invoke();
                     break;
@@ -75,7 +75,7 @@ namespace DefaultNamespace
 
             Debug.Log($"[GameState] {oldState} → {newState}");
         }
-        public void ReturnToMenu() => SetState(GameState.Menu);
+        // public void ReturnToMenu() => SetState(GameState.Menu);
         public void StartGame() => SetState(GameState.Playing);
         public void PauseGame() => SetState(GameState.Paused);
         public void EndGame() => SetState(GameState.GameOver);
