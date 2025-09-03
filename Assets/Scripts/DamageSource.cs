@@ -1,36 +1,49 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
+using DefaultNamespace;
 
-namespace DefaultNamespace
+[RequireComponent(typeof(Collider2D))]
+public class DamageSource : MonoBehaviour
 {
+    [Header("Behavior")]
+    [SerializeField] private bool fatal;         // ← ground: ON
+    [SerializeField, Min(1)] private int damage = 1; 
+
+    [Header("Filtering")]
+    [SerializeField] private LayerMask targetLayers = ~0; // who we can hurt
+    [SerializeField] private bool ignoreSelfHierarchy = true;
     
-    [RequireComponent(typeof(Collider2D))]
-    public class DamageSource : MonoBehaviour
+    private Collider2D _collider;
+
+    private void Awake()
     {
-        [Header("Behavior")]
-        [SerializeField] private bool fatal = false;         // ← ground: ON
-        [SerializeField, Min(1)] private int damage = 1; 
-
-        [Header("Filtering")]
-        [SerializeField] private LayerMask targetLayers = ~0; // who we can hurt
-        [SerializeField] private bool ignoreSelfHierarchy = true;
-
-
-        void OnTriggerEnter2D(Collider2D other)  => TryHit(other);
-        void OnCollisionEnter2D(Collision2D col) => TryHit(col.collider);
-
-        void TryHit(Collider2D other)
-        {
-            // Checks if a GameObject is in this LayerMask.
-            if ((targetLayers.value & (1 << other.gameObject.layer)) == 0) return;
-            if (ignoreSelfHierarchy && other.transform.IsChildOf(transform.root)) return;
-
-            var damageable = other.GetComponentInParent<IDamageable>();
-            if (damageable == null) return;
-
-            var ctx = new DamageContext { Source = this.gameObject, IsFatal = fatal };
-            damageable.TakeDamage(fatal ? int.MaxValue : damage, ctx);
-        }
+        // Cache own collider to avoid repeated GetComponent calls on hit.
+        _collider = GetComponent<Collider2D>();
     }
-    
+
+    private void OnTriggerEnter2D(Collider2D other)  => TryHit(other);
+    private void OnCollisionEnter2D(Collision2D col) => TryHit(col.collider);
+
+    private void TryHit(Collider2D other)
+    {
+        if (other == null) return;
+
+        // Checks if a GameObject is in this LayerMask.
+        if (!IsInTargetLayers(other.gameObject)) return;
+        if (ignoreSelfHierarchy && other.transform.IsChildOf(transform.root)) return;
+
+        var damageable = other.GetComponentInParent<IDamageable>();
+        if (damageable == null) return;
+
+        var ctx = new DamageContext { Source = this.gameObject, IsFatal = fatal };
+        damageable.TakeDamage(fatal ? int.MaxValue : damage, ctx);
+        
+        // disable self collider to prevent multiple hits
+        if (_collider != null) _collider.enabled = false;
+    }
+
+    private bool IsInTargetLayers(GameObject go)
+    {
+        // True if the object's layer is included in the configured mask.
+        return (targetLayers.value & (1 << go.layer)) != 0;
+    }
 }
