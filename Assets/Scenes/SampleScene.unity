@@ -614,6 +614,7 @@ GameObject:
   - component: {fileID: 491258288}
   - component: {fileID: 491258287}
   - component: {fileID: 491258289}
+  - component: {fileID: 491258290}
   m_Layer: 0
   m_Name: Systems
   m_TagString: Untagged
@@ -662,8 +663,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::GameManager
   playerLives: {fileID: 444666084}
   playerScript: {fileID: 444666082}
+  difficulty: {fileID: 830024060}
   pipesSpawner: {fileID: 1408798578}
-  pipesMover: {fileID: 999632331269653655, guid: c535d4abc4878f941ac6ab0975854f0b, type: 3}
+  groundLoop: {fileID: 2005838960}
+--- !u!114 &491258290
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 491258286}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 356d0c89a08c4f6dba46b14fdcf9b9b1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::DefaultNamespace.GameStateManager
+  currentState: 0
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -1561,7 +1576,6 @@ MonoBehaviour:
   targetLayers:
     serializedVersion: 2
     m_Bits: 64
-  requiredTag: 
   ignoreSelfHierarchy: 1
 --- !u!1660057539 &9223372036854775807
 SceneRoots:

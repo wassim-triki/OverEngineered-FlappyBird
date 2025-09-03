@@ -22,7 +22,6 @@ public sealed class Lives : MonoBehaviour
         MaxLives = InitMaxLives;
         CurrentLives = MaxLives;
         OnLivesChanged?.Invoke(CurrentLives,MaxLives);
-        Debug.Log($"[Lives] ResetRun → {CurrentLives}/{MaxLives}", this);
     }
 
     public void GainLife(int amount = 1)

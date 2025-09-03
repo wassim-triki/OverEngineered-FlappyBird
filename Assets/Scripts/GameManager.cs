@@ -11,14 +11,13 @@ public class GameManager : MonoBehaviour
     [SerializeField] private GroundLoop groundLoop;
     
     
-    [SerializeField] private PipesMover pipesMover;
-    
     void OnEnable()
     {
         playerLives.OnLifeLost += HandleLifeLost;    // ← subscribe
         playerLives.OnDeath    += HandleGameOver;
         GameStateManager.OnGameOver += HandleGameOverState;
-        GameStateManager.OnGameStarted += HandleGameStartedState;
+        GameStateManager.OnGamePlaying += HandleGamePlayingState;
+        GameStateManager.OnGamePaused += HandleGamePausedState;
     }
     void OnDisable()
     {
@@ -28,7 +27,8 @@ public class GameManager : MonoBehaviour
         if (GameStateManager.Instance != null)
         {
             GameStateManager.OnGameOver -= HandleGameOverState;
-            GameStateManager.OnGameStarted -= HandleGameStartedState;
+            GameStateManager.OnGamePlaying -= HandleGamePlayingState;
+            GameStateManager.OnGamePaused -= HandleGamePausedState;
         }
     }
     void Start()
@@ -43,7 +43,8 @@ public class GameManager : MonoBehaviour
 
     void InitializeGame()
     {
-        GameStateManager.Instance.ReturnToMenu();
+        // TODO: change this to Menu state
+        GameStateManager.Instance.PauseGame();
     }
     void HandleGameOverState()
     {
@@ -51,8 +52,14 @@ public class GameManager : MonoBehaviour
         pipesSpawner.Disable();
         groundLoop.Freeze();
     }
+    void HandleGamePausedState()
+    {
+        playerScript.DisableControls();
+        pipesSpawner.Disable();
+        groundLoop.Freeze();
+    }
 
-    void HandleGameStartedState()
+    void HandleGamePlayingState()
     {
         playerLives.ResetRun();
         pipesSpawner.Enable();

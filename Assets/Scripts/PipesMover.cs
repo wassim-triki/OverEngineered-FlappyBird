@@ -21,14 +21,15 @@ public class PipesMover : MonoBehaviour, IFreezable
     void OnEnable()
     {
         GameStateManager.OnGameOver += Freeze;
-        GameStateManager.OnGameStarted += Unfreeze;
+        GameStateManager.OnGamePaused += Freeze;
+        GameStateManager.OnGamePlaying += Unfreeze;
     }
     void OnDisable()
     {
         if (GameStateManager.Instance != null)
         {
             GameStateManager.OnGameOver -= Freeze;
-            GameStateManager.OnGameStarted -= Unfreeze;
+            GameStateManager.OnGamePlaying -= Unfreeze;
         }
     }
 

@@ -28,7 +28,6 @@ public class LivesUI : MonoBehaviour
     
     public void HandleLivesChanged(int currentLives, int maxLives)
     {
-        Debug.Log("triggered from editor");
         if (_cells.Count > 0 && _cells.Count != maxLives)
         {
             ClearCells();

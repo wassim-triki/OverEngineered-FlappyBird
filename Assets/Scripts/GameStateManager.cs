@@ -14,16 +14,15 @@ namespace DefaultNamespace
     public class GameStateManager:MonoBehaviour
     {
         public static GameStateManager Instance { get; private set; }
-        // TODO: change this to Menu state
-        [SerializeField] private GameState currentState = GameState.Playing;
+        
+        [SerializeField] private GameState currentState = GameState.Menu;
         private GameState _previousState;
         public GameState CurrentState => currentState;
 
         public static event Action<GameState,GameState> OnStateChanged;
         public static event Action OnGameOver;
         public static event Action OnGamePaused;
-        public static event Action OnGameResumed;
-        public static event Action OnGameStarted;
+        public static event Action OnGamePlaying;
         private void Awake()
         {
             if (Instance == null)
@@ -42,8 +41,10 @@ namespace DefaultNamespace
 #if UNITY_EDITOR
             if (_previousState != currentState)
             {
+                Debug.Log("Triggered from update");
                 SetState(currentState);
                 _previousState = currentState;
+                
             }
 #endif
         }
@@ -63,14 +64,7 @@ namespace DefaultNamespace
                 case GameState.Menu:
                     break;
                 case GameState.Playing:
-                    if (oldState == GameState.Paused)
-                    {
-                        OnGameResumed?.Invoke();
-                    }
-                    else if (oldState == GameState.GameOver || oldState == GameState.Menu)
-                    {
-                        OnGameStarted?.Invoke();
-                    }
+                    OnGamePlaying?.Invoke();
                     break;
                 case GameState.Paused:
                     OnGamePaused?.Invoke();
@@ -85,7 +79,6 @@ namespace DefaultNamespace
         public void ReturnToMenu() => SetState(GameState.Menu);
         public void StartGame() => SetState(GameState.Playing);
         public void PauseGame() => SetState(GameState.Paused);
-        public void ResumeGame() => SetState(GameState.Playing);
         public void EndGame() => SetState(GameState.GameOver);
         
 
