@@ -313,7 +313,7 @@ SpriteRenderer:
   m_SortingLayerID: -1741034357
   m_SortingLayer: 1
   m_SortingOrder: 1
-  m_Sprite: {fileID: 5167379883609447733, guid: 6dd48c7f9af3e0e4e9e91cb49fc263e6, type: 3}
+  m_Sprite: {fileID: 5167379883609447733, guid: cf085eef051ec5f4d897c72f6c17508c, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -358,17 +358,17 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: -0.029999971, y: 9.108961}
+  m_Offset: {x: 0.03, y: 9.17}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.0047794976}
-    oldSize: {x: 1.62, y: 18.28}
+    pivot: {x: 0.5, y: 0}
+    oldSize: {x: 1.56, y: 13.65}
     newSize: {x: 1.62, y: 18.28}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 1.43, y: 18.13792}
+  m_Size: {x: 1.36, y: 18.03}
   m_EdgeRadius: 0
 --- !u!114 &8499305924664427106
 MonoBehaviour:
@@ -382,6 +382,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8bd2a426a0f745c0bca9207205cd70b7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DefaultNamespace.DamageSource
+  fatal: 0
   damage: 1
   targetLayers:
     serializedVersion: 2
@@ -468,7 +469,7 @@ SpriteRenderer:
   m_SortingLayerID: -1741034357
   m_SortingLayer: 1
   m_SortingOrder: 1
-  m_Sprite: {fileID: 5167379883609447733, guid: 6dd48c7f9af3e0e4e9e91cb49fc263e6, type: 3}
+  m_Sprite: {fileID: 5167379883609447733, guid: cf085eef051ec5f4d897c72f6c17508c, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -513,17 +514,17 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: -0.03, y: 9.1}
+  m_Offset: {x: 0.03, y: 9.17}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.0047794976}
-    oldSize: {x: 1.62, y: 18.28}
+    pivot: {x: 0.5, y: 0}
+    oldSize: {x: 1.56, y: 13.65}
     newSize: {x: 1.62, y: 18.28}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 1.43, y: 18.08}
+  m_Size: {x: 1.36, y: 18.03}
   m_EdgeRadius: 0
 --- !u!114 &7841390235733495962
 MonoBehaviour:
@@ -537,6 +538,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8bd2a426a0f745c0bca9207205cd70b7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DefaultNamespace.DamageSource
+  fatal: 0
   damage: 1
   targetLayers:
     serializedVersion: 2
