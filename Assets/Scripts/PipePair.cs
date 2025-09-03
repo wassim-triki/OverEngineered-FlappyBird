@@ -28,7 +28,6 @@ public class PipePair : MonoBehaviour
         float half = gap * 0.5f;
         if (topAnchor)    topAnchor.localPosition    = new Vector3(0f, +half, 0f);
         if (bottomAnchor) bottomAnchor.localPosition = new Vector3(0f, -half, 0f);
-        if (scoreGate)    scoreGate.SetHeight(gap);
     }
 
     void OnValidate()
