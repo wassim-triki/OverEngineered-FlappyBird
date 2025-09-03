@@ -1,7 +1,6 @@
 using DefaultNamespace;
 using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 public class GameManager : MonoBehaviour
 {
@@ -25,8 +24,8 @@ public class GameManager : MonoBehaviour
         playerLives.ResetRun();
         playerScript.EnableControls();
 
-        var diff = FindObjectsByType<DifficultyController>(FindObjectsSortMode.None)[0];
-        if (diff != null) diff.ResetRun();
+        var diff = FindFirstObjectByType<DifficultyController>();
+        if (diff) diff.ResetRun();
     }
 
     void HandleGameOver(DamageContext ctx)
