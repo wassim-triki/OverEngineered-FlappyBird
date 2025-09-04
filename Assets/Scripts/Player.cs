@@ -1,4 +1,6 @@
+using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 
 public class Player : MonoBehaviour
@@ -67,13 +69,16 @@ public class Player : MonoBehaviour
         {
             HandleJump();
         }
-        HandleAutoJump();
         HandleGravity();
+        HandleAutoJump();
         HandleRotation();
     }
 
     void HandleJump()
     {
+        // Check if the mouse was clicked over a UI element
+        if (EventSystem.current.IsPointerOverGameObject()) return;
+
         // Start jump
         if (_jump.WasPerformedThisFrame())
         {
@@ -124,6 +129,7 @@ public class Player : MonoBehaviour
     
     void PerformJump()
     {
+
         _rigidbody.linearVelocity = new Vector2(_rigidbody.linearVelocity.x, jumpForce);
         _holdTimer = holdTime;
     }

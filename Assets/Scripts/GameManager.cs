@@ -65,6 +65,7 @@ public class GameManager : MonoBehaviour
     void HandleGamePausedState()
     {
         playerScript.DisableMovements();
+        playerScript.ResetAutoJump();
         pipesSpawner.Disable();
         groundLoop.Freeze();
     }

@@ -32,6 +32,6 @@ public class ScoreService : MonoBehaviour
             OnHighScoreChanged?.Invoke(High);
             PlayerPrefs.SetInt("HighScore", High);
         }
-        Debug.Log("Score:"  + Current );
+        // Debug.Log("Score:"  + Current );
     }
 }
