@@ -22,7 +22,8 @@ public class PipesMover : MonoBehaviour, IFreezable
     {
         GameStateManager.OnGameOver += Freeze;
         GameStateManager.OnGamePaused += Freeze;
-        GameStateManager.OnGamePlaying += Unfreeze;
+        GameStateManager.OnGameStarted += Unfreeze;
+        GameStateManager.OnGameResumed += Unfreeze;
         GameStateManager.OnMenu += Freeze;
     }
 
@@ -32,7 +33,8 @@ public class PipesMover : MonoBehaviour, IFreezable
         {
             GameStateManager.OnGameOver -= Freeze;
             GameStateManager.OnGamePaused -= Freeze;
-            GameStateManager.OnGamePlaying -= Unfreeze;
+            GameStateManager.OnGameStarted -= Unfreeze;
+            GameStateManager.OnGameResumed -= Unfreeze;
             GameStateManager.OnMenu -= Freeze;
         }
     }

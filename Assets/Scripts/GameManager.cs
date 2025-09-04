@@ -16,8 +16,9 @@ public class GameManager : MonoBehaviour
         playerLives.OnLifeLost += HandleLifeLost;    // ← subscribe
         playerLives.OnDeath    += HandleGameOver;
         GameStateManager.OnGameOver += HandleGameOverState;
-        GameStateManager.OnGamePlaying += HandleGamePlayingState;
+        GameStateManager.OnGameStarted += HandleGameStartedState;
         GameStateManager.OnGamePaused += HandleGamePausedState;
+        GameStateManager.OnGameResumed += HandleGameResumedState;
         GameStateManager.OnMenu += HandleOnMenuState;
     }
     void OnDisable()
@@ -28,8 +29,9 @@ public class GameManager : MonoBehaviour
         if (GameStateManager.Instance != null)
         {
             GameStateManager.OnGameOver -= HandleGameOverState;
-            GameStateManager.OnGamePlaying -= HandleGamePlayingState;
+            GameStateManager.OnGameStarted -= HandleGameStartedState;
             GameStateManager.OnGamePaused -= HandleGamePausedState;
+            GameStateManager.OnGameResumed -= HandleGameResumedState;
             GameStateManager.OnMenu -= HandleOnMenuState;
         }
     }
@@ -37,7 +39,16 @@ public class GameManager : MonoBehaviour
     {
         InitializeGame();
     }
-
+    void HandleGameOver(DamageContext ctx)
+    {
+        GameStateManager.Instance.EndGame();
+    }
+    void InitializeGame()
+    {
+        // TODO: change this to Menu state
+        GameStateManager.Instance.ReturnToMenu();
+    }
+    
     
     void HandleOnMenuState()
     {
@@ -45,39 +56,38 @@ public class GameManager : MonoBehaviour
         pipesSpawner.Disable();
         groundLoop.Unfreeze();
     }
-    void HandleGameOver(DamageContext ctx)
+
+    void HandleGameStartedState()
     {
-        GameStateManager.Instance.EndGame();
+        playerScript.ResetAutoJump();
+        playerScript.EnableMovements();
+        playerLives.ResetLives();
+        pipesSpawner.Enable();
+        difficulty.ResetRun();
+        groundLoop.Unfreeze();
     }
 
-    void InitializeGame()
-    {
-        // TODO: change this to Menu state
-        GameStateManager.Instance.ReturnToMenu();
-    }
     void HandleGameOverState()
     {
         playerScript.DisableControls();
-        playerScript.ResetAutoJump();
         pipesSpawner.Disable();
         groundLoop.Freeze();
     }
     void HandleGamePausedState()
     {
         playerScript.DisableMovements();
-        // playerScript.ResetAutoJump();
         pipesSpawner.Disable();
         groundLoop.Freeze();
     }
-
-    void HandleGamePlayingState()
+    
+    void HandleGameResumedState()
     {
-        playerLives.ResetRun();
-        pipesSpawner.Enable();
         playerScript.EnableMovements();
-        difficulty.ResetRun();
+        pipesSpawner.Enable();
         groundLoop.Unfreeze();
     }
+
+
 
     void HandleLifeLost(DamageContext ctx)
     {

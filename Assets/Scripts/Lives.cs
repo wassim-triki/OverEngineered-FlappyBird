@@ -17,7 +17,7 @@ public sealed class Lives : MonoBehaviour
     public event Action<DamageContext> OnLifeLost;
 
 
-    public void ResetRun()
+    public void ResetLives()
     {
         MaxLives = InitMaxLives;
         CurrentLives = MaxLives;
@@ -79,7 +79,7 @@ public sealed class Lives : MonoBehaviour
 #endif
 
     [ContextMenu("Debug/Reset Run")]
-    private void Debug_Reset() => ResetRun();
+    private void Debug_Reset() => ResetLives();
     
     [ContextMenu("Debug/Lose Life")]
     private void Debug_LoseLife() => LoseLife(1,new DamageContext{Source = gameObject});

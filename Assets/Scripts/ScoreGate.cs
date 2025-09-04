@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class ScoreGate : MonoBehaviour
 {
-    [SerializeField] private string playerTag = "Player";
+    private string _playerTag = "Player";
     private ScoreService _score;
     private bool _consumed;
     
@@ -14,7 +14,7 @@ public class ScoreGate : MonoBehaviour
     void OnTriggerEnter2D(Collider2D other)
     {
         if (_consumed || _score == null) return;
-        if (!other.CompareTag(playerTag)) return;
+        if (!other.CompareTag(_playerTag)) return;
 
         _consumed = true;
         _score.Add(1);

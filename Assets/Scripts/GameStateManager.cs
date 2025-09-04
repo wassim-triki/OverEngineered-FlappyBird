@@ -22,8 +22,9 @@ namespace DefaultNamespace
         public static event Action<GameState,GameState> OnStateChanged;
         public static event Action OnGameOver;
         public static event Action OnGamePaused;
-        public static event Action OnGamePlaying;
+        public static event Action OnGameStarted;
         public static event Action OnMenu;
+        public static event Action OnGameResumed;
         private void Awake()
         {
             if (Instance == null)
@@ -65,7 +66,12 @@ namespace DefaultNamespace
                     OnMenu?.Invoke();
                     break;
                 case GameState.Playing:
-                    OnGamePlaying?.Invoke();
+                    if (oldState == GameState.Paused)
+                    {
+                        OnGameResumed?.Invoke();
+                        break;
+                    }
+                        OnGameStarted?.Invoke();
                     break;
                 case GameState.Paused:
                     OnGamePaused?.Invoke();
@@ -79,6 +85,7 @@ namespace DefaultNamespace
         }
         public void ReturnToMenu() => SetState(GameState.Menu);
         public void StartGame() => SetState(GameState.Playing);
+        public void ResumeGame() => SetState(GameState.Playing);
         public void PauseGame() => SetState(GameState.Paused);
         public void EndGame() => SetState(GameState.GameOver);
         
