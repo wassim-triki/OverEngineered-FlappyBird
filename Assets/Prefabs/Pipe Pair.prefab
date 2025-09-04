@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2502930234485400981}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Bottom Anchor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -43,7 +43,7 @@ GameObject:
   - component: {fileID: 7341326696718091120}
   - component: {fileID: 867095471380406236}
   - component: {fileID: 6772891152896429714}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Score Gate
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -137,7 +137,8 @@ GameObject:
   - component: {fileID: 999632331269653655}
   - component: {fileID: 7945160731471277502}
   - component: {fileID: 8994218104534529223}
-  m_Layer: 0
+  - component: {fileID: 3704949432190262733}
+  m_Layer: 3
   m_Name: Pipe Pair
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -232,6 +233,18 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 1
   m_Constraints: 0
+--- !u!210 &3704949432190262733
+SortingGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1367876255701826999}
+  m_Enabled: 1
+  m_SortingLayerID: -1741034357
+  m_SortingLayer: -4
+  m_SortingOrder: 0
+  m_SortAtRoot: 0
 --- !u!1 &5497661382879974744
 GameObject:
   m_ObjectHideFlags: 0
@@ -311,7 +324,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: -1741034357
-  m_SortingLayer: 1
+  m_SortingLayer: -4
   m_SortingOrder: 1
   m_Sprite: {fileID: 5167379883609447733, guid: cf085eef051ec5f4d897c72f6c17508c, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -467,7 +480,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: -1741034357
-  m_SortingLayer: 1
+  m_SortingLayer: -4
   m_SortingOrder: 1
   m_Sprite: {fileID: 5167379883609447733, guid: cf085eef051ec5f4d897c72f6c17508c, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -553,7 +566,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1632262376715730933}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Top Anchor
   m_TagString: Untagged
   m_Icon: {fileID: 0}

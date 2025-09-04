@@ -18,6 +18,8 @@ public class Player : MonoBehaviour
     [SerializeField] private float normalGravity = 5.8f;
     [SerializeField] private float holdGravity = 4.8f;
     [SerializeField] private float fallGravity = 10.5f;
+    
+    private Vector2 _velocityOnPause;
 
     private bool _hasAutoJumped = false;
 
@@ -42,12 +44,14 @@ public class Player : MonoBehaviour
         _movementsEnabled = true;
         EnableControls();
         _rigidbody.bodyType = RigidbodyType2D.Dynamic;
+        _rigidbody.linearVelocity = _velocityOnPause;
     }
     public void DisableMovements()
     {
         _movementsEnabled = false;
         DisableControls();
         _rigidbody.bodyType = RigidbodyType2D.Kinematic;
+        _rigidbody.linearVelocity = Vector2.zero;
     }
 
     public void EnableControls()
