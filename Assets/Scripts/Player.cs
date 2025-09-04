@@ -18,6 +18,8 @@ public class Player : MonoBehaviour
     [SerializeField] private float normalGravity = 5.8f;
     [SerializeField] private float holdGravity = 4.8f;
     [SerializeField] private float fallGravity = 10.5f;
+
+    private Vector3 _initPosition;
     
     private Vector2 _velocityOnPause;
 
@@ -39,6 +41,14 @@ public class Player : MonoBehaviour
     void OnEnable() => EnableMovements();
     void OnDisable() => DisableMovements();
 
+    public void ResetPlayer(bool resetAutoJump = true)
+    {
+        transform.position = _initPosition;
+        transform.rotation = Quaternion.identity;
+        _rigidbody.linearVelocity = Vector2.zero;
+        _rigidbody.angularVelocity = 0f;
+        if (resetAutoJump) ResetAutoJump();
+    }
     public void EnableMovements()
     {
         _movementsEnabled = true;

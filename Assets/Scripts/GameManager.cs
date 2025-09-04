@@ -9,6 +9,8 @@ public class GameManager : MonoBehaviour
     [SerializeField] private DifficultyController difficulty;
     [SerializeField] private PipesSpawner pipesSpawner;
     [SerializeField] private GroundLoop groundLoop;
+    [SerializeField] private ScoreService score;
+    
     
     
     void OnEnable()
@@ -52,16 +54,17 @@ public class GameManager : MonoBehaviour
     
     void HandleOnMenuState()
     {
+        playerScript.ResetPlayer();
         playerScript.DisableMovements();
+        playerLives.ResetLives();
+        score.ResetScore();
         pipesSpawner.Disable();
         groundLoop.Unfreeze();
     }
 
     void HandleGameStartedState()
     {
-        playerScript.ResetAutoJump();
         playerScript.EnableMovements();
-        playerLives.ResetLives();
         pipesSpawner.Enable();
         difficulty.ResetRun();
         groundLoop.Unfreeze();
