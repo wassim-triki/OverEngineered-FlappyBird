@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2502930234485400981}
-  m_Layer: 3
+  m_Layer: 0
   m_Name: Bottom Anchor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -43,7 +43,7 @@ GameObject:
   - component: {fileID: 7341326696718091120}
   - component: {fileID: 867095471380406236}
   - component: {fileID: 6772891152896429714}
-  m_Layer: 3
+  m_Layer: 0
   m_Name: Score Gate
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -138,7 +138,7 @@ GameObject:
   - component: {fileID: 7945160731471277502}
   - component: {fileID: 8994218104534529223}
   - component: {fileID: 3704949432190262733}
-  m_Layer: 3
+  m_Layer: 0
   m_Name: Pipe Pair
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -241,8 +241,8 @@ SortingGroup:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1367876255701826999}
   m_Enabled: 1
-  m_SortingLayerID: -1741034357
-  m_SortingLayer: -4
+  m_SortingLayerID: 818603213
+  m_SortingLayer: 2
   m_SortingOrder: 0
   m_SortAtRoot: 0
 --- !u!1 &5497661382879974744
@@ -257,7 +257,7 @@ GameObject:
   - component: {fileID: 2718945144072153225}
   - component: {fileID: 5010259007347169288}
   - component: {fileID: 8499305924664427106}
-  m_Layer: 3
+  m_Layer: 0
   m_Name: Top Pillar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -323,8 +323,8 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_GlobalIlluminationMeshLod: 0
-  m_SortingLayerID: -1741034357
-  m_SortingLayer: -4
+  m_SortingLayerID: 818603213
+  m_SortingLayer: 2
   m_SortingOrder: 1
   m_Sprite: {fileID: 5167379883609447733, guid: cf085eef051ec5f4d897c72f6c17508c, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -399,7 +399,7 @@ MonoBehaviour:
   damage: 1
   targetLayers:
     serializedVersion: 2
-    m_Bits: 64
+    m_Bits: 0
   ignoreSelfHierarchy: 1
 --- !u!1 &7171292695773209868
 GameObject:
@@ -413,7 +413,7 @@ GameObject:
   - component: {fileID: 1457203042880832508}
   - component: {fileID: 6769803654070578235}
   - component: {fileID: 7841390235733495962}
-  m_Layer: 3
+  m_Layer: 0
   m_Name: Bottom Pillar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -479,8 +479,8 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_GlobalIlluminationMeshLod: 0
-  m_SortingLayerID: -1741034357
-  m_SortingLayer: -4
+  m_SortingLayerID: 818603213
+  m_SortingLayer: 2
   m_SortingOrder: 1
   m_Sprite: {fileID: 5167379883609447733, guid: cf085eef051ec5f4d897c72f6c17508c, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -555,7 +555,7 @@ MonoBehaviour:
   damage: 1
   targetLayers:
     serializedVersion: 2
-    m_Bits: 64
+    m_Bits: 0
   ignoreSelfHierarchy: 1
 --- !u!1 &9137605783041557149
 GameObject:
@@ -566,7 +566,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1632262376715730933}
-  m_Layer: 3
+  m_Layer: 0
   m_Name: Top Anchor
   m_TagString: Untagged
   m_Icon: {fileID: 0}

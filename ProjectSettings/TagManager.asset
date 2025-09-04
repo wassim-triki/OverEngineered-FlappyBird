@@ -8,14 +8,14 @@ TagManager:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - Pillars
+  - 
   - Water
   - UI
-  - Player
-  - Ground
-  - Score
-  - Background
-  - HUD
+  - 
+  - 
+  - 
+  - 
+  - 
   - 
   - 
   - 
@@ -38,26 +38,17 @@ TagManager:
   - 
   - 
   m_SortingLayers:
-  - name: Background
-    uniqueID: 618270339
-    locked: 0
-  - name: Score
-    uniqueID: 2107786087
-    locked: 0
-  - name: Pillars
-    uniqueID: 2553932939
-    locked: 0
-  - name: Player
-    uniqueID: 802203557
-    locked: 0
-  - name: Ground
-    uniqueID: 3837883623
-    locked: 0
-  - name: HUD
-    uniqueID: 98883771
-    locked: 0
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Background
+    uniqueID: 2728993331
+    locked: 0
+  - name: GameObjects
+    uniqueID: 818603213
+    locked: 0
+  - name: Foreground
+    uniqueID: 883356785
     locked: 0
   m_RenderingLayers:
   - Default
