@@ -1,3 +1,6 @@
+using System;
+using DefaultNamespace;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class PipePair : MonoBehaviour
@@ -22,6 +25,23 @@ public class PipePair : MonoBehaviour
         if (transform.position.x <= deadZone) Destroy(gameObject);
     }
 
+    private void OnEnable()
+    {
+        GameStateManager.OnMenu += HandleOnMenuState;
+    }
+
+    private void OnDisable()
+    {
+        if (GameStateManager.Instance != null)
+        {
+            GameStateManager.OnMenu -= HandleOnMenuState;
+        }
+    }
+
+    private void HandleOnMenuState()
+    {
+        Destroy(gameObject);
+    }
     public void SetGap(float newGap)
     {
         gap = Mathf.Max(0f, newGap);
