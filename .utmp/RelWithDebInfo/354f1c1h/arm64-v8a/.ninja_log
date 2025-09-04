@@ -1,12 +1,12 @@
 # ninja log v5
-219	3679	7786210512026559	FramePacing/CMakeFiles/swappywrapper.dir/UnitySwappyWrapper.cpp.o	d5c1b005631c2dbc
-3683	4563	7786210519670241	C:/Users/wsmtr/Flappy Bird Learning The Basics/Library/Bee/Android/Prj/IL2CPP/Gradle/unityLibrary/build/intermediates/cxx/RelWithDebInfo/354f1c1h/obj/arm64-v8a/libswappywrapper.so	b660960ce3428dec
-65	7868	7786210553868953	GameActivity/CMakeFiles/game.dir/UGAInputKeyEvent.cpp.o	6701d555e4fb1bb4
-124	7942	7786210554683212	GameActivity/CMakeFiles/game.dir/UGAEntry.cpp.o	79b61e4700fa8d77
-2	8016	7786210555466389	GameActivity/CMakeFiles/game.dir/UGAConfiguration.cpp.o	fa1a3527448963d5
-198	8035	7786210555604625	GameActivity/CMakeFiles/game.dir/UGAInputMotionEvent.cpp.o	81729d2604af0894
-23	8171	7786210557064673	GameActivity/CMakeFiles/game.dir/UGADebug.cpp.o	3ab301ee27d96a2d
-161	8535	7786210560813908	GameActivity/CMakeFiles/game.dir/UGASoftKeyboard.cpp.o	6f600a35866a093f
-98	8633	7786210561803334	GameActivity/CMakeFiles/game.dir/UGAInput.cpp.o	351c7a875a28e198
-42	8778	7786210563141406	GameActivity/CMakeFiles/game.dir/UGAApplication.cpp.o	43d04b8fc03613c5
-8778	8957	7786210565056053	C:/Users/wsmtr/Flappy Bird Learning The Basics/Library/Bee/Android/Prj/IL2CPP/Gradle/unityLibrary/build/intermediates/cxx/RelWithDebInfo/354f1c1h/obj/arm64-v8a/libgame.so	f5d149b466ed9c6a
+169	1138	7786879044415011	FramePacing/CMakeFiles/swappywrapper.dir/UnitySwappyWrapper.cpp.o	d5c1b005631c2dbc
+1187	1952	7786879051544655	C:/Users/wsmtr/Flappy Bird Learning The Basics/Library/Bee/Android/Prj/IL2CPP/Gradle/unityLibrary/build/intermediates/cxx/RelWithDebInfo/354f1c1h/obj/arm64-v8a/libswappywrapper.so	b660960ce3428dec
+45	4435	7786879077251899	GameActivity/CMakeFiles/game.dir/UGAInputKeyEvent.cpp.o	6701d555e4fb1bb4
+79	4455	7786879077277046	GameActivity/CMakeFiles/game.dir/UGAEntry.cpp.o	79b61e4700fa8d77
+31	4526	7786879078196814	GameActivity/CMakeFiles/game.dir/UGAConfiguration.cpp.o	fa1a3527448963d5
+121	4549	7786879078551461	GameActivity/CMakeFiles/game.dir/UGAInputMotionEvent.cpp.o	81729d2604af0894
+1	4700	7786879080084971	GameActivity/CMakeFiles/game.dir/UGADebug.cpp.o	3ab301ee27d96a2d
+61	5138	7786879084382467	GameActivity/CMakeFiles/game.dir/UGAInput.cpp.o	351c7a875a28e198
+15	5378	7786879086858815	GameActivity/CMakeFiles/game.dir/UGAApplication.cpp.o	43d04b8fc03613c5
+98	5389	7786879086911212	GameActivity/CMakeFiles/game.dir/UGASoftKeyboard.cpp.o	6f600a35866a093f
+5390	5627	7786879089428017	C:/Users/wsmtr/Flappy Bird Learning The Basics/Library/Bee/Android/Prj/IL2CPP/Gradle/unityLibrary/build/intermediates/cxx/RelWithDebInfo/354f1c1h/obj/arm64-v8a/libgame.so	f5d149b466ed9c6a

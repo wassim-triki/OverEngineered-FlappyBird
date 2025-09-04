@@ -1,10 +1,13 @@
 fileFormatVersion: 2
-guid: cf085eef051ec5f4d897c72f6c17508c
+guid: a3508d178e0100f4686bc3cbccbfde5f
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 5167379883609447733
-    second: Pipe 1_0
+      213: 6261180780860757445
+    second: Pipes_0
+  - first:
+      213: 6958147056157409064
+    second: Pipes_1
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -46,12 +49,12 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 1
+  spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 1
-  alignment: 9
-  spritePivot: {x: 0.5, y: 0}
-  spritePixelsToUnits: 100
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 148
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -113,14 +116,14 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Pipe 1_0
+      name: Pipes_Top
       rect:
         serializedVersion: 2
         x: 0
-        y: 1
-        width: 156
-        height: 1365
-      alignment: 9
+        y: 2271
+        width: 170
+        height: 1861
+      alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
@@ -128,8 +131,30 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 53d5a0e40a836b740800000000000000
-      internalID: 5167379883609447733
+      spriteID: 5c555bd3fbe24e650800000000000000
+      internalID: 6261180780860757445
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Pipes_Bottom
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 1
+        width: 170
+        height: 1861
+      alignment: 2
+      pivot: {x: 0.5, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 82f3139b1ed409060800000000000000
+      internalID: 6958147056157409064
       vertices: []
       indices: 
       edges: []
@@ -138,8 +163,8 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: e710eeb66f63da746866a4dad9d38eec
-    internalID: 1125189443
+    spriteID: 7771d6c53fb82594788ab2ca1844dca9
+    internalID: 0
     vertices: []
     indices: 
     edges: []
@@ -148,7 +173,8 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Pipe 1_0: 5167379883609447733
+      Pipes_Bottom: 6958147056157409064
+      Pipes_Top: 6261180780860757445
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
