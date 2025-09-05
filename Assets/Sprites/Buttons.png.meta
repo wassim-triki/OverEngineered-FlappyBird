@@ -14,12 +14,6 @@ TextureImporter:
   - first:
       213: 2013261503205373015
     second: Buttons_3
-  - first:
-      213: 3760674464881954987
-    second: Buttons_4
-  - first:
-      213: -7811504096720598664
-    second: Buttons_5
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -128,13 +122,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Buttons_Play
+      name: Button_Play
       rect:
         serializedVersion: 2
-        x: 4
+        x: 0
         y: 0
-        width: 341
-        height: 358
+        width: 320
+        height: 320
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -150,13 +144,13 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Buttons_Pause
+      name: Button_Pause
       rect:
         serializedVersion: 2
-        x: 345
+        x: 320
         y: 0
-        width: 341
-        height: 358
+        width: 320
+        height: 320
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -172,13 +166,13 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Buttons_Restart
+      name: Button_Restart
       rect:
         serializedVersion: 2
-        x: 686
+        x: 640
         y: 0
-        width: 341
-        height: 358
+        width: 320
+        height: 320
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -197,7 +191,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: f4ca54d412e89d546a5ee044c562b2ca
+    spriteID: 554f9a2bd64ebc848808c7a5612d04bf
     internalID: 0
     vertices: []
     indices: 
@@ -207,11 +201,11 @@ TextureImporter:
     spriteCustomMetadata:
       entries:
       - key: SpriteEditor.SliceSettings
-        value: '{"sliceOnImport":false,"gridCellCount":{"x":1.0,"y":1.0},"gridSpriteSize":{"x":341.0,"y":358.0},"gridSpriteOffset":{"x":0.0,"y":0.0},"gridSpritePadding":{"x":0.0,"y":0.0},"pivot":{"x":0.5,"y":0.5},"pivotPixels":{"x":0.0,"y":0.0},"autoSlicingMethod":0,"spriteAlignment":0,"pivotUnitMode":0,"slicingType":1,"keepEmptyRects":false,"isAlternate":false}'
+        value: '{"sliceOnImport":false,"gridCellCount":{"x":1.0,"y":1.0},"gridSpriteSize":{"x":320.0,"y":320.0},"gridSpriteOffset":{"x":0.0,"y":0.0},"gridSpritePadding":{"x":0.0,"y":0.0},"pivot":{"x":0.5,"y":0.5},"pivotPixels":{"x":0.0,"y":0.0},"autoSlicingMethod":0,"spriteAlignment":0,"pivotUnitMode":0,"slicingType":1,"keepEmptyRects":false,"isAlternate":false}'
     nameFileIdTable:
-      Buttons_Pause: 7664807735657788756
-      Buttons_Play: 8894201953851282084
-      Buttons_Restart: -5402412272178277761
+      Button_Pause: 7664807735657788756
+      Button_Play: 8894201953851282084
+      Button_Restart: -5402412272178277761
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
