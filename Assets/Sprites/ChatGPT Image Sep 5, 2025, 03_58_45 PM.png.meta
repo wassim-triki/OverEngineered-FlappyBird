@@ -1,16 +1,64 @@
 fileFormatVersion: 2
-guid: 9ee076c403525a642a0a29237fbc53e2
+guid: 2441a6f783343454ea0e5734fe8d718c
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 5994196626052538083
-    second: HUD 1_0
+      213: -1063244131646484073
+    second: ChatGPT Image Sep 5, 2025, 03_58_45 PM_0
   - first:
-      213: 4371516252913282918
-    second: HUD 1_1
+      213: -1728007202594296192
+    second: ChatGPT Image Sep 5, 2025, 03_58_45 PM_1
   - first:
-      213: 1287219748595035933
-    second: HUD 1_2
+      213: 1892957125276659003
+    second: ChatGPT Image Sep 5, 2025, 03_58_45 PM_2
+  - first:
+      213: -9128621951954218127
+    second: ChatGPT Image Sep 5, 2025, 03_58_45 PM_3
+  - first:
+      213: -6899364408467997286
+    second: ChatGPT Image Sep 5, 2025, 03_58_45 PM_4
+  - first:
+      213: 2716547287382655815
+    second: ChatGPT Image Sep 5, 2025, 03_58_45 PM_5
+  - first:
+      213: -4562501653817851217
+    second: ChatGPT Image Sep 5, 2025, 03_58_45 PM_6
+  - first:
+      213: 5257338751998718949
+    second: ChatGPT Image Sep 5, 2025, 03_58_45 PM_7
+  - first:
+      213: -2617264622921515645
+    second: ChatGPT Image Sep 5, 2025, 03_58_45 PM_8
+  - first:
+      213: 423103303058267057
+    second: ChatGPT Image Sep 5, 2025, 03_58_45 PM_9
+  - first:
+      213: -7125921734194656948
+    second: ChatGPT Image Sep 5, 2025, 03_58_45 PM_10
+  - first:
+      213: 1169663893257143788
+    second: ChatGPT Image Sep 5, 2025, 03_58_45 PM_11
+  - first:
+      213: 8630157906818388221
+    second: ChatGPT Image Sep 5, 2025, 03_58_45 PM_12
+  - first:
+      213: 4041248041003017368
+    second: ChatGPT Image Sep 5, 2025, 03_58_45 PM_13
+  - first:
+      213: -8326196412620946469
+    second: ChatGPT Image Sep 5, 2025, 03_58_45 PM_14
+  - first:
+      213: -4536827302631541299
+    second: ChatGPT Image Sep 5, 2025, 03_58_45 PM_15
+  - first:
+      213: -2843898900422667809
+    second: ChatGPT Image Sep 5, 2025, 03_58_45 PM_16
+  - first:
+      213: 64117496109094985
+    second: ChatGPT Image Sep 5, 2025, 03_58_45 PM_17
+  - first:
+      213: 5187575675528788549
+    second: ChatGPT Image Sep 5, 2025, 03_58_45 PM_18
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -57,8 +105,8 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 100
-  spriteBorder: {x: 18, y: 17, z: 45, w: 22}
+  spritePixelsToUnits: 580
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
   alphaIsTransparency: 1
@@ -119,13 +167,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: HUD 1_0
+      name: Cloud_1
       rect:
         serializedVersion: 2
-        x: 12
-        y: 29
-        width: 7
-        height: 16
+        x: 126
+        y: 600
+        width: 580
+        height: 360
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -134,20 +182,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 3eed4b1a21aaf2350800000000000000
-      internalID: 5994196626052538083
+      spriteID: 79151b778199e31f0800000000000000
+      internalID: -1063244131646484073
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: HUD 1_1
+      name: Cloud_2
       rect:
         serializedVersion: 2
-        x: 19
-        y: 21
-        width: 880
-        height: 197
+        x: 831
+        y: 600
+        width: 580
+        height: 360
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -156,20 +204,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 66f2eb8eedebaac30800000000000000
-      internalID: 4371516252913282918
+      spriteID: 08eec08ca92e408e0800000000000000
+      internalID: -1728007202594296192
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: HUD 1_2
+      name: Cloud_4
       rect:
         serializedVersion: 2
-        x: 56
-        y: 0
-        width: 6
-        height: 11
+        x: 126
+        y: 158
+        width: 580
+        height: 360
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -178,8 +226,30 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: d1fefd69a8f1dd110800000000000000
-      internalID: 1287219748595035933
+      spriteID: b3de823e972254a10800000000000000
+      internalID: 1892957125276659003
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Cloud_3
+      rect:
+        serializedVersion: 2
+        x: 831
+        y: 158
+        width: 580
+        height: 360
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1739fe043be905180800000000000000
+      internalID: -9128621951954218127
       vertices: []
       indices: 
       edges: []
@@ -188,19 +258,22 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 5e97eb03825dee720800000000000000
-    internalID: 1537655665
+    spriteID: 3adba5518fa84f243a478610312baff7
+    internalID: 0
     vertices: []
     indices: 
     edges: []
     weights: []
     secondaryTextures: []
     spriteCustomMetadata:
-      entries: []
+      entries:
+      - key: SpriteEditor.SliceSettings
+        value: '{"sliceOnImport":false,"gridCellCount":{"x":1.0,"y":1.0},"gridSpriteSize":{"x":580.0,"y":360.0},"gridSpriteOffset":{"x":126.0,"y":64.0},"gridSpritePadding":{"x":125.0,"y":82.0},"pivot":{"x":0.5,"y":0.5},"pivotPixels":{"x":0.0,"y":0.0},"autoSlicingMethod":0,"spriteAlignment":0,"pivotUnitMode":0,"slicingType":1,"keepEmptyRects":false,"isAlternate":false}'
     nameFileIdTable:
-      HUD 1_0: 5994196626052538083
-      HUD 1_1: 4371516252913282918
-      HUD 1_2: 1287219748595035933
+      Cloud_1: -1063244131646484073
+      Cloud_2: -1728007202594296192
+      Cloud_3: -9128621951954218127
+      Cloud_4: 1892957125276659003
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

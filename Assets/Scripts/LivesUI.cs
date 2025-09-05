@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class LivesUI : MonoBehaviour
 {
     [SerializeField] private Lives playerLives;
+    [SerializeField] private GameObject livesContainer;
     [SerializeField] private LifeCell lifeCellPrefab;
     private readonly List<LifeCell> _cells = new();
     
@@ -20,7 +21,7 @@ public class LivesUI : MonoBehaviour
     {
         for (int i = 0; i < playerLives.MaxLives; i++)
         {
-            var cell = Instantiate<LifeCell>(lifeCellPrefab, transform);
+            var cell = Instantiate<LifeCell>(lifeCellPrefab, livesContainer.transform);
             _cells.Add(cell);
             cell.SetFull(i<playerLives.CurrentLives);
         }
