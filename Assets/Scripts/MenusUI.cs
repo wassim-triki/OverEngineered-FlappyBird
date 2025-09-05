@@ -4,10 +4,10 @@ using UnityEngine.UI;
 
 public class MenuUI : MonoBehaviour
 {
-    [SerializeField] private Button playButton;
-    [SerializeField] private Button pauseButton;
-    [SerializeField] private Button resumeButton;
-    [SerializeField] private Button restartButton;
+    [SerializeField] private GameObject mainMenu;
+    [SerializeField] private GameObject pauseMenu;
+    [SerializeField] private GameObject inGameMenu;
+    [SerializeField] private GameObject gameOverMenu;
     
     
     
@@ -36,41 +36,46 @@ public class MenuUI : MonoBehaviour
     
     void HandleOnGameOverState()
     {
-        restartButton.gameObject.SetActive(true);
-        pauseButton.gameObject.SetActive(false);
-        playButton.gameObject.SetActive(false);
-        resumeButton.gameObject.SetActive(false);
+        gameOverMenu.SetActive(true);
+        
+        mainMenu.SetActive(false);
+        inGameMenu.SetActive(false);
+        pauseMenu.SetActive(false);
     }
     
 
     void HandleGamePausedState()
     {
-        resumeButton.gameObject.SetActive(true);
-        restartButton.gameObject.SetActive(false);
-        playButton.gameObject.SetActive(false);
-        pauseButton.gameObject.SetActive(false);
+        pauseMenu.SetActive(true);
+        
+        mainMenu.SetActive(false);
+        inGameMenu.SetActive(false);
+        gameOverMenu.SetActive(false);
     }
     
     void HandleGameResumedState()
     {
-        pauseButton.gameObject.SetActive(true);
-        playButton.gameObject.SetActive(false);
-        restartButton.gameObject.SetActive(false);
-        resumeButton.gameObject.SetActive(false);
+        inGameMenu.SetActive(true);
+        
+        mainMenu.SetActive(false);
+        pauseMenu.SetActive(false);
+        gameOverMenu.SetActive(false);;
     }
     void HandleOnMenuState()
     {
-        playButton.gameObject.SetActive(true);
-        pauseButton.gameObject.SetActive(false);
-        resumeButton.gameObject.SetActive(false);
-        restartButton.gameObject.SetActive(false);
+        mainMenu.SetActive(true);
+        
+        pauseMenu.SetActive(false);
+        inGameMenu.SetActive(false);
+        gameOverMenu.SetActive(false);
     }
     
     void HandleGameStartedState()
     {
-        pauseButton.gameObject.SetActive(true);
-        playButton.gameObject.SetActive(false);
-        resumeButton.gameObject.SetActive(false);
-        restartButton.gameObject.SetActive(false);
+        inGameMenu.SetActive(true);
+        
+        mainMenu.SetActive(false);
+        pauseMenu.SetActive(false);
+        gameOverMenu.SetActive(false);
     }
 }
