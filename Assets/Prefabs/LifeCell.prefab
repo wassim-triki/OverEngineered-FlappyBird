@@ -36,7 +36,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 65.9814, y: 65.981}
+  m_SizeDelta: {x: 65.9814, y: 58.8892}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &6268033734258086475
 MonoBehaviour:
@@ -50,8 +50,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ea727a2c7a705f24ca0281cf17ad82ad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::LifeCell
-  full: {fileID: -2443198628030305771, guid: 33e2f180a5c6c8d4c8d477f1d1ddca01, type: 3}
-  empty: {fileID: -3519655967668433541, guid: 33e2f180a5c6c8d4c8d477f1d1ddca01, type: 3}
+  full: {fileID: 4432793351920879750, guid: 6153d69699a713245b9e14f431565c54, type: 3}
+  empty: {fileID: 5642012044021194823, guid: 6153d69699a713245b9e14f431565c54, type: 3}
 --- !u!222 &761737430918812130
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -80,7 +80,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: -2443198628030305771, guid: 33e2f180a5c6c8d4c8d477f1d1ddca01, type: 3}
+  m_Sprite: {fileID: 4432793351920879750, guid: 6153d69699a713245b9e14f431565c54, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
