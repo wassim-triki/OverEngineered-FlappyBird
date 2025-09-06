@@ -3432,6 +3432,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::DefaultNamespace.DamageSource
   fatal: 1
   damage: 1
+  disableSelfOnHit: 0
   targetLayers:
     serializedVersion: 2
     m_Bits: 8
@@ -3470,7 +3471,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: -31.886}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 55.6, y: -51.3}
+  m_AnchoredPosition: {x: 55.600006, y: -51.300003}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 1, y: 1}
 --- !u!114 &2013497397

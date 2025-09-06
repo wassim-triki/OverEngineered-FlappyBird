@@ -7,6 +7,7 @@ public class DamageSource : MonoBehaviour
     [Header("Behavior")]
     [SerializeField] private bool fatal;         // ← ground: ON
     [SerializeField, Min(1)] private int damage = 1; 
+    [SerializeField] private bool disableSelfOnHit = true;
 
     [Header("Filtering")]
     [SerializeField] private LayerMask targetLayers = ~0; // who we can hurt
@@ -38,7 +39,7 @@ public class DamageSource : MonoBehaviour
         damageable.TakeDamage(fatal ? int.MaxValue : damage, ctx);
         
         // disable self collider to prevent multiple hits
-        if (_collider != null) _collider.enabled = false;
+        if (_collider != null && disableSelfOnHit) _collider.enabled = false;
     }
 
     private bool IsInTargetLayers(GameObject go)
