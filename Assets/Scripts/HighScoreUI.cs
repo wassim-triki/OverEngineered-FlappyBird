@@ -13,26 +13,29 @@ public class HighScoreUI : MonoBehaviour
 
     void Awake()
     {
-        if (score != null)
-        {
             score.OnHighScoreChanged += HandleNewHighScore;
-            GameStateManager.OnMenu  += () => newBadgeLabel.gameObject.SetActive(false);
-        }
+            GameStateManager.OnMenu += HandleOnMenu;
     }
-
-
-
+    
     private void OnDestroy()
     {
         if (score != null)
             score.OnHighScoreChanged -= HandleNewHighScore;
+        if (GameStateManager.Instance != null)
+            GameStateManager.OnMenu -= HandleOnMenu;
     }
-
+    void HandleOnMenu()
+    {
+        newBadgeLabel.gameObject.SetActive(false);
+    }
     void Start()
     {
         highScoreUI.text = score.High.ToString();
         newBadgeLabel.gameObject.SetActive(false);
     }
+
+
+
 
     private void HandleNewHighScore(int newHigh)
     {
