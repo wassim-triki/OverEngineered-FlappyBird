@@ -18,6 +18,7 @@ public class PlayerDamageable : MonoBehaviour, IDamageable
         if (ctx != null && ctx.IsFatal)
         {
             _lives.Kill();
+            return;
         }
         _lives.LoseLife(amount,ctx);
     }
