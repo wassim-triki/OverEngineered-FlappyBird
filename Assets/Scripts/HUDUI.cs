@@ -27,11 +27,11 @@ public class HUDUI : MonoBehaviour
 
     void HandleOnGameStarted()
     {
-        highScoreUI.SetActive(true);
+        highScoreUI.SetActive(false);
     }
     void HandleOnGameResumed()
     {
-        highScoreUI.SetActive(true);
+        highScoreUI.SetActive(false);
     }
     
     void HandleOnMenu()

@@ -1,4 +1,5 @@
 using System;
+using DefaultNamespace;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -6,34 +7,36 @@ using UnityEngine.UI;
 public class HighScoreUI : MonoBehaviour
 {
     [SerializeField] private ScoreService score;
-    [SerializeField] private TextMeshProUGUI scoreText; // Preferred (TMP)
+    [SerializeField] private TextMeshProUGUI highScoreUI; 
+    [SerializeField] private TextMeshProUGUI newBadgeLabel; 
+    
 
     void Awake()
     {
-        // Auto-wire references if not set in Inspector
+        if (score != null)
+        {
+            score.OnHighScoreChanged += HandleNewHighScore;
+            GameStateManager.OnMenu  += () => newBadgeLabel.gameObject.SetActive(false);
+        }
     }
 
-    void OnEnable()
+
+
+    private void OnDestroy()
     {
         if (score != null)
-            score.OnHighScoreChanged += UpdateHighScore;
+            score.OnHighScoreChanged -= HandleNewHighScore;
     }
 
     void Start()
     {
-        // Initialize display with saved or current high score
-        UpdateHighScore(score.High);
+        highScoreUI.text = score.High.ToString();
+        newBadgeLabel.gameObject.SetActive(false);
     }
 
-    void OnDestroy()
+    private void HandleNewHighScore(int newHigh)
     {
-        if (score != null)
-            score.OnHighScoreChanged -= UpdateHighScore;
-    }
-
-    private void UpdateHighScore(int newHigh)
-    {
-        if (scoreText != null)
-            scoreText.text = newHigh.ToString();
+            highScoreUI.text = newHigh.ToString();
+            newBadgeLabel.gameObject.SetActive(true);
     }
 }
