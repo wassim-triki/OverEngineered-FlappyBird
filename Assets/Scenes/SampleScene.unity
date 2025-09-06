@@ -1115,6 +1115,7 @@ MonoBehaviour:
   pipesSpawner: {fileID: 1408798578}
   groundLoop: {fileID: 2005838960}
   score: {fileID: 491258287}
+  cameraShake: {fileID: 519420035}
 --- !u!114 &491258290
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1206,6 +1207,7 @@ GameObject:
   - component: {fileID: 519420030}
   - component: {fileID: 519420034}
   - component: {fileID: 519420033}
+  - component: {fileID: 519420035}
   m_Layer: 6
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -1408,6 +1410,22 @@ MonoBehaviour:
   m_BeforeTransparentBundles: []
   m_BeforeStackBundles: []
   m_AfterStackBundles: []
+--- !u!114 &519420035
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 519420028}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 82544c40d5f74c0ab491ac934a73f84d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CameraShake2D
+  defaultDuration: 0.14
+  defaultAmplitude: 0.15
+  defaultFrequency: 33
+  rotationPerUnit: 8
 --- !u!1 &549460384
 GameObject:
   m_ObjectHideFlags: 0

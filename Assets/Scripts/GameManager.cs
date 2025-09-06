@@ -10,7 +10,8 @@ public class GameManager : MonoBehaviour
     [SerializeField] private PipesSpawner pipesSpawner;
     [SerializeField] private GroundLoop groundLoop;
     [SerializeField] private ScoreService score;
-    
+    [SerializeField] private CameraShake2D cameraShake;
+
     
     
     void OnEnable()
@@ -43,6 +44,7 @@ public class GameManager : MonoBehaviour
     }
     void HandleGameOver(DamageContext ctx)
     {
+        cameraShake?.ShakeHeavy();
         GameStateManager.Instance.EndGame();
     }
     void InitializeGame()
@@ -94,6 +96,7 @@ public class GameManager : MonoBehaviour
 
     void HandleLifeLost(DamageContext ctx)
     {
+        cameraShake?.ShakeLight(); 
         if (ctx != null)
         {
             // if the ctx source is a top pillar or a bottom pillar than its parent must be a PillarPair
