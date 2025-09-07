@@ -1,3 +1,0 @@
-﻿<manifest>
-<uses-permission android:name="android.permission.VIBRATE" />
-</manifest>
