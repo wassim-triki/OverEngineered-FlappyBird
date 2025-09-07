@@ -867,9 +867,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c0a5645a9f71c7c438c709866ee7af9b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Lives
-  <MaxLives>k__BackingField: 100
-  <CurrentLives>k__BackingField: 100
-  <InitMaxLives>k__BackingField: 100
+  <MaxLives>k__BackingField: 3
+  <CurrentLives>k__BackingField: 3
+  <InitMaxLives>k__BackingField: 3
 --- !u!114 &444666085
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2122,6 +2122,51 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 1.04834, y: 5.3072, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &920220482
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 920220484}
+  - component: {fileID: 920220483}
+  m_Layer: 0
+  m_Name: AudioManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &920220483
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 920220482}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4629c8293b1f426db82f25421019eb34, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::AudioManager
+  library: {fileID: 11400000, guid: 1ac3803d28fc435418cbf701742cede3, type: 2}
+--- !u!4 &920220484
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 920220482}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.92126, y: -3.46246, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -3938,3 +3983,4 @@ SceneRoots:
   - {fileID: 549460388}
   - {fileID: 327371224}
   - {fileID: 1882817592}
+  - {fileID: 920220484}

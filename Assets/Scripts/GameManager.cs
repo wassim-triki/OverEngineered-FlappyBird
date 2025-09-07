@@ -46,6 +46,7 @@ public class GameManager : MonoBehaviour
     {
         cameraShake?.ShakeHeavy();
         Haptics.Heavy();
+        AudioManager.I.Play(Sfx.Death);
         GameStateManager.Instance.EndGame();
     }
     void InitializeGame()
@@ -99,6 +100,7 @@ public class GameManager : MonoBehaviour
     {
         cameraShake?.ShakeLight(); 
         Haptics.Medium();
+        AudioManager.I.Play(Sfx.Hit);
         if (ctx != null)
         {
             // if the ctx source is a top pillar or a bottom pillar than its parent must be a PillarPair

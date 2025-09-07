@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using DefaultNamespace;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
@@ -176,6 +177,7 @@ public class Player : MonoBehaviour
     
     void PerformJump()
     {
+        AudioManager.I.Play(Sfx.Jump);
         _rigidbody.linearVelocity = new Vector2(_rigidbody.linearVelocity.x, jumpForce);
         _holdTimer = holdTime;
     }
