@@ -1990,6 +1990,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::AudioManager
   library: {fileID: 11400000, guid: 1ac3803d28fc435418cbf701742cede3, type: 2}
+  musicSource: {fileID: 0}
+  normalCutoffHz: 22000
+  underwaterCutoffHz: 700
+  normalPitch: 1
+  underwaterPitch: 0.95
+  normalVolume: 0.6
+  underwaterVolume: 0.4
+  transition: 0.35
 --- !u!4 &920220484
 Transform:
   m_ObjectHideFlags: 0
@@ -2018,7 +2026,7 @@ AudioSource:
   m_audioClip: {fileID: 0}
   m_Resource: {fileID: 8300000, guid: 2353acae25617664fa35acc8bfd21b59, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 0.4
+  m_Volume: 0.3
   m_Pitch: 1
   Loop: 1
   Mute: 0
