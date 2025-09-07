@@ -1116,6 +1116,7 @@ MonoBehaviour:
   groundLoop: {fileID: 2005838960}
   score: {fileID: 491258287}
   cameraShake: {fileID: 519420035}
+  damageSource: {fileID: 2005838963}
 --- !u!114 &491258290
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3482,7 +3483,7 @@ GameObject:
   - component: {fileID: 2005838963}
   m_Layer: 0
   m_Name: Ground
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

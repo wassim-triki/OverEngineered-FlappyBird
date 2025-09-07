@@ -20,6 +20,12 @@ public class DamageSource : MonoBehaviour
         // Cache own collider to avoid repeated GetComponent calls on hit.
         _collider = GetComponent<Collider2D>();
     }
+    
+    public void ResetCollider()
+    {
+        if (_collider != null)
+            _collider.enabled = true;
+    }
 
     private void OnTriggerEnter2D(Collider2D other)  => TryHit(other);
     private void OnCollisionEnter2D(Collision2D col) => TryHit(col.collider);
@@ -39,7 +45,8 @@ public class DamageSource : MonoBehaviour
         damageable.TakeDamage(fatal ? int.MaxValue : damage, ctx);
         
         // disable self collider to prevent multiple hits
-        if (_collider != null && disableSelfOnHit) _collider.enabled = false;
+        if (_collider != null && (disableSelfOnHit || _collider.gameObject.CompareTag("Ground")))
+            _collider.enabled = false;
     }
 
     private bool IsInTargetLayers(GameObject go)

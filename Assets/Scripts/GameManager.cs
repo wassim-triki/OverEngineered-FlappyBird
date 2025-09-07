@@ -1,7 +1,7 @@
 using DefaultNamespace;
 using Unity.VisualScripting;
 using UnityEngine;
-
+using UnityEngine.SceneManagement;
 public class GameManager : MonoBehaviour
 {
     [SerializeField] private Lives playerLives;
@@ -11,7 +11,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private GroundLoop groundLoop;
     [SerializeField] private ScoreService score;
     [SerializeField] private CameraShake2D cameraShake;
-
+    [SerializeField] private DamageSource damageSource;
     
     
     void OnEnable()
@@ -64,6 +64,7 @@ public class GameManager : MonoBehaviour
         score.ResetScore();
         pipesSpawner.Disable();
         groundLoop.Unfreeze();
+        damageSource.ResetCollider();
     }
 
     void HandleGameStartedState()
