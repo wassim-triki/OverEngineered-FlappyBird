@@ -14,6 +14,7 @@ public class ScoreUI : MonoBehaviour
         score.OnScoreChanged += UpdateScoreUI;
         score.OnHighScoreChanged += HandleHighScoreChanged;
         GameStateManager.OnMenu += HandleOnMenu;
+        GameStateManager.OnGameOver += HandleGameOver;
         // Set initial value
         UpdateScoreUI(score.Current);
     }
@@ -25,16 +26,21 @@ public class ScoreUI : MonoBehaviour
             score.OnScoreChanged -= UpdateScoreUI;
             score.OnHighScoreChanged -= HandleHighScoreChanged;
             GameStateManager.OnMenu -= HandleOnMenu;
+            GameStateManager.OnGameOver -= HandleGameOver;
     }
     
     void HandleOnMenu()
     {
         newBadgeLabel.gameObject.SetActive(false);
     }
+    void HandleGameOver()
+    {
+        newBadgeLabel.gameObject.SetActive(false);
+    }
 
     private void HandleHighScoreChanged(int newHigh)
     {
-        if(score.High>1)
+        // if(score.High>1)
             newBadgeLabel.gameObject.SetActive(true);
     }
     private void UpdateScoreUI(int newScore)
