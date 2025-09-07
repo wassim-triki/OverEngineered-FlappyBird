@@ -385,7 +385,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -0.0065, y: 1.391, z: 0}
-  m_LocalScale: {x: 0.80814534, y: 0.7168357, z: 1}
+  m_LocalScale: {x: 1.0400022, y: 0.92249584, z: 1.2869}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -867,9 +867,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c0a5645a9f71c7c438c709866ee7af9b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Lives
-  <MaxLives>k__BackingField: 3
-  <CurrentLives>k__BackingField: 3
-  <InitMaxLives>k__BackingField: 3
+  <MaxLives>k__BackingField: 100
+  <CurrentLives>k__BackingField: 100
+  <InitMaxLives>k__BackingField: 100
 --- !u!114 &444666085
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1422,9 +1422,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 82544c40d5f74c0ab491ac934a73f84d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CameraShake2D
-  defaultDuration: 0.14
-  defaultAmplitude: 0.15
-  defaultFrequency: 33
+  defaultDuration: 0.3
+  defaultAmplitude: 0.5
+  defaultFrequency: 40
   rotationPerUnit: 8
 --- !u!1 &549460384
 GameObject:
@@ -3568,7 +3568,7 @@ Transform:
   m_GameObject: {fileID: 2005838958}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 4.34, y: -8.35, z: 0}
+  m_LocalPosition: {x: 5.39, y: -8.35, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

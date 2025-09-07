@@ -25,7 +25,7 @@ public class CameraShake2D : MonoBehaviour
 
     public void ShakeLight() => Shake(defaultAmplitude, defaultFrequency, defaultDuration);
 
-    public void ShakeHeavy() => Shake(defaultAmplitude * 1.8f, defaultFrequency * 0.8f, defaultDuration * 1.6f);
+    public void ShakeHeavy() => Shake(defaultAmplitude * 1.4f, defaultFrequency * 0.8f, defaultDuration * 1.6f);
 
     public void Shake(float amplitude, float frequency, float duration)
     {
