@@ -1,3 +1,4 @@
+using DefaultNamespace;
 using UnityEngine;
 
 public class ScoreGate : MonoBehaviour
@@ -18,5 +19,6 @@ public class ScoreGate : MonoBehaviour
 
         _consumed = true;
         _score.Add(1);
+        AudioManager.I.Play(Sfx.Score);
     }
 }
