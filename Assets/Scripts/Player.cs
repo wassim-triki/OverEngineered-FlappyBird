@@ -58,6 +58,8 @@ public class Player : MonoBehaviour
     // --- NEW: helper for SmoothDamp X snapping ---
     private float _xSmoothVel; // internal velocity used by SmoothDamp
     private Coroutine _xSnapRoutine; // coroutine handle for X snapping
+    private float smoothTime = 2f;
+    private float targetX = -3;
 
     void Awake()
     {
@@ -211,14 +213,14 @@ public class Player : MonoBehaviour
     
     public void ResetAutoJump() => _hasAutoJumped = false;
     
-    public void StartSnapX(float targetX, float smoothTime)
+    public void StartSnapX()
     {
         if (_xSnapRoutine != null)
         {
             StopCoroutine(_xSnapRoutine);
             _xSnapRoutine = null;
         }
-        _xSnapRoutine = StartCoroutine(SnapXRoutine(targetX, smoothTime));
+        _xSnapRoutine = StartCoroutine(SnapXRoutine());
     }
 
     public void CancelSnapX()
@@ -238,7 +240,7 @@ public class Player : MonoBehaviour
         }
     }
 
-    private IEnumerator SnapXRoutine(float targetX, float smoothTime)
+    private IEnumerator SnapXRoutine()
     {
         if (_rigidbody == null || smoothTime <= 0f) yield break;
 

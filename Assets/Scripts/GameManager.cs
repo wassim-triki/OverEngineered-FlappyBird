@@ -69,9 +69,8 @@ public class GameManager : MonoBehaviour
 
     void HandleGameStartedState()
     {
-        Debug.Log("Starting to drift to left");
         playerScript.EnableMovements();
-        playerScript.StartSnapX(-3f, 3f); // one-time X snap at run start
+        playerScript.StartSnapX(); 
         pipesSpawner.Enable();
         difficulty.ResetRun();
         groundLoop.Unfreeze();

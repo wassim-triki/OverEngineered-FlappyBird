@@ -1,6 +1,8 @@
+using System;
 using DefaultNamespace;
 using UnityEngine;
 using UnityEngine.UI;
+using DG.Tweening;
 
 public class MenuUI : MonoBehaviour
 {
@@ -8,6 +10,8 @@ public class MenuUI : MonoBehaviour
     [SerializeField] private GameObject pauseMenu;
     [SerializeField] private GameObject inGameMenu;
     [SerializeField] private GameObject gameOverMenu;
+    
+    private RectTransform _mainRectTransform;
     
     
     
@@ -32,8 +36,14 @@ public class MenuUI : MonoBehaviour
             GameStateManager.OnGameOver -= HandleOnGameOverState;
         }
     }
-    
-    
+
+    private void Start()
+    {
+        _mainRectTransform = mainMenu.GetComponent<RectTransform>();
+        // Initialize to main menu state
+        HandleOnMenuState();
+    }
+
     void HandleOnGameOverState()
     {
         gameOverMenu.SetActive(true);
@@ -64,7 +74,7 @@ public class MenuUI : MonoBehaviour
     void HandleOnMenuState()
     {
         mainMenu.SetActive(true);
-        
+        _mainRectTransform.DOAnchorPosY(-1200f, 0.5f).SetEase(Ease.OutBack).From();
         pauseMenu.SetActive(false);
         inGameMenu.SetActive(false);
         gameOverMenu.SetActive(false);

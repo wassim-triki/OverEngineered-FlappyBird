@@ -23,9 +23,6 @@ public class HighScoreUI : MonoBehaviour
         highScoreUI.text = score.High.ToString();
         newBadgeLabel.gameObject.SetActive(false);
         _rectTransform = GetComponent<RectTransform>();
-        Debug.Log("_rectTransform: " + _rectTransform);
-        Debug.Log("_rectTransform.localPosition: " + _rectTransform.localPosition);
-        Debug.Log("_rectTransform.anchoredPostion: " + _rectTransform.anchoredPosition);
     }
     
     private void OnDestroy()
