@@ -43,6 +43,11 @@ public class GameManager : MonoBehaviour
     }
     void HandleGameOver(DamageContext ctx)
     {
+<<<<<<< Updated upstream
+=======
+        cameraShake?.ShakeHeavy();
+        Haptics.Heavy();
+>>>>>>> Stashed changes
         GameStateManager.Instance.EndGame();
     }
     void InitializeGame()
@@ -94,6 +99,11 @@ public class GameManager : MonoBehaviour
 
     void HandleLifeLost(DamageContext ctx)
     {
+<<<<<<< Updated upstream
+=======
+        cameraShake?.ShakeLight(); 
+        Haptics.Medium();
+>>>>>>> Stashed changes
         if (ctx != null)
         {
             // if the ctx source is a top pillar or a bottom pillar than its parent must be a PillarPair
