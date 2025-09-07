@@ -11,6 +11,22 @@ public class Player : MonoBehaviour
     [SerializeField] private float holdTime = 0.16f;
     [SerializeField] private float holdBoost = 16f;
     
+    // === Soft Top Clamp (feel-first) ===
+    [Header("Top Clamp")]
+    [SerializeField, Range(0f, 0.25f)]
+    private float viewportTopMargin = 0.08f;  // how far below the top edge we place the limit (in normalized viewport units)
+
+    [SerializeField, Min(0f)]
+    private float softZoneWorld = 0.9f;       // height of the "soft" band (world units) beneath the limit
+
+    [SerializeField, Min(0f)]
+    private float clampPushStrength = 18f;    // downward push when inside soft band (units/sec^2)
+
+    [SerializeField, Min(0f)]
+    private float clampDamping = 10f;         // scales how quickly upward velocity is reduced
+
+    private Camera _cam;
+    
     [Header("Rotation Settings")]
     [SerializeField] private float maxRotation = 45f; // degrees
     [SerializeField] private float rotationSpeed = 10f; // how fast to rotate
@@ -126,6 +142,7 @@ public class Player : MonoBehaviour
         }
 
         HandleGravity();
+        HandleTopSoftClamp();
         HandleAutoJump();
         HandleRotation();
     }
@@ -193,8 +210,7 @@ public class Player : MonoBehaviour
     }
     
     public void ResetAutoJump() => _hasAutoJumped = false;
-
-    // START of refactored snapping API
+    
     public void StartSnapX(float targetX, float smoothTime)
     {
         if (_xSnapRoutine != null)
@@ -278,5 +294,49 @@ public class Player : MonoBehaviour
         _isXSnapping = false;
         _xSnapRoutine = null;
     }
-    // END of refactored snapping API
+    void HandleTopSoftClamp()
+    {
+        if (!_cam) _cam = Camera.main;
+        if (!_cam) return;
+
+        // Compute the world Y of the top limit (with viewport margin)
+        // We use player's Z so the conversion works for ortho/persp.
+        float depth = Mathf.Abs(_cam.transform.position.z - transform.position.z);
+        Vector3 topWorld = _cam.ViewportToWorldPoint(new Vector3(0.5f, 1f - viewportTopMargin, depth));
+        float maxY = topWorld.y;
+
+        // Soft band starts this far below the top limit
+        float softStartY = maxY - softZoneWorld;
+
+        Vector3 pos = transform.position;
+        Vector2 vel = _rigidbody.linearVelocity;
+
+        if (pos.y >= softStartY)
+        {
+            // How deep into the soft band are we? (0 at softStart, 1 at max)
+            float t = Mathf.InverseLerp(softStartY, maxY, pos.y);
+
+            // 1) Reduce upward velocity as we approach the cap
+            if (vel.y > 0f)
+            {
+                // Scale down upward speed proportionally to depth in band
+                float damping = clampDamping * t * Time.fixedDeltaTime;
+                vel.y = Mathf.Lerp(vel.y, 0f, damping);
+            }
+
+            // 2) Apply a gentle downward acceleration that ramps up in the band
+            float push = clampPushStrength * t * Time.fixedDeltaTime;
+            vel.y -= push;
+
+            // 3) Safety net: never allow crossing above the absolute cap
+            if (pos.y > maxY)
+            {
+                pos.y = maxY;
+            }
+
+            _rigidbody.linearVelocity = vel;
+            transform.position = pos;
+        }
+    }
+
 }
