@@ -1,7 +1,7 @@
 using DefaultNamespace;
 using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.SceneManagement;
+
 public class GameManager : MonoBehaviour
 {
     [SerializeField] private Lives playerLives;
@@ -69,7 +69,9 @@ public class GameManager : MonoBehaviour
 
     void HandleGameStartedState()
     {
+        Debug.Log("Starting to drift to left");
         playerScript.EnableMovements();
+        playerScript.StartSnapX(-3f, 3f); // one-time X snap at run start
         pipesSpawner.Enable();
         difficulty.ResetRun();
         groundLoop.Unfreeze();
@@ -77,7 +79,7 @@ public class GameManager : MonoBehaviour
 
     void HandleGameOverState()
     {
-        playerScript.DisableControls();
+        playerScript.DisableControls(); // ensures snapping cancels & velocity zeroed
         pipesSpawner.Disable();
         groundLoop.Freeze();
     }

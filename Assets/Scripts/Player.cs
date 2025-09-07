@@ -1,4 +1,4 @@
-using System.Collections.Generic;
+using System.Collections;
 using DefaultNamespace;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -27,7 +27,7 @@ public class Player : MonoBehaviour
     private Vector3 _initPosition;
     private Vector2 _velocityOnPause;
 
-    private bool _hasAutoJumped = false;
+    private bool _hasAutoJumped;
 
     private Rigidbody2D _rigidbody;
     private InputAction _jump;
@@ -41,12 +41,14 @@ public class Player : MonoBehaviour
 
     // --- NEW: helper for SmoothDamp X snapping ---
     private float _xSmoothVel; // internal velocity used by SmoothDamp
+    private Coroutine _xSnapRoutine; // coroutine handle for X snapping
 
     void Awake()
     {
         _rigidbody = GetComponent<Rigidbody2D>();
         _jump = InputSystem.actions.FindAction("Jump");
         _rigidbody.gravityScale = normalGravity;
+        _initPosition = transform.position; // capture initial spawn position
     }
 
     void OnEnable() => EnableMovements();
@@ -54,6 +56,7 @@ public class Player : MonoBehaviour
 
     public void ResetPlayer(bool resetAutoJump = true)
     {
+        CancelSnapX(); // ensure no leftover snapping continues into menu
         transform.position = _initPosition;
         transform.rotation = Quaternion.identity;
         _rigidbody.linearVelocity = Vector2.zero;
@@ -75,6 +78,7 @@ public class Player : MonoBehaviour
     public void DisableMovements()
     {
         _movementsEnabled = false;
+        CancelSnapX(); // stop snapping while disabled
         DisableControls();
         _rigidbody.bodyType = RigidbodyType2D.Kinematic;
         _rigidbody.linearVelocity = Vector2.zero;
@@ -118,10 +122,9 @@ public class Player : MonoBehaviour
 
         if (_controlsEnabled)
         {
-            HandleJump();   // now consumes flags set in Update()
+            HandleJump();
         }
 
-        SnapXToTargetOverTime(-3f, 3f); // renamed + damped snapping
         HandleGravity();
         HandleAutoJump();
         HandleRotation();
@@ -191,58 +194,89 @@ public class Player : MonoBehaviour
     
     public void ResetAutoJump() => _hasAutoJumped = false;
 
-    public void SnapXToTargetOverTime(float targetX, float smoothTime)
+    // START of refactored snapping API
+    public void StartSnapX(float targetX, float smoothTime)
     {
-        if (_rigidbody == null || smoothTime <= 0f) return;
+        if (_xSnapRoutine != null)
+        {
+            StopCoroutine(_xSnapRoutine);
+            _xSnapRoutine = null;
+        }
+        _xSnapRoutine = StartCoroutine(SnapXRoutine(targetX, smoothTime));
+    }
+
+    public void CancelSnapX()
+    {
+        if (_xSnapRoutine != null)
+        {
+            StopCoroutine(_xSnapRoutine);
+            _xSnapRoutine = null;
+        }
+        if (_isXSnapping)
+        {
+            _rigidbody.constraints = _freezeXWhenIdle
+                ? (_constraintsBeforeSnap | RigidbodyConstraints2D.FreezePositionX)
+                : _constraintsBeforeSnap;
+            _isXSnapping = false;
+            _xSmoothVel = 0f;
+        }
+    }
+
+    private IEnumerator SnapXRoutine(float targetX, float smoothTime)
+    {
+        if (_rigidbody == null || smoothTime <= 0f) yield break;
 
         float currentX = transform.position.x;
         float dist = Mathf.Abs(targetX - currentX);
-
-        // If we're not snapping and already at target, ensure X is frozen and bail.
         if (!_isXSnapping && dist < 0.001f)
         {
             if (_freezeXWhenIdle)
                 _rigidbody.constraints |= RigidbodyConstraints2D.FreezePositionX;
-            return;
+            yield break;
         }
 
-        // On first tick of a snap: unfreeze X but remember prior constraints.
-        if (!_isXSnapping)
+        // Setup for snapping (unfreeze X)
+        _constraintsBeforeSnap = _rigidbody.constraints;
+        if (_freezeXWhenIdle)
+            _rigidbody.constraints &= ~RigidbodyConstraints2D.FreezePositionX;
+        _isXSnapping = true;
+        _xSmoothVel = 0f;
+
+        while (true)
         {
-            _constraintsBeforeSnap = _rigidbody.constraints;
-            if (_freezeXWhenIdle)
-                _rigidbody.constraints &= ~RigidbodyConstraints2D.FreezePositionX;
-            _isXSnapping = true;
+            if (!_movementsEnabled)
+            {
+                // abort if movements disabled (e.g., menu / game over)
+                break;
+            }
+            currentX = transform.position.x;
+            float newX = Mathf.SmoothDamp(
+                currentX,
+                targetX,
+                ref _xSmoothVel,
+                smoothTime,
+                Mathf.Infinity,
+                Time.fixedDeltaTime);
+
+            float requiredVelX = (newX - currentX) / Time.fixedDeltaTime;
+            _rigidbody.linearVelocity = new Vector2(requiredVelX, _rigidbody.linearVelocity.y);
+
+            bool done = Mathf.Abs(targetX - newX) < 0.005f && Mathf.Abs(requiredVelX) < 0.02f;
+            if (done)
+            {
+                _rigidbody.linearVelocity = new Vector2(0f, _rigidbody.linearVelocity.y);
+                transform.position = new Vector3(targetX, transform.position.y, transform.position.z);
+                break;
+            }
+            yield return new WaitForFixedUpdate();
         }
-
-        // SmoothDamp the *position* along X (critically damped feel)
-        float newX = Mathf.SmoothDamp(
-            currentX,
-            targetX,
-            ref _xSmoothVel,
-            smoothTime,
-            Mathf.Infinity,
-            Time.fixedDeltaTime
-        );
-
-        // Convert to velocity this physics tick
-        float requiredVelX = (newX - currentX) / Time.fixedDeltaTime;
-        _rigidbody.linearVelocity = new Vector2(requiredVelX, _rigidbody.linearVelocity.y);
-
-        // Close enough? land, stop, and re-freeze X.
-        if (Mathf.Abs(targetX - newX) < 0.005f && Mathf.Abs(requiredVelX) < 0.02f)
-        {
-            _rigidbody.linearVelocity = new Vector2(0f, _rigidbody.linearVelocity.y);
-            transform.position = new Vector3(targetX, transform.position.y, transform.position.z);
-
-            // Re-freeze X (preserve any other constraints the body had)
-            _rigidbody.constraints = _freezeXWhenIdle
-                ? (_constraintsBeforeSnap | RigidbodyConstraints2D.FreezePositionX)
-                : _constraintsBeforeSnap;
-
-            _xSmoothVel = 0f;
-            _isXSnapping = false;
-        }
+        // cleanup (both normal completion & aborted)
+        _rigidbody.constraints = _freezeXWhenIdle
+            ? (_constraintsBeforeSnap | RigidbodyConstraints2D.FreezePositionX)
+            : _constraintsBeforeSnap;
+        _xSmoothVel = 0f;
+        _isXSnapping = false;
+        _xSnapRoutine = null;
     }
-
+    // END of refactored snapping API
 }

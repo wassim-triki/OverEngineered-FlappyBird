@@ -45,7 +45,7 @@ public class DamageSource : MonoBehaviour
         damageable.TakeDamage(fatal ? int.MaxValue : damage, ctx);
         
         // disable self collider to prevent multiple hits
-        if (_collider != null && (disableSelfOnHit || _collider.gameObject.CompareTag("Ground")))
+        if (_collider != null && (disableSelfOnHit || fatal))
             _collider.enabled = false;
     }
 

@@ -1,12 +1,5 @@
 {
   "dependencies": {
-    "com.colincw.ezhaptics": {
-      "version": "https://github.com/colinc-w/EZHaptics.git",
-      "depth": 0,
-      "source": "git",
-      "dependencies": {},
-      "hash": "71b70383a27e85f1c3f084a23b36813d87ac2cff"
-    },
     "com.unity.2d.animation": {
       "version": "12.0.2",
       "depth": 0,
