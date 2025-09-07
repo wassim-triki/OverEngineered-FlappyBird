@@ -873,6 +873,10 @@ MonoBehaviour:
   jumpForce: 13.5
   holdTime: 0.16
   holdBoost: 16
+  viewportTopMargin: 0.08
+  softZoneWorld: 0.9
+  clampPushStrength: 18
+  clampDamping: 10
   maxRotation: 30
   rotationSpeed: 10
   normalGravity: 5.8
@@ -1520,7 +1524,7 @@ Canvas:
   serializedVersion: 3
   m_RenderMode: 1
   m_Camera: {fileID: 519420031}
-  m_PlaneDistance: 100
+  m_PlaneDistance: 26.35
   m_PixelPerfect: 0
   m_ReceivesEvents: 1
   m_OverrideSorting: 0

@@ -9,30 +9,45 @@ public class AudioLibrary : ScriptableObject
     [Serializable]
     public struct Entry
     {
-        public Sfx id;                 // e.g., Sfx.Jump
-        public AudioClip[] clips;      // allow 1+ variants
-        [Range(0f, 1f)] public float volume; // default volume for this SFX type
+        public Sfx id;
+        public AudioClip[] clips;
+        [Range(0f, 1f)] public float volume;
     }
 
     [SerializeField] private Entry[] entries;
 
-    // Built once for fast lookups
-    Dictionary<Sfx, Entry> _map;
+    // Map Sfx -> index into entries[] (not a copy of Entry!)
+    Dictionary<Sfx, int> _indexMap;
 
-    void OnEnable()
+    void OnEnable() => RebuildIndex();
+#if UNITY_EDITOR
+    // Runs when you tweak values in the Inspector (even in Play Mode)
+    void OnValidate() => RebuildIndex();
+#endif
+
+    void RebuildIndex()
     {
-        _map = new Dictionary<Sfx, Entry>(entries.Length);
-        foreach (var e in entries)
-            if (!_map.ContainsKey(e.id)) _map.Add(e.id, e);
+        if (entries == null) { _indexMap = null; return; }
+        _indexMap = new Dictionary<Sfx, int>(entries.Length);
+        for (int i = 0; i < entries.Length; i++)
+        {
+            var id = entries[i].id;
+            if (!_indexMap.ContainsKey(id)) _indexMap.Add(id, i);
+        }
     }
 
     public bool TryGetRandom(Sfx id, out AudioClip clip, out float defaultVolume)
     {
-        clip = null; defaultVolume = 1f;
-        if (_map == null || !_map.TryGetValue(id, out var e) || e.clips == null || e.clips.Length == 0)
-            return false;
+        clip = null;
+        defaultVolume = 1f;
 
-        defaultVolume = (e.volume <= 0f) ? 1f : e.volume;
+        if (_indexMap == null || !_indexMap.TryGetValue(id, out int idx)) return false;
+        if (idx < 0 || idx >= entries.Length) return false;
+
+        ref Entry e = ref entries[idx]; // read live data
+        if (e.clips == null || e.clips.Length == 0) return false;
+
+        defaultVolume = Mathf.Clamp01(e.volume); // allow 0..1
         clip = e.clips[UnityEngine.Random.Range(0, e.clips.Length)];
         return clip != null;
     }

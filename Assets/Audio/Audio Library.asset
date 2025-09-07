@@ -24,4 +24,4 @@ MonoBehaviour:
   - id: 3
     clips:
     - {fileID: 8300000, guid: 71f1b8db32a87644da1313c97d3f0498, type: 3}
-    volume: 0.26
+    volume: 0.1
