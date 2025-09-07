@@ -665,6 +665,7 @@ GameObject:
   - component: {fileID: 444666084}
   - component: {fileID: 444666085}
   - component: {fileID: 444666086}
+  - component: {fileID: 444666087}
   m_Layer: 3
   m_Name: Player
   m_TagString: Player
@@ -860,6 +861,23 @@ CapsuleCollider2D:
   m_Offset: {x: -0.01932138, y: 0.037234135}
   m_Size: {x: 1.2832791, y: 0.88690794}
   m_Direction: 1
+--- !u!114 &444666087
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 444666078}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1b55cdf0fbb34314a8bbf70d665257d7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::WindAudio
+  windLoop: {fileID: 8300000, guid: a0d3fc1b0498b3e4f8063a30b624e731, type: 3}
+  baseVolume: 5.11
+  maxVolume: 5.96
+  maxFallSpeedForMax: 10
+  smoothTime: 0.1
 --- !u!1 &490748831
 GameObject:
   m_ObjectHideFlags: 0
@@ -1995,8 +2013,8 @@ MonoBehaviour:
   underwaterCutoffHz: 700
   normalPitch: 1
   underwaterPitch: 0.95
-  normalVolume: 0.7
-  underwaterVolume: 0.6
+  normalVolume: 0.35
+  underwaterVolume: 0.35
   transition: 0.35
 --- !u!4 &920220484
 Transform:

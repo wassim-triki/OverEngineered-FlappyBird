@@ -56,19 +56,19 @@ public class AudioManager : MonoBehaviour
     void OnEnable()
     {
         GameStateManager.OnGameOver  += ApplyUnderwaterFX;
-        GameStateManager.OnMenu      += ClearUnderwaterFX;
+        GameStateManager.OnMenu      += ApplyUnderwaterFX;
         GameStateManager.OnGameStarted += ClearUnderwaterFX;
         GameStateManager.OnGameResumed += ClearUnderwaterFX;
-        GameStateManager.OnGamePaused  += ClearUnderwaterFX; // optional
+        GameStateManager.OnGamePaused  += ApplyUnderwaterFX; // optional
     }
 
     void OnDisable()
     {
         GameStateManager.OnGameOver  -= ApplyUnderwaterFX;
-        GameStateManager.OnMenu      -= ClearUnderwaterFX;
+        GameStateManager.OnMenu      -= ApplyUnderwaterFX;
         GameStateManager.OnGameStarted -= ClearUnderwaterFX;
         GameStateManager.OnGameResumed -= ClearUnderwaterFX;
-        GameStateManager.OnGamePaused  -= ClearUnderwaterFX;
+        GameStateManager.OnGamePaused  -= ApplyUnderwaterFX;
     }
 
     // --- Public SFX ---
