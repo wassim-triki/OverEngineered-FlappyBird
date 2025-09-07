@@ -1995,8 +1995,8 @@ MonoBehaviour:
   underwaterCutoffHz: 700
   normalPitch: 1
   underwaterPitch: 0.95
-  normalVolume: 0.6
-  underwaterVolume: 0.4
+  normalVolume: 0.7
+  underwaterVolume: 0.6
   transition: 0.35
 --- !u!4 &920220484
 Transform:

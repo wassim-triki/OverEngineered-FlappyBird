@@ -12,8 +12,7 @@ public class ScoreService : MonoBehaviour
 
     private void Awake()
     {
-        // High = PlayerPrefs.GetInt("HighScore", 0);
-        High = 0;
+        High = PlayerPrefs.GetInt("HighScore", 0);
     }
 
     public void ResetScore()
@@ -31,8 +30,7 @@ public class ScoreService : MonoBehaviour
         {
             High = Current;
             OnHighScoreChanged?.Invoke(High);
-            Debug.Log("Invoked change on high");
-            // PlayerPrefs.SetInt("HighScore", High);
+            PlayerPrefs.SetInt("HighScore", High);
         }
     }
 }
