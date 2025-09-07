@@ -45,6 +45,7 @@ public class GameManager : MonoBehaviour
     void HandleGameOver(DamageContext ctx)
     {
         cameraShake?.ShakeHeavy();
+        Haptics.Heavy();
         GameStateManager.Instance.EndGame();
     }
     void InitializeGame()
@@ -97,6 +98,7 @@ public class GameManager : MonoBehaviour
     void HandleLifeLost(DamageContext ctx)
     {
         cameraShake?.ShakeLight(); 
+        Haptics.Medium();
         if (ctx != null)
         {
             // if the ctx source is a top pillar or a bottom pillar than its parent must be a PillarPair
