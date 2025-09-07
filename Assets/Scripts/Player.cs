@@ -3,6 +3,7 @@ using DefaultNamespace;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
+using DG.Tweening; // added
 
 public class Player : MonoBehaviour
 {
@@ -61,16 +62,25 @@ public class Player : MonoBehaviour
     private float smoothTime = 2f;
     private float targetX = -3;
 
+    private Tween _menuScaleTween; // menu appearance tween
+    private Vector3 _originalScale;
+
     void Awake()
     {
         _rigidbody = GetComponent<Rigidbody2D>();
         _jump = InputSystem.actions.FindAction("Jump");
         _rigidbody.gravityScale = normalGravity;
         _initPosition = transform.position; // capture initial spawn position
+        _originalScale = transform.localScale; // store original scale
     }
 
     void OnEnable() => EnableMovements();
     void OnDisable() => DisableMovements();
+
+    void OnDestroy()
+    {
+        if (_menuScaleTween != null && _menuScaleTween.IsActive()) _menuScaleTween.Kill();
+    }
 
     public void ResetPlayer(bool resetAutoJump = true)
     {
@@ -341,4 +351,22 @@ public class Player : MonoBehaviour
         }
     }
 
+    public void AnimateMenuAppear()
+    {
+        // Immediately set scale to 0, then after delay animate to original scale
+        if (_menuScaleTween != null && _menuScaleTween.IsActive()) _menuScaleTween.Kill();
+        transform.localScale = Vector3.zero;
+        _menuScaleTween = transform.DOScale(_originalScale, 0.5f)
+            .SetDelay(0.25f)
+            .SetEase(Ease.OutBack);
+    }
+
+    public void EnsureNormalScale()
+    {
+        if (_menuScaleTween != null && _menuScaleTween.IsActive())
+        {
+            _menuScaleTween.Kill();
+        }
+        transform.localScale = _originalScale;
+    }
 }

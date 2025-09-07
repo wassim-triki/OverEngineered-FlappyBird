@@ -60,6 +60,7 @@ public class GameManager : MonoBehaviour
     {
         playerScript.ResetPlayer();
         playerScript.DisableMovements();
+        playerScript.AnimateMenuAppear(); // start menu scale animation
         playerLives.ResetLives();
         score.ResetScore();
         pipesSpawner.Disable();
@@ -69,6 +70,7 @@ public class GameManager : MonoBehaviour
 
     void HandleGameStartedState()
     {
+        playerScript.EnsureNormalScale(); // ensure fully visible when game starts
         playerScript.EnableMovements();
         playerScript.StartSnapX(); 
         pipesSpawner.Enable();
