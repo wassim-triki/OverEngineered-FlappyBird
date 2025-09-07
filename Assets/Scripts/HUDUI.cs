@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class HUDUI : MonoBehaviour
 {
-    [SerializeField] private GameObject highScoreUI;
+    [SerializeField] private HighScoreUI highScoreUI;
 
 
     private void OnEnable()
@@ -27,37 +27,33 @@ public class HUDUI : MonoBehaviour
 
     void HandleOnGameStarted()
     {
-        highScoreUI.SetActive(false);
+        // highScoreUI.SetActive(false);
+        highScoreUI.Hide();
     }
+    
     void HandleOnGameResumed()
     {
-        highScoreUI.SetActive(false);
+        // highScoreUI.SetActive(false);
+        highScoreUI.Hide();
     }
+    
     
     void HandleOnMenu()
     {
-        highScoreUI.gameObject.SetActive(true);
+        // highScoreUI.gameObject.SetActive(true);
+        highScoreUI.Show();
     }
 
     void HandleOnGameOver()
     {
-        highScoreUI.gameObject.SetActive(true);
+        // highScoreUI.gameObject.SetActive(true);
+        highScoreUI.Show();
     }
 
     void HandleOnGamePaused()
     {
-        highScoreUI.gameObject.SetActive(true);
+        // highScoreUI.gameObject.SetActive(true);
+        highScoreUI.Show();
     }
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }
