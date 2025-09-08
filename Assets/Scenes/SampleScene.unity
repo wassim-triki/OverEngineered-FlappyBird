@@ -1967,13 +1967,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7c77629639014f1468b53a7f46172df5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DifficultyController
-  rampScore: 30
+  rampScore: 50
   score: {fileID: 491258287}
   enableGapScaling: 1
   enableSpeedScaling: 1
   enableSpawnScaling: 1
   minSpeed: 3
-  maxSpeed: 7
+  maxSpeed: 10
   maxInterval: 2.5
   minInterval: 1
   maxGap: 6
@@ -2030,14 +2030,14 @@ MonoBehaviour:
   normalVolume: 0.4
   underwaterVolume: 0.4
   transition: 0.35
-  basePitch: 0.9
-  pitchRange: 0.2
+  basePitch: 0.85
+  pitchRange: 0.5
   pitchFollowSmooth: 0.25
   underwaterPitch: 0.8
   scorePitchMin: 1
-  scorePitchMax: 1.35
+  scorePitchMax: 1.2
   scorePitchReturn: 0.12
-  difficultyController: {fileID: 0}
+  difficultyController: {fileID: 830024060}
 --- !u!4 &920220484
 Transform:
   m_ObjectHideFlags: 0
@@ -3049,7 +3049,7 @@ MonoBehaviour:
   lifeCollectiblePrefab: {fileID: 1665902087951113465, guid: 2e48f69edbe5102409ac3bb095fc4210, type: 3}
   healCollectiblePrefab: {fileID: 1665902087951113465, guid: a6f41958b26b3d54f9143874dfdcadbe, type: 3}
   lifeSpawnChance: 0.05
-  healSpawnChance: 0.2
+  healSpawnChance: 0.1
   gapInnerMargin: 0.75
   xOffsetWithinPair: 0.8
   parentCollectibleToPipe: 1

@@ -21,3 +21,5 @@
 88	5672	7789827935981749	GameActivity/CMakeFiles/game.dir/UGAInput.cpp.o	351c7a875a28e198
 29	5913	7789827938716277	GameActivity/CMakeFiles/game.dir/UGAApplication.cpp.o	43d04b8fc03613c5
 5914	6155	7789827941182960	C:/Users/wsmtr/Flappy Bird Learning The Basics/Library/Bee/Android/Prj/IL2CPP/Gradle/unityLibrary/build/intermediates/cxx/RelWithDebInfo/354f1c1h/obj/arm64-v8a/libgame.so	f5d149b466ed9c6a
+42	1168	7790463687615064	FramePacing/CMakeFiles/swappywrapper.dir/UnitySwappyWrapper.cpp.o	d5c1b005631c2dbc
+1170	1468	7790463690291448	C:/Users/wsmtr/Flappy Bird Learning The Basics/Library/Bee/Android/Prj/IL2CPP/Gradle/unityLibrary/build/intermediates/cxx/RelWithDebInfo/354f1c1h/obj/arm64-v8a/libswappywrapper.so	b660960ce3428dec
