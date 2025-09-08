@@ -4,7 +4,12 @@ namespace DefaultNamespace
 {
     public abstract class CollectibleEffect : ScriptableObject
     {
-        // Apply effect to the collector (usually the player root or its Lives component owner)
+        [Header("Audio")]
+        [SerializeField] private Sfx sfxOnPickup = Sfx.Pickup;   // default
+
+        public Sfx SfxOnPickup => sfxOnPickup;
+
+        // Apply effect to the collector (usually the player root or its Lives owner)
         public abstract void Apply(GameObject collector);
     }
 }

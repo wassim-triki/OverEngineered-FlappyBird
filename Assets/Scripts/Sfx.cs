@@ -7,7 +7,8 @@
         Death,
         Score,
         Button,
-        Pickup // new generic pickup / collectible sound
+        Pickup,
+        FullHeal
     }
 
 }

@@ -1967,17 +1967,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7c77629639014f1468b53a7f46172df5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DifficultyController
-  rampScore: 50
+  rampScore: 60
   score: {fileID: 491258287}
   enableGapScaling: 1
   enableSpeedScaling: 1
   enableSpawnScaling: 1
-  minSpeed: 3
-  maxSpeed: 10
+  minSpeed: 4
+  maxSpeed: 16
   maxInterval: 2.5
   minInterval: 1
   maxGap: 6
-  minGap: 3.5
+  minGap: 3
 --- !u!4 &830024061
 Transform:
   m_ObjectHideFlags: 0
@@ -2030,9 +2030,9 @@ MonoBehaviour:
   normalVolume: 0.4
   underwaterVolume: 0.4
   transition: 0.35
-  basePitch: 0.85
-  pitchRange: 0.5
-  pitchFollowSmooth: 0.25
+  basePitch: 0.9
+  pitchRange: 0.4
+  pitchFollowSmooth: 0.5
   underwaterPitch: 0.8
   scorePitchMin: 1
   scorePitchMax: 1.2
@@ -2242,6 +2242,7 @@ MonoBehaviour:
   playerLives: {fileID: 444666084}
   livesContainer: {fileID: 384234205}
   lifeCellPrefab: {fileID: 6268033734258086475, guid: 1a8f1271928f93344b824d1a4d5cec99, type: 3}
+  beatScale: 1.35
 --- !u!1 &1058773500
 GameObject:
   m_ObjectHideFlags: 0
@@ -2716,6 +2717,9 @@ MonoBehaviour:
   beatDownDuration: 0.18
   beatUpEase: 27
   beatDownEase: 9
+  menuRevealDuration: 0.6
+  menuRevealDelay: 0.5
+  menuRevealEase: 27
 --- !u!225 &1214729748
 CanvasGroup:
   m_ObjectHideFlags: 0
@@ -3048,8 +3052,8 @@ MonoBehaviour:
   difficulty: {fileID: 830024060}
   lifeCollectiblePrefab: {fileID: 1665902087951113465, guid: 2e48f69edbe5102409ac3bb095fc4210, type: 3}
   healCollectiblePrefab: {fileID: 1665902087951113465, guid: a6f41958b26b3d54f9143874dfdcadbe, type: 3}
-  lifeSpawnChance: 0.05
-  healSpawnChance: 0.1
+  lifeSpawnChance: 0.269
+  healSpawnChance: 0.216
   gapInnerMargin: 0.75
   xOffsetWithinPair: 0.8
   parentCollectibleToPipe: 1

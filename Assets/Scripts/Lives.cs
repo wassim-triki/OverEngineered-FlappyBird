@@ -16,6 +16,7 @@ public sealed class Lives : MonoBehaviour
     public event Action<DamageContext>OnDeath;
     public event Action<DamageContext> OnLifeLost;
 
+    public event Action OnFullHeal;
 
     public void ResetLives()
     {
@@ -61,6 +62,7 @@ public sealed class Lives : MonoBehaviour
             OnLivesChanged?.Invoke(CurrentLives);
             Debug.Log($"[Lives] MAX → {CurrentLives}/{MaxObtainableLives}", this);
         }
+        OnFullHeal?.Invoke();
     }
 
     public void LoseLife(int amount = 1, DamageContext ctx = null)
