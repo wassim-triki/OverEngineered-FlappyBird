@@ -2,30 +2,24 @@
 using DefaultNamespace;
 using DG.Tweening;
 using UnityEngine;
+using System.Collections;
 
 [DisallowMultipleComponent]
 public class IdleBob : MonoBehaviour
 {
     [Header("Bobbing")]
-    [SerializeField, Min(0f)] private float amplitude = 0.25f; // world units
-    [SerializeField, Min(0.1f)] private float period = 1.8f;   // seconds for a full up/down
+    [SerializeField, Min(0f)]   private float amplitude   = 0.25f; // world units
+    [SerializeField, Min(0.1f)] private float period      = 1.8f;  // seconds full cycle
     [Header("Subtle tilt")]
-    [SerializeField, Min(0f)] private float tiltDegrees = 5f;  // max +/- Z
+    [SerializeField, Min(0f)]   private float tiltDegrees = 5f;    // +/- Z around current
 
     private float _startY;
-    private Quaternion _startRot;
     private Tween _bobTween, _tiltTween;
-
-    void Awake()
-    {
-        _startY = transform.localPosition.y;
-        _startRot = transform.localRotation;
-    }
+    private Coroutine _startCo;
 
     void OnEnable()
     {
         GameStateManager.OnMenu        += StartBob;
-        GameStateManager.OnGamePaused  += StopBob;
         GameStateManager.OnGameStarted += StopBob;
         GameStateManager.OnGameResumed += StopBob;
         GameStateManager.OnGameOver    += StopBob;
@@ -36,57 +30,67 @@ public class IdleBob : MonoBehaviour
         if (GameStateManager.Instance != null)
         {
             GameStateManager.OnMenu        -= StartBob;
-            GameStateManager.OnGamePaused  -= StopBob;
             GameStateManager.OnGameStarted -= StopBob;
             GameStateManager.OnGameResumed -= StopBob;
             GameStateManager.OnGameOver    -= StopBob;
         }
-        KillTweens(reset:true);
+        KillTweens();
+        if (_startCo != null) { StopCoroutine(_startCo); _startCo = null; }
     }
 
     void Start()
     {
-        // If we enter a scene already in Menu/Paused, kick it off.
         var s = GameStateManager.Instance?.CurrentState ?? GameState.Menu;
-        if (s == GameState.Menu || s == GameState.Paused) StartBob();
+        if (s == GameState.Menu) StartBob(); // scene boot into menu
     }
 
-    void StartBob()
+    public void StartBob()
     {
-        KillTweens(reset:false);
+        // Ensure only one pending starter
+        if (_startCo != null) StopCoroutine(_startCo);
+        KillTweens();
 
-        // Vertical bob (local Y only)
+        // Delay one frame so GameManager.ResetPlayer has run
+        _startCo = StartCoroutine(StartBobNextFrame());
+    }
+
+    IEnumerator StartBobNextFrame()
+    {
+        yield return null; // wait a frame (after all listeners handle OnMenu)
+        _startCo = null;
+
+        // Sample current as baseline AFTER ResetPlayer()
+        _startY = transform.localPosition.y;
+
         _bobTween = transform.DOLocalMoveY(_startY + amplitude, period * 0.5f)
             .SetEase(Ease.InOutSine)
             .SetLoops(-1, LoopType.Yoyo)
-            .SetUpdate(true); // keep running if timeScale==0 (pause)
+            .SetUpdate(true)
+            .SetLink(gameObject, LinkBehaviour.KillOnDisable);
 
-        // Gentle tilt around Z
         if (tiltDegrees > 0f)
         {
-            _tiltTween = transform.DOLocalRotate(new Vector3(0f, 0f, tiltDegrees), period * 0.5f)
+            _tiltTween = transform.DOBlendableLocalRotateBy(
+                    new Vector3(0f, 0f, tiltDegrees),
+                    period * 0.5f,
+                    RotateMode.Fast)
                 .SetEase(Ease.InOutSine)
                 .SetLoops(-1, LoopType.Yoyo)
-                .SetUpdate(true);
+                .SetUpdate(true)
+                .SetLink(gameObject, LinkBehaviour.KillOnDisable);
         }
     }
 
-    void StopBob()
+    public void StopBob()
     {
-        KillTweens(reset:true);
+        // Just stop; keep whatever pose/rotation the player currently has
+        if (_startCo != null) { StopCoroutine(_startCo); _startCo = null; }
+        KillTweens();
     }
 
-    void KillTweens(bool reset)
+    private void KillTweens()
     {
         _bobTween?.Kill();  _bobTween = null;
         _tiltTween?.Kill(); _tiltTween = null;
-
-        if (reset)
-        {
-            var p = transform.localPosition;
-            p.y = _startY;
-            transform.localPosition = p;
-            transform.localRotation = _startRot;
-        }
     }
 }
