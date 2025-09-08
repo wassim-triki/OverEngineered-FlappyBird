@@ -874,9 +874,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::WindAudio
   windLoop: {fileID: 8300000, guid: a0d3fc1b0498b3e4f8063a30b624e731, type: 3}
-  baseVolume: 5.11
+  baseVolume: 0.5
   maxVolume: 5.96
-  maxFallSpeedForMax: 10
+  maxFallSpeedForMax: 8
   smoothTime: 0.1
 --- !u!1 &490748831
 GameObject:
@@ -1262,7 +1262,7 @@ Camera:
   far clip plane: 1000
   field of view: 34
   orthographic: 1
-  orthographic size: 9.58
+  orthographic size: 9.5
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -1382,10 +1382,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 82544c40d5f74c0ab491ac934a73f84d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CameraShake2D
-  defaultDuration: 0.3
-  defaultAmplitude: 0.5
+  defaultDuration: 0.35
+  defaultAmplitude: 0.8
   defaultFrequency: 40
-  rotationPerUnit: 8
+  rotationPerUnit: 12
 --- !u!1 &549460384
 GameObject:
   m_ObjectHideFlags: 0
@@ -2010,11 +2010,11 @@ MonoBehaviour:
   library: {fileID: 11400000, guid: 1ac3803d28fc435418cbf701742cede3, type: 2}
   musicSource: {fileID: 0}
   normalCutoffHz: 22000
-  underwaterCutoffHz: 700
+  underwaterCutoffHz: 2000
   normalPitch: 1
-  underwaterPitch: 0.95
-  normalVolume: 0.35
-  underwaterVolume: 0.35
+  underwaterPitch: 0.8
+  normalVolume: 0.4
+  underwaterVolume: 0.4
   transition: 0.35
 --- !u!4 &920220484
 Transform:
@@ -2326,6 +2326,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1084693488}
   - component: {fileID: 1084693487}
+  - component: {fileID: 1084693489}
   m_Layer: 0
   m_Name: GlobalVolume
   m_TagString: Untagged
@@ -2365,6 +2366,29 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1084693489
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1084693486}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bd4e4772ebe2411ea982faa0b64ed724, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PostProcessing
+  postProcessVolume: {fileID: 1084693487}
+  initLensDistortionIntensity: 0.25
+  initVignetteIntensity: 0.4
+  lensDistortionIntensity: -0.32
+  chromaticAberrationIntensity: 0.2
+  vignetteIntensity: 0.25
+  initOrthoSize: 8.5
+  playOrthoSize: 9.5
+  duration: 0.35
+  ease: 9
+  ignoreTimeScale: 1
 --- !u!1 &1131752541
 GameObject:
   m_ObjectHideFlags: 0
@@ -3076,8 +3100,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4282477644
-  m_fontColor: {r: 0.29686943, g: 0.4245283, b: 0.25431648, a: 1}
+    rgba: 4281224420
+  m_fontColor: {r: 0.8941177, g: 0.29803923, b: 0.18039216, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
