@@ -1,62 +1,77 @@
-using System;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class LivesUI : MonoBehaviour
 {
     [SerializeField] private Lives playerLives;
-    [SerializeField] private GameObject livesContainer;
+    [SerializeField] private Transform livesContainer; // use Transform directly
     [SerializeField] private LifeCell lifeCellPrefab;
+
     private readonly List<LifeCell> _cells = new();
-    
 
-    private void Start()
+    void Awake()
     {
-        ClearCells();
-        BuildCells();
+        if (playerLives != null)
+            playerLives.OnLivesChanged += HandleLivesChanged;
     }
 
-    public void BuildCells()
+    void OnDestroy()
     {
-        for (int i = 0; i < playerLives.MaxLives; i++)
+        if (playerLives != null)
+            playerLives.OnLivesChanged -= HandleLivesChanged;
+    }
+
+    void Start()
+    {
+        ClearAll();
+        // Seed exactly CurrentLives hearts at startup
+        for (int i = 0; i < (playerLives ? playerLives.CurrentLives : 0); i++)
+            AddOne();
+    }
+
+    // Keep container count == currentLives (only filled hearts are shown)
+    public void HandleLivesChanged(int currentLives)
+    {
+        if (!livesContainer || !lifeCellPrefab) return;
+
+        int diff = currentLives - _cells.Count;
+
+        if (diff > 0)
         {
-            var cell = Instantiate<LifeCell>(lifeCellPrefab, livesContainer.transform);
-            _cells.Add(cell);
-            cell.SetFull(i<playerLives.CurrentLives);
+            // gained lives -> add that many hearts
+            for (int i = 0; i < diff; i++) AddOne();
         }
-    }
-    
-    public void HandleLivesChanged(int currentLives, int maxLives)
-    {
-        if (_cells.Count > 0 && _cells.Count != maxLives)
+        else if (diff < 0)
         {
-            ClearCells();
-            BuildCells();
+            // lost lives -> remove that many hearts from the end
+            diff = -diff;
+            for (int i = 0; i < diff; i++) RemoveOne();
         }
-
-        for (int i = 0; i < _cells.Count; i++)
-        {
-            _cells[i].SetFull(i < currentLives);
-        }
-            
+        // If diff == 0, nothing to do.
     }
 
-    private void OnEnable()
+    private void AddOne()
     {
-        playerLives.OnLivesChanged += HandleLivesChanged;
+        var cell = Instantiate(lifeCellPrefab, livesContainer);
+        _cells.Add(cell);
     }
 
-    private void OnDisable()
+    private void RemoveOne()
     {
-        playerLives.OnLivesChanged -= HandleLivesChanged;
+        if (_cells.Count == 0) return;
+        int last = _cells.Count - 1;
+        var go = _cells[last].gameObject;
+        _cells.RemoveAt(last);
+        Destroy(go);
     }
 
-    public void ClearCells()
+    private void ClearAll()
     {
-        for (int i = transform.childCount - 1; i >= 0; --i)
-            Destroy(livesContainer.transform.GetChild(i).gameObject);
+        if (!livesContainer) return;
+
+        for (int i = livesContainer.childCount - 1; i >= 0; --i)
+            Destroy(livesContainer.GetChild(i).gameObject);
+
         _cells.Clear();
     }
-
 }

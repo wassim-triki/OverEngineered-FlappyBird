@@ -6,7 +6,8 @@
         Hit,
         Death,
         Score,
-        Button
+        Button,
+        Pickup // new generic pickup / collectible sound
     }
 
 }

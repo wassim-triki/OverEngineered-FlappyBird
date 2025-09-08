@@ -548,7 +548,7 @@ MonoBehaviour:
     m_Top: 0
     m_Bottom: 0
   m_ChildAlignment: 4
-  m_Spacing: 6.09
+  m_Spacing: 14.36
   m_ChildForceExpandWidth: 0
   m_ChildForceExpandHeight: 1
   m_ChildControlWidth: 0
@@ -810,9 +810,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c0a5645a9f71c7c438c709866ee7af9b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Lives
-  <MaxLives>k__BackingField: 3
-  <CurrentLives>k__BackingField: 3
-  <InitMaxLives>k__BackingField: 3
+  <CurrentLives>k__BackingField: 1
+  <MaxObtainableLives>k__BackingField: 5
+  <InitLives>k__BackingField: 1
 --- !u!114 &444666085
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2027,11 +2027,17 @@ MonoBehaviour:
   musicSource: {fileID: 0}
   normalCutoffHz: 22000
   underwaterCutoffHz: 2000
-  normalPitch: 0.9
-  underwaterPitch: 0.8
   normalVolume: 0.4
   underwaterVolume: 0.4
   transition: 0.35
+  basePitch: 0.9
+  pitchRange: 0.2
+  pitchFollowSmooth: 0.25
+  underwaterPitch: 0.8
+  scorePitchMin: 1
+  scorePitchMax: 1.35
+  scorePitchReturn: 0.12
+  difficultyController: {fileID: 0}
 --- !u!4 &920220484
 Transform:
   m_ObjectHideFlags: 0
@@ -2234,7 +2240,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: '::'
   playerLives: {fileID: 444666084}
-  livesContainer: {fileID: 384234204}
+  livesContainer: {fileID: 384234205}
   lifeCellPrefab: {fileID: 6268033734258086475, guid: 1a8f1271928f93344b824d1a4d5cec99, type: 3}
 --- !u!1 &1058773500
 GameObject:
@@ -2579,11 +2585,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8136121185727349961, guid: 1a8f1271928f93344b824d1a4d5cec99, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 58
+      value: 69.06
       objectReference: {fileID: 0}
     - target: {fileID: 8136121185727349961, guid: 1a8f1271928f93344b824d1a4d5cec99, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 52
+      value: 67.75
       objectReference: {fileID: 0}
     - target: {fileID: 8136121185727349961, guid: 1a8f1271928f93344b824d1a4d5cec99, type: 3}
       propertyPath: m_LocalPosition.x
@@ -3040,6 +3046,13 @@ MonoBehaviour:
   pipePairPrefab: {fileID: 1530110248339373564, guid: c535d4abc4878f941ac6ab0975854f0b, type: 3}
   scoreService: {fileID: 491258287}
   difficulty: {fileID: 830024060}
+  lifeCollectiblePrefab: {fileID: 1665902087951113465, guid: 2e48f69edbe5102409ac3bb095fc4210, type: 3}
+  healCollectiblePrefab: {fileID: 1665902087951113465, guid: a6f41958b26b3d54f9143874dfdcadbe, type: 3}
+  lifeSpawnChance: 0.05
+  healSpawnChance: 0.2
+  gapInnerMargin: 0.75
+  xOffsetWithinPair: 0.8
+  parentCollectibleToPipe: 1
 --- !u!4 &1408798579
 Transform:
   m_ObjectHideFlags: 0
