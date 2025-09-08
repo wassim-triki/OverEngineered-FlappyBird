@@ -38,19 +38,14 @@ public class DifficultyController : MonoBehaviour
         return Mathf.Clamp(gap , minGap, maxGap);
     }
     
+    // Normalized difficulty 0..1
+    public float Difficulty01 => Mathf.Clamp01(score ? (float)score.Current / rampScore : 0f);
+
+    
     public void ResetRun()
     {
         // nothing to do for now (score drives everything)
         // method here so GameManager can call it for symmetry
     }
-    
-#if UNITY_EDITOR
-    private void OnValidate()
-    {
-        if (minSpeed > maxSpeed) (minSpeed, maxSpeed) = (maxSpeed, minSpeed);
-        if (minInterval > maxInterval) (minInterval, maxInterval) = (maxInterval, minInterval);
-        if (minGap > maxGap) (minGap, maxGap) = (maxGap, minGap);
-        rampScore = Mathf.Max(1, rampScore);
-    }
-#endif
+
 }

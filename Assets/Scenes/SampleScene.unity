@@ -1967,7 +1967,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7c77629639014f1468b53a7f46172df5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DifficultyController
-  rampScore: 20
+  rampScore: 30
   score: {fileID: 491258287}
   enableGapScaling: 1
   enableSpeedScaling: 1
@@ -2027,7 +2027,7 @@ MonoBehaviour:
   musicSource: {fileID: 0}
   normalCutoffHz: 22000
   underwaterCutoffHz: 2000
-  normalPitch: 1
+  normalPitch: 0.9
   underwaterPitch: 0.8
   normalVolume: 0.4
   underwaterVolume: 0.4
