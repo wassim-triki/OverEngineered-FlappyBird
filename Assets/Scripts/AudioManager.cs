@@ -26,6 +26,12 @@ public class AudioManager : MonoBehaviour
     [Header("Underwater state (menu/pause/game over)")]
     [SerializeField] private float underwaterPitch = 0.85f;    // slight dip
 
+    [Header("Score SFX pitch-up")]
+    [SerializeField, Range(0.5f, 1.5f)] private float scorePitchMin = 1.00f;
+    [SerializeField, Range(0.5f, 2.00f)] private float scorePitchMax = 1.35f;
+    [SerializeField, Min(0f)]            private float scorePitchReturn = 0.12f;
+
+    private Tween _sfxPitchTween;
     [Header("Difficulty")]
     [SerializeField] private DifficultyController difficultyController;
 
@@ -178,5 +184,27 @@ public class AudioManager : MonoBehaviour
         }
         // base + range * t
         return basePitch + t * pitchRange;
+    }
+    public void PlayScoreUp()
+    {
+        if (!library) return;
+        if (!library.TryGetRandom(Sfx.Score, out var clip, out var libVol)) return;
+
+        // Map difficulty 0..1 → pitch range
+        float t = 0f;
+        if (difficultyController != null)
+            t = Mathf.Clamp01(difficultyController.Difficulty01);
+
+        float pitch = Mathf.Lerp(scorePitchMin, scorePitchMax, t);
+
+        // Apply pitch only for this one-shot, then ease back to 1f
+        _sfxPitchTween?.Kill();
+        _sfxSource.pitch = pitch;
+        _sfxSource.PlayOneShot(clip, Mathf.Clamp01(libVol));
+
+        // Smoothly return pitch so other SFX aren't affected
+        _sfxPitchTween = DG.Tweening.DOTween
+            .To(() => _sfxSource.pitch, x => _sfxSource.pitch = x, 1f, scorePitchReturn)
+            .SetUpdate(true);
     }
 }

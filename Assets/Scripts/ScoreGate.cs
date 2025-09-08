@@ -19,7 +19,8 @@ public class ScoreGate : MonoBehaviour
 
         _consumed = true;
         _score.Add(1);
-        AudioManager.I.Play(Sfx.Score);
+        // AudioManager.I.Play(Sfx.Score);
+        AudioManager.I.PlayScoreUp();
         Haptics.Light();
     }
 }
