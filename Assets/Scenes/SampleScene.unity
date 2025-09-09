@@ -3065,8 +3065,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 307db016f1818784dafd35f12f5db7b8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PillarsSpawner
-  spawnMinY: -5
-  spawnMaxY: 6
+  spawnMinY: -6
+  spawnMaxY: 5
   pipePairPrefab: {fileID: 1530110248339373564, guid: c535d4abc4878f941ac6ab0975854f0b, type: 3}
   scoreService: {fileID: 491258287}
   difficulty: {fileID: 830024060}
