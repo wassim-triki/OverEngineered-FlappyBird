@@ -2027,8 +2027,8 @@ MonoBehaviour:
   musicSource: {fileID: 0}
   normalCutoffHz: 22000
   underwaterCutoffHz: 2000
-  normalVolume: 0.4
-  underwaterVolume: 0.4
+  normalVolume: 0.5
+  underwaterVolume: 0.5
   transition: 0.35
   basePitch: 0.9
   pitchRange: 0.4
@@ -3052,8 +3052,8 @@ MonoBehaviour:
   difficulty: {fileID: 830024060}
   lifeCollectiblePrefab: {fileID: 1665902087951113465, guid: 2e48f69edbe5102409ac3bb095fc4210, type: 3}
   healCollectiblePrefab: {fileID: 1665902087951113465, guid: a6f41958b26b3d54f9143874dfdcadbe, type: 3}
-  lifeSpawnChance: 0.269
-  healSpawnChance: 0.216
+  lifeSpawnChance: 0.04
+  healSpawnChance: 0.08
   gapInnerMargin: 0.75
   xOffsetWithinPair: 0.8
   parentCollectibleToPipe: 1

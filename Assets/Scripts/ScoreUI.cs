@@ -9,7 +9,6 @@ public class ScoreUI : MonoBehaviour
     [SerializeField] private TextMeshProUGUI scoreUI;
     [SerializeField] private TextMeshProUGUI newBadgeLabel;
 
-    // Beat settings
     [Header("Beat Animation")]
     [SerializeField] private float beatScale = 1.15f;
     [SerializeField] private float beatUpDuration = 0.10f;
@@ -17,7 +16,6 @@ public class ScoreUI : MonoBehaviour
     [SerializeField] private Ease beatUpEase = Ease.OutBack;
     [SerializeField] private Ease beatDownEase = Ease.OutCubic;
 
-    // Menu reveal settings
     [Header("Menu Reveal")]
     [SerializeField] private float menuRevealDuration = 0.6f;
     [SerializeField] private float menuRevealDelay = 0.5f;
@@ -27,14 +25,8 @@ public class ScoreUI : MonoBehaviour
     private Tween _beatTween;
 
     private bool _newHighShownThisRun = false;
-    private bool _scoreUIInitialized = false;
     private bool _initialRevealDone = false;
-
-    void Awake()
-    {
-        // In case DOTween hasn't been initialized elsewhere
-        if (!DOTween.IsTweening(this)) { /* noop */ }
-    }
+    private int  _lastShownScore = 0;
 
     void Start()
     {
@@ -48,11 +40,9 @@ public class ScoreUI : MonoBehaviour
 
         if (newBadgeLabel) newBadgeLabel.gameObject.SetActive(false);
 
-        // Set initial value without beat
-        scoreUI.text = score != null ? score.Current.ToString() : "0";
-        _scoreUIInitialized = true;
+        _lastShownScore = score ? score.Current : 0;
+        scoreUI.text = _lastShownScore.ToString();
 
-        // If we boot into Menu, play the reveal once
         TryInitialMenuReveal();
     }
 
@@ -101,8 +91,10 @@ public class ScoreUI : MonoBehaviour
     private void HandleOnMenu()
     {
         _newHighShownThisRun = false;
-        _scoreUIInitialized = false; // avoid beating on the first set after reset
         if (newBadgeLabel) newBadgeLabel.gameObject.SetActive(false);
+
+        // sync last shown baseline to whatever score is on entering menu (likely 0)
+        _lastShownScore = score ? score.Current : 0;
 
         PlayMenuReveal();
     }
@@ -124,8 +116,11 @@ public class ScoreUI : MonoBehaviour
     private void HandleGameOver()
     {
         _newHighShownThisRun = false;
-        _scoreUIInitialized = false;
         if (newBadgeLabel) newBadgeLabel.gameObject.SetActive(false);
+
+        // reset baseline; prevents a beat on the 0 reset
+        _lastShownScore = score ? score.Current : 0;
+
         ResetScoreScale();
     }
 
@@ -145,19 +140,16 @@ public class ScoreUI : MonoBehaviour
 
         newBadgeLabel.gameObject.SetActive(true);
 
-        // Reset initial state
         newBadgeLabel.fontSize = 0f;
         var c = newBadgeLabel.color;
         newBadgeLabel.color = new Color(c.r, c.g, c.b, 0f);
 
-        // Animate font size
         DOTween.To(() => newBadgeLabel.fontSize,
                    x => newBadgeLabel.fontSize = x,
                    25.5f,
                    0.5f)
                .SetEase(Ease.OutBack);
 
-        // Animate opacity (alpha up to ~70%)
         newBadgeLabel.DOFade(0.7f, 0.5f).SetEase(Ease.OutBack);
     }
 
@@ -165,13 +157,14 @@ public class ScoreUI : MonoBehaviour
     {
         if (!scoreUI) return;
 
+        bool increased = newScore > _lastShownScore;
+
         scoreUI.text = newScore.ToString();
 
-        // Beat only on real changes during play (skip the very first init set)
-        if (_scoreUIInitialized)
+        if (increased)
             PlayBeat();
-        else
-            _scoreUIInitialized = true;
+
+        _lastShownScore = newScore;
     }
 
     private void PlayBeat()

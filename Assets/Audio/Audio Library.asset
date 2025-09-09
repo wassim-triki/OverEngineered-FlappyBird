@@ -29,12 +29,12 @@ MonoBehaviour:
   - id: 0
     clips:
     - {fileID: 8300000, guid: 59c597ffca12dbf46846adf7c2207b15, type: 3}
-    volume: 0.3
+    volume: 0.1
   - id: 5
     clips:
     - {fileID: 8300000, guid: 9d3913de4d9eb4b4387ade56349eb8bb, type: 3}
-    volume: 0.6
+    volume: 0.5
   - id: 6
     clips:
     - {fileID: 8300000, guid: 395129c45067a8240ba25965d82f6566, type: 3}
-    volume: 0.6
+    volume: 0.5
