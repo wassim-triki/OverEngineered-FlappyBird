@@ -1986,7 +1986,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7c77629639014f1468b53a7f46172df5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DifficultyController
-  rampScore: 1
+  rampScore: 60
   score: {fileID: 491258287}
   enableGapScaling: 1
   enableSpeedScaling: 1
@@ -1995,7 +1995,7 @@ MonoBehaviour:
   maxSpeed: 10
   maxInterval: 2.5
   minInterval: 1
-  maxGap: 8
+  maxGap: 7
   minGap: 5
   slomo: {fileID: 491258291}
 --- !u!4 &830024061
@@ -3065,8 +3065,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 307db016f1818784dafd35f12f5db7b8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PillarsSpawner
-  spawnMinY: -6
-  spawnMaxY: 5
+  bandCenterY: 0.4
+  bandHeight: 11.2
   pipePairPrefab: {fileID: 1530110248339373564, guid: c535d4abc4878f941ac6ab0975854f0b, type: 3}
   scoreService: {fileID: 491258287}
   difficulty: {fileID: 830024060}
@@ -3079,6 +3079,8 @@ MonoBehaviour:
   gapInnerMargin: 0.75
   xOffsetWithinPair: 0.8
   parentCollectibleToPipe: 1
+  fallbackSpeedForSpacing: 3
+  fallbackIntervalForTiming: 1.5
 --- !u!4 &1408798579
 Transform:
   m_ObjectHideFlags: 0
