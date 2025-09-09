@@ -15,7 +15,6 @@ public class MenuUI : MonoBehaviour
     
     
     
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
     void OnEnable()
     {
         GameStateManager.OnMenu += HandleOnMenuState;
@@ -40,7 +39,6 @@ public class MenuUI : MonoBehaviour
     private void Start()
     {
         _mainRectTransform = mainMenu.GetComponent<RectTransform>();
-        // Initialize to main menu state
         HandleOnMenuState();
     }
 

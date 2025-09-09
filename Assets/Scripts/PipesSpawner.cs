@@ -16,7 +16,6 @@ public class PipesSpawner : MonoBehaviour
     [SerializeField] private ScoreService scoreService;
     [SerializeField] private DifficultyController difficulty;
 
-    // ---------------------- Collectibles ----------------------
     [Header("Collectibles (optional)")]
     [SerializeField] private Collectible lifeCollectiblePrefab;
     [SerializeField] private Collectible healCollectiblePrefab;
@@ -29,9 +28,7 @@ public class PipesSpawner : MonoBehaviour
     [SerializeField, Min(0f)] private float gapInnerMargin = 0.75f;
     [SerializeField] private float xOffsetWithinPair = 0.8f;
     [SerializeField] private bool parentCollectibleToPipe = true;
-    // ----------------------------------------------------------
 
-    // Distance-based spawning (as you have)
     [Header("Distance Spawning (fallbacks when no Difficulty)")]
     [SerializeField] private float fallbackSpeedForSpacing   = 3.0f;
     [SerializeField] private float fallbackIntervalForTiming = 1.5f;
@@ -41,7 +38,7 @@ public class PipesSpawner : MonoBehaviour
     void Start()
     {
         _distanceSinceLast = 0f;
-        Spawn(); // initial
+        Spawn();
     }
 
     void Update()
@@ -49,7 +46,7 @@ public class PipesSpawner : MonoBehaviour
         if (!enabled) return;
 
         float speed         = CurrentSpeed();
-        float targetSpacing = TargetWorldSpacing(); // speed * interval
+        float targetSpacing = TargetWorldSpacing(); 
 
         _distanceSinceLast += speed * Time.deltaTime;
 
@@ -124,7 +121,6 @@ public class PipesSpawner : MonoBehaviour
 #if UNITY_EDITOR
     void OnDrawGizmosSelected()
     {
-        // Draw the vertical band and current valid center range (based on *prefab* gap for editor preview)
         Gizmos.color = new Color(1f, 1f, 1f, 0.25f);
 
         float halfBand = Mathf.Max(0f, bandHeight * 0.5f);
@@ -140,7 +136,6 @@ public class PipesSpawner : MonoBehaviour
         Vector3 d = new Vector3(right, yTop,    0f);
         Gizmos.DrawLine(a, b); Gizmos.DrawLine(c, d); Gizmos.DrawLine(a, c); Gizmos.DrawLine(b, d);
 
-        // Preview safe center range for current prefab gap (editor hint)
         if (pipePairPrefab != null)
         {
             float gap     = pipePairPrefab.Gap;

@@ -23,13 +23,11 @@ public class Collectible : MonoBehaviour
     {
         _consumed = true;
 
-        // Find the player root (Lives usually sits there)
         var player = other.GetComponentInParent<Player>();
         var collector = player ? player.gameObject : other;
 
         effect.Apply(collector);
 
-        // Per-collectible SFX (defaults to Pickup from the base class)
         AudioManager.I?.Play(effect.SfxOnPickup);
 
         Haptics.Medium();

@@ -11,7 +11,6 @@ public class LivesUI : MonoBehaviour
     [Header("Animation")]
     [SerializeField, Min(1f)] private float beatScale = 1.15f; // <- the single knob
 
-    // Fixed internals (kept private & constant)
     const float AddPopInDuration   = 0.08f;
     const float FullHealStagger    = 0.035f;
 
@@ -21,8 +20,8 @@ public class LivesUI : MonoBehaviour
     {
         if (playerLives != null)
         {
-            playerLives.OnLivesChanged += HandleLivesChanged; // int currentLives
-            playerLives.OnFullHeal     += HandleFullHeal;     // always triggers Max animation
+            playerLives.OnLivesChanged += HandleLivesChanged; 
+            playerLives.OnFullHeal     += HandleFullHeal;     
         }
     }
 
@@ -38,7 +37,6 @@ public class LivesUI : MonoBehaviour
     void Start()
     {
         ClearAll();
-        // Build initial hearts without anim
         for (int i = 0; i < (playerLives ? playerLives.CurrentLives : 0); i++)
             AddOne();
     }
@@ -51,7 +49,6 @@ public class LivesUI : MonoBehaviour
 
         if (diff > 0)
         {
-            // Gained lives -> add with pop then beat (uses the same beatScale)
             for (int i = 0; i < diff; i++) AddOneAnimated();
         }
         else if (diff < 0)
@@ -63,7 +60,6 @@ public class LivesUI : MonoBehaviour
 
     void HandleFullHeal()
     {
-        // Beat all hearts once in a short ripple; same beatScale
         for (int i = 0; i < _cells.Count; i++)
         {
             var cell = _cells[i];
@@ -92,7 +88,6 @@ public class LivesUI : MonoBehaviour
         var baseScale = Vector3.one;
         rt.localScale = Vector3.zero;
 
-        // quick pop-in to 1, then the same beat as full-heal
         DOTween.Sequence().SetLink(cell.gameObject, LinkBehaviour.KillOnDisable)
             .Append(rt.DOScale(baseScale, AddPopInDuration).SetEase(Ease.OutCubic))
             .AppendCallback(() => cell.Beat(beatScale));

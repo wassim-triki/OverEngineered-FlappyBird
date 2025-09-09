@@ -44,7 +44,6 @@ public class DifficultyController : MonoBehaviour
         get
         {
             float baseInterval = enableSpawnScaling ? Mathf.Lerp(maxInterval, minInterval, T) : maxInterval;
-            // To keep world spacing similar: slower movement => spawn less often => interval scales by 1/M
             return baseInterval * (1f / SlomoM);
         }
     }
@@ -57,5 +56,5 @@ public class DifficultyController : MonoBehaviour
 
     public float Difficulty01 => Mathf.Clamp01(score ? (float)score.Current / rampScore : 0f);
 
-    public void ResetRun() { /* score drives everything */ }
+    public void ResetRun() {  }
 }

@@ -200,8 +200,6 @@ public class PostProcessing : MonoBehaviour
         float hold   = Mathf.Max(0f, holdDuration);
         float outDur = Mathf.Max(0.01f, outDuration);
 
-        // Targets: "underwater-like" during hold -> init lens, zero chroma (same as menu/pause),
-        // then back to gameplay targets. Vignette is intentionally untouched.
         _pulseSeq = DOTween.Sequence().SetUpdate(ignoreTimeScale);
 
         if (_lensDistortion)
@@ -257,7 +255,6 @@ public class PostProcessing : MonoBehaviour
         float zoomTarget = initOrthoSize; // zoom IN (closer) during slomo hold
 
         _camTween = DOTween.Sequence().SetUpdate(ignoreTimeScale)
-            // In (zoom in)
             .Append(DOTween.To(
                 () => _cam.orthographicSize,
                 v  => _cam.orthographicSize = v,
@@ -265,7 +262,6 @@ public class PostProcessing : MonoBehaviour
                 inDur).SetEase(inEase))
             // Hold
             .AppendInterval(hold)
-            // Out (back to play size)
             .Append(DOTween.To(
                 () => _cam.orthographicSize,
                 v  => _cam.orthographicSize = v,

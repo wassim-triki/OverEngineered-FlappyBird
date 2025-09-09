@@ -51,7 +51,6 @@ public class GameManager : MonoBehaviour
     }
     void InitializeGame()
     {
-        // TODO: change this to Menu state
         GameStateManager.Instance.ReturnToMenu();
     }
     
@@ -60,7 +59,7 @@ public class GameManager : MonoBehaviour
     {
         playerScript.ResetPlayer();
         playerScript.DisableMovements();
-        playerScript.AnimateMenuAppear(); // start menu scale animation
+        playerScript.AnimateMenuAppear(); 
         playerLives.ResetLives();
         score.ResetScore();
         pipesSpawner.Disable();
@@ -70,7 +69,7 @@ public class GameManager : MonoBehaviour
 
     void HandleGameStartedState()
     {
-        playerScript.EnsureNormalScale(); // ensure fully visible when game starts
+        playerScript.EnsureNormalScale();
         playerScript.EnableMovements();
         playerScript.StartSnapX(); 
         pipesSpawner.Enable();
@@ -80,7 +79,7 @@ public class GameManager : MonoBehaviour
 
     void HandleGameOverState()
     {
-        playerScript.DisableControls(); // ensures snapping cancels & velocity zeroed
+        playerScript.DisableControls(); 
         pipesSpawner.Disable();
         groundLoop.Freeze();
     }
@@ -107,7 +106,6 @@ public class GameManager : MonoBehaviour
         AudioManager.I.Play(Sfx.Hit);
         if (ctx != null)
         {
-            // if the ctx source is a top pillar or a bottom pillar than its parent must be a PillarPair
             var pair = ctx.Source.GetComponentInParent<PipePair>();
             pair?.DisableScoring();                 
         }

@@ -18,10 +18,7 @@ public class LifeCell : MonoBehaviour
         _baseScale = _rt ? _rt.localScale : Vector3.one;
     }
 
-    /// <summary>
-    /// Single beat. 'scale' is the absolute target multiplier (e.g. 1.15).
-    /// Fixed timings/eases inside.
-    /// </summary>
+
     public void Beat(float scale)
     {
         if (_rt == null) return;

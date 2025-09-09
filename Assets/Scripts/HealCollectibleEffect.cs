@@ -11,10 +11,8 @@ namespace DefaultNamespace
             if (!collector) return;
             var lives = collector.GetComponent<Lives>();
             if (!lives) return;
-            // if (lives.CurrentLives < lives.MaxLives)
-            // {
+
                 lives.GainLife(amount);
-            // }
         }
     }
 }

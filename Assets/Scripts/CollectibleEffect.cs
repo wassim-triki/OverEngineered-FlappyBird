@@ -9,7 +9,6 @@ namespace DefaultNamespace
 
         public Sfx SfxOnPickup => sfxOnPickup;
 
-        // Apply effect to the collector (usually the player root or its Lives owner)
         public abstract void Apply(GameObject collector);
     }
 }

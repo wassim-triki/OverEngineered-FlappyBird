@@ -93,7 +93,6 @@ public class ScoreUI : MonoBehaviour
         _newHighShownThisRun = false;
         if (newBadgeLabel) newBadgeLabel.gameObject.SetActive(false);
 
-        // sync last shown baseline to whatever score is on entering menu (likely 0)
         _lastShownScore = score ? score.Current : 0;
 
         PlayMenuReveal();
@@ -118,7 +117,6 @@ public class ScoreUI : MonoBehaviour
         _newHighShownThisRun = false;
         if (newBadgeLabel) newBadgeLabel.gameObject.SetActive(false);
 
-        // reset baseline; prevents a beat on the 0 reset
         _lastShownScore = score ? score.Current : 0;
 
         ResetScoreScale();

@@ -5,7 +5,7 @@ public class CameraShake2D : MonoBehaviour
 {
     [Header("Defaults (tweak to taste)")]
     [SerializeField] private float defaultDuration  = 0.14f;
-    [SerializeField] private float defaultAmplitude = 0.15f;  // world units
+    [SerializeField] private float defaultAmplitude = 0.15f; 
     [SerializeField] private float defaultFrequency = 33f;    // Hz
     [SerializeField] private float rotationPerUnit  = 8f;     // deg per 1.0 amplitude
 

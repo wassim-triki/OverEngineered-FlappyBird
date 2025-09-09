@@ -112,7 +112,6 @@ public class AudioManager : MonoBehaviour
         }
     }
 
-    // --- Public SFX ---
     public void Play(Sfx id, float volume = 1f)
     {
         if (!library) return;
@@ -120,7 +119,6 @@ public class AudioManager : MonoBehaviour
         _sfxSource.PlayOneShot(clip, Mathf.Clamp01(volume * libVol));
     }
 
-    // --- Gameplay entry/resume ---
     private void HandlePlayStartOrResume()
     {
         ClearUnderwaterFX();
@@ -128,7 +126,6 @@ public class AudioManager : MonoBehaviour
         if (musicSource) _pitch = musicSource.pitch;
     }
 
-    // --- Music FX: underwater for states ---
     private void ApplyUnderwaterFX()
     {
         if (!musicSource) return;
@@ -165,7 +162,6 @@ public class AudioManager : MonoBehaviour
             });
     }
 
-    // --- UPDATED: Music Pulse (for Slomo) with HOLD ---
     public void PulseUnderwater(float inDuration, float holdDuration, float outDuration, Ease inEase, Ease outEase)
     {
         if (!musicSource) return;
@@ -198,7 +194,6 @@ public class AudioManager : MonoBehaviour
             });
     }
 
-    // --- Helpers ---
     private float TargetNormalPitch()
     {
         float t = 0f;

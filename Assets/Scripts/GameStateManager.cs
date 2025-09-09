@@ -52,7 +52,6 @@ namespace DefaultNamespace
 
         public void SetState(GameState newState)
         {
-            // if (newState == currentState && _previousState == currentState) return;
             
             var oldState = _previousState != currentState ? _previousState : currentState;
             currentState = newState;
@@ -80,8 +79,6 @@ namespace DefaultNamespace
                     OnGameOver?.Invoke();
                     break;
             }
-
-            Debug.Log($"[GameState] {oldState} → {newState}");
         }
         public void ReturnToMenu() => SetState(GameState.Menu);
         public void StartGame() => SetState(GameState.Playing);

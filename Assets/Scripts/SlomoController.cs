@@ -47,10 +47,6 @@ public class SlomoController : MonoBehaviour
         SpeedMultiplier = 1f;
     }
 
-    /// <summary>
-    /// Plays a slomo pulse: ease down -> HOLD -> ease up.
-    /// If a pulse is active, it restarts from the current multiplier.
-    /// </summary>
     public void PlayPulse(
         float targetMultiplier,
         float inDuration,
@@ -78,7 +74,6 @@ public class SlomoController : MonoBehaviour
             .SetLink(gameObject, LinkBehaviour.KillOnDisable);
     }
 
-    // Convenience using defaults
     public void PlayPulseDefault()
     {
         PlayPulse(defaultTargetMultiplier, defaultInDuration, defaultHoldDuration, defaultOutDuration, defaultInEase, defaultOutEase);
