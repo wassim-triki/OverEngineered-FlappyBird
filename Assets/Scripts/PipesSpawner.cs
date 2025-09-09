@@ -1,3 +1,4 @@
+// Assets/Scripts/PipesSpawner.cs
 using System;
 using System.Collections.Generic;
 using UnityEngine;
@@ -19,10 +20,12 @@ public class PipesSpawner : MonoBehaviour
     [Header("Collectibles (optional)")]
     [SerializeField] private Collectible lifeCollectiblePrefab;
     [SerializeField] private Collectible healCollectiblePrefab;
+    [SerializeField] private Collectible slomoCollectiblePrefab;  // << NEW
 
     [Tooltip("Independent chances per pair; at most ONE collectible will spawn.")]
-    [SerializeField, Range(0f, 1f)] private float lifeSpawnChance = 0.08f;
-    [SerializeField, Range(0f, 1f)] private float healSpawnChance = 0.15f;
+    [SerializeField, Range(0f, 1f)] private float lifeSpawnChance  = 0.08f;
+    [SerializeField, Range(0f, 1f)] private float healSpawnChance  = 0.15f;
+    [SerializeField, Range(0f, 1f)] private float slomoSpawnChance = 0.10f; // << NEW
 
     [Tooltip("Safety margin inside the gap edges (world units) to avoid touching pipes).")]
     [SerializeField, Min(0f)] private float gapInnerMargin = 0.75f;
@@ -52,7 +55,7 @@ public class PipesSpawner : MonoBehaviour
         {
             _timer = 0f;
             Spawn();
-            _interval = difficulty ? difficulty.CurrentInterval : _interval; // schedule next
+            _interval = difficulty ? difficulty.CurrentInterval : _interval;
         }
     }
 
@@ -80,20 +83,21 @@ public class PipesSpawner : MonoBehaviour
 
     void TrySpawnOneCollectible(PipePair pair)
     {
-        // Compute safe Y band inside the gap once
         float gap = Mathf.Max(0f, pair.Gap);
         float halfGap  = gap * 0.5f;
         float halfSafe = Mathf.Max(0f, halfGap - gapInnerMargin);
-        if (halfSafe <= 0f) return; // no safe space
+        if (halfSafe <= 0f) return;
 
-        // Roll each candidate independently, then pick ONE at random if multiple passed.
-        var candidates = new List<Collectible>(2);
+        var candidates = new List<Collectible>(3);
 
         if (lifeCollectiblePrefab && UnityEngine.Random.value <= lifeSpawnChance)
             candidates.Add(lifeCollectiblePrefab);
 
         if (healCollectiblePrefab && UnityEngine.Random.value <= healSpawnChance)
             candidates.Add(healCollectiblePrefab);
+
+        if (slomoCollectiblePrefab && UnityEngine.Random.value <= slomoSpawnChance)
+            candidates.Add(slomoCollectiblePrefab);
 
         if (candidates.Count == 0) return;
 
@@ -108,7 +112,6 @@ public class PipesSpawner : MonoBehaviour
 
         Transform parent = parentCollectibleToPipe ? pair.transform : null;
         Instantiate(prefab, new Vector3(x, y, 0f), Quaternion.identity, parent);
-        // Exactly one collectible spawned per pair.
     }
 
     public void Disable() => enabled = false;

@@ -1038,6 +1038,7 @@ GameObject:
   - component: {fileID: 491258287}
   - component: {fileID: 491258289}
   - component: {fileID: 491258290}
+  - component: {fileID: 491258291}
   m_Layer: 0
   m_Name: Systems
   m_TagString: Untagged
@@ -1105,6 +1106,24 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DefaultNamespace.GameStateManager
   currentState: 0
+--- !u!114 &491258291
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 491258286}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ba086402ff38f6148afb1b25999eb8c6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: '::'
+  defaultTargetMultiplier: 0.55
+  defaultInDuration: 0.22
+  defaultHoldDuration: 3
+  defaultOutDuration: 0.9
+  defaultInEase: 9
+  defaultOutEase: 8
 --- !u!1 &493727884
 GameObject:
   m_ObjectHideFlags: 0
@@ -1967,17 +1986,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7c77629639014f1468b53a7f46172df5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DifficultyController
-  rampScore: 60
+  rampScore: 1
   score: {fileID: 491258287}
   enableGapScaling: 1
   enableSpeedScaling: 1
   enableSpawnScaling: 1
   minSpeed: 4
-  maxSpeed: 16
+  maxSpeed: 10
   maxInterval: 2.5
   minInterval: 1
-  maxGap: 6
-  minGap: 3
+  maxGap: 8
+  minGap: 5
+  slomo: {fileID: 491258291}
 --- !u!4 &830024061
 Transform:
   m_ObjectHideFlags: 0
@@ -3045,15 +3065,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 307db016f1818784dafd35f12f5db7b8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PillarsSpawner
-  spawnMinY: -7
-  spawnMaxY: 8
+  spawnMinY: -5
+  spawnMaxY: 6
   pipePairPrefab: {fileID: 1530110248339373564, guid: c535d4abc4878f941ac6ab0975854f0b, type: 3}
   scoreService: {fileID: 491258287}
   difficulty: {fileID: 830024060}
   lifeCollectiblePrefab: {fileID: 1665902087951113465, guid: 2e48f69edbe5102409ac3bb095fc4210, type: 3}
   healCollectiblePrefab: {fileID: 1665902087951113465, guid: a6f41958b26b3d54f9143874dfdcadbe, type: 3}
+  slomoCollectiblePrefab: {fileID: 556974041706765229, guid: 7fc1f3f6b29a97844a8aa7d9fe7dfd0e, type: 3}
   lifeSpawnChance: 0.04
   healSpawnChance: 0.08
+  slomoSpawnChance: 0.08
   gapInnerMargin: 0.75
   xOffsetWithinPair: 0.8
   parentCollectibleToPipe: 1

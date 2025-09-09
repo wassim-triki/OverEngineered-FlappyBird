@@ -1,4 +1,5 @@
-﻿using DefaultNamespace;
+﻿// Assets/Scripts/PostProcessing.cs
+using DefaultNamespace;
 using UnityEngine;
 using UnityEngine.Rendering;
 using UnityEngine.Rendering.Universal;
@@ -32,6 +33,7 @@ public class PostProcessing : MonoBehaviour
     [SerializeField] private bool  ignoreTimeScale           = true;
 
     private Tween _lensTween, _chromTween, _vignetteTween, _camTween;
+    private Sequence _pulseSeq;
     private Camera _cam;
 
     void Start()
@@ -46,7 +48,6 @@ public class PostProcessing : MonoBehaviour
             return;
         }
 
-        // Fetch overrides and enable intensity control
         if (postProcessVolume.profile.TryGet(out _lensDistortion))
         {
             _lensDistortion.active = true;
@@ -63,11 +64,9 @@ public class PostProcessing : MonoBehaviour
             _vignette.intensity.overrideState = true;
         }
 
-        // Camera: grab main (tagged), fallback to any camera
         _cam = Camera.main;
         if (!_cam) _cam = FindObjectOfType<Camera>();
 
-        // Initial look
         SetInstant(initLensDistortionIntensity, 0f, initVignetteIntensity);
         SetCamInstant(initOrthoSize);
     }
@@ -83,16 +82,20 @@ public class PostProcessing : MonoBehaviour
 
     void OnDisable()
     {
-        GameStateManager.OnMenu        -= HandleMenu;
-        GameStateManager.OnGameStarted -= HandleGameStarted;
-        GameStateManager.OnGameResumed -= HandleGameStarted;
-        GameStateManager.OnGameOver    -= HandleGameOver;
-        GameStateManager.OnGamePaused  -= HandlePaused;
+        if (GameStateManager.Instance != null)
+        {
+            GameStateManager.OnMenu        -= HandleMenu;
+            GameStateManager.OnGameStarted -= HandleGameStarted;
+            GameStateManager.OnGameResumed -= HandleGameStarted;
+            GameStateManager.OnGameOver    -= HandleGameOver;
+            GameStateManager.OnGamePaused  -= HandlePaused;
+        }
 
         _lensTween?.Kill();
         _chromTween?.Kill();
         _vignetteTween?.Kill();
         _camTween?.Kill();
+        _pulseSeq?.Kill();
     }
 
     // --- State handlers ---
@@ -186,4 +189,88 @@ public class PostProcessing : MonoBehaviour
             .SetEase(ease)
             .SetUpdate(ignoreTimeScale);
     }
+
+    public void PulseUnderwaterVisuals(float inDuration, float holdDuration, float outDuration, Ease inEase, Ease outEase)
+    {
+        if (_lensDistortion == null && _chromaticAberration == null) return;
+
+        _pulseSeq?.Kill();
+
+        float inDur  = Mathf.Max(0.01f, inDuration);
+        float hold   = Mathf.Max(0f, holdDuration);
+        float outDur = Mathf.Max(0.01f, outDuration);
+
+        // Targets: "underwater-like" during hold -> init lens, zero chroma (same as menu/pause),
+        // then back to gameplay targets. Vignette is intentionally untouched.
+        _pulseSeq = DOTween.Sequence().SetUpdate(ignoreTimeScale);
+
+        if (_lensDistortion)
+        {
+            _pulseSeq.Join(DOTween.To(
+                () => _lensDistortion.intensity.value,
+                v  => _lensDistortion.intensity.value = v,
+                // Mathf.Clamp(initLensDistortionIntensity, -1f, 1f),
+                0.44f,
+                inDur).SetEase(inEase));
+        }
+
+        if (_chromaticAberration)
+        {
+            _pulseSeq.Join(DOTween.To(
+                () => _chromaticAberration.intensity.value,
+                v  => _chromaticAberration.intensity.value = v,
+                // 0.5f,
+                1,
+                inDur).SetEase(inEase));
+        }
+
+        _pulseSeq.AppendInterval(hold);
+
+        if (_lensDistortion)
+        {
+            _pulseSeq.Append(DOTween.To(
+                () => _lensDistortion.intensity.value,
+                v  => _lensDistortion.intensity.value = v,
+                Mathf.Clamp(lensDistortionIntensity, -1f, 1f),
+                
+                outDur).SetEase(outEase));
+        }
+        if (_chromaticAberration)
+        {
+            _pulseSeq.Join(DOTween.To(
+                () => _chromaticAberration.intensity.value,
+                v  => _chromaticAberration.intensity.value = v,
+                Mathf.Clamp01(chromaticAberrationIntensity),
+                outDur).SetEase(outEase));
+        }
+    }
+    public void PulseCamZoom(float inDuration, float holdDuration, float outDuration, Ease inEase, Ease outEase)
+    {
+        if (!_cam || !_cam.orthographic) return;
+
+        _camTween?.Kill();
+
+        float inDur  = Mathf.Max(0.01f, inDuration);
+        float hold   = Mathf.Max(0f, holdDuration);
+        float outDur = Mathf.Max(0.01f, outDuration);
+
+        float zoomTarget = initOrthoSize; // zoom IN (closer) during slomo hold
+
+        _camTween = DOTween.Sequence().SetUpdate(ignoreTimeScale)
+            // In (zoom in)
+            .Append(DOTween.To(
+                () => _cam.orthographicSize,
+                v  => _cam.orthographicSize = v,
+                initOrthoSize*1.2f,
+                inDur).SetEase(inEase))
+            // Hold
+            .AppendInterval(hold)
+            // Out (back to play size)
+            .Append(DOTween.To(
+                () => _cam.orthographicSize,
+                v  => _cam.orthographicSize = v,
+                playOrthoSize,
+                outDur).SetEase(outEase));
+    }
+
 }
