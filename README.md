@@ -8,7 +8,7 @@ A small Unity 2D, Flappy Bird–like game showcasing applied C# and software eng
 - 📱 **Android:** [Download the APK](https://github.com/wassim-triki/Tweet-n-Beat-Unity-2D/releases) from this repository’s Releases and play it on your device.
 
 ## Demo
-![Demo](https://media2.giphy.com/media/v1.Y2lkPTc5MGI3NjExNW85ajYwbGwyaDlqcGVyeXBxcnVycmFwbG51dHA1Y2g3czJwNTA3MSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/7b0UOPZkT9AACZpMRR/giphy.gif)
+<img src="./tweetnbeat-gif.gif" width="20%"/>
 
 ## Under the Hood
 - **Event-driven flow:** `GameStateManager` broadcasts C# events; UI, audio, and gameplay stay decoupled.
@@ -25,4 +25,4 @@ A small Unity 2D, Flappy Bird–like game showcasing applied C# and software eng
 - **Composition** via interfaces (`IDamageable`, `IFreezable`)
 
 ---
-**Run:** Open `SampleScene` → Play. Tap / click / space to jump.
+**Run:** Open `Scene` → Play. Tap / click / space to jump.
