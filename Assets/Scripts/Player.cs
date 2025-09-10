@@ -12,25 +12,24 @@ public class Player : MonoBehaviour
     [SerializeField] private float holdTime = 0.16f;
     [SerializeField] private float holdBoost = 16f;
     
-    // === Soft Top Clamp (feel-first) ===
     [Header("Top Clamp")]
     [SerializeField, Range(0f, 0.25f)]
-    private float viewportTopMargin = 0.08f;  // how far below the top edge we place the limit (in normalized viewport units)
+    private float viewportTopMargin = 0.08f;  
 
     [SerializeField, Min(0f)]
-    private float softZoneWorld = 0.9f;       // height of the "soft" band (world units) beneath the limit
+    private float softZoneWorld = 0.9f;      
 
     [SerializeField, Min(0f)]
-    private float clampPushStrength = 18f;    // downward push when inside soft band (units/sec^2)
+    private float clampPushStrength = 18f;    
 
     [SerializeField, Min(0f)]
-    private float clampDamping = 10f;         // scales how quickly upward velocity is reduced
+    private float clampDamping = 10f;        
 
     private Camera _cam;
     
     [Header("Rotation Settings")]
-    [SerializeField] private float maxRotation = 45f; // degrees
-    [SerializeField] private float rotationSpeed = 10f; // how fast to rotate
+    [SerializeField] private float maxRotation = 45f; 
+    [SerializeField] private float rotationSpeed = 10f; 
 
     [Header("Gravity")]
     [SerializeField] private float normalGravity = 5.8f;
@@ -52,17 +51,15 @@ public class Player : MonoBehaviour
     private bool _movementsEnabled;
     private bool _controlsEnabled;
 
-    // --- NEW: input sampling flags (Update) ---
     private bool _jumpPressedThisFrame;
     private bool _jumpHeld;
 
-    // --- NEW: helper for SmoothDamp X snapping ---
-    private float _xSmoothVel; // internal velocity used by SmoothDamp
-    private Coroutine _xSnapRoutine; // coroutine handle for X snapping
+    private float _xSmoothVel; 
+    private Coroutine _xSnapRoutine; 
     private float smoothTime = 2f;
     private float targetX = -3;
 
-    private Tween _menuScaleTween; // menu appearance tween
+    private Tween _menuScaleTween; 
     private Vector3 _originalScale;
 
     void Awake()
@@ -70,8 +67,8 @@ public class Player : MonoBehaviour
         _rigidbody = GetComponent<Rigidbody2D>();
         _jump = InputSystem.actions.FindAction("Jump");
         _rigidbody.gravityScale = normalGravity;
-        _initPosition = transform.position; // capture initial spawn position
-        _originalScale = transform.localScale; // store original scale
+        _initPosition = transform.position; 
+        _originalScale = transform.localScale; 
     }
 
     void OnEnable() => EnableMovements();
@@ -84,7 +81,7 @@ public class Player : MonoBehaviour
 
     public void ResetPlayer(bool resetAutoJump = true)
     {
-        CancelSnapX(); // ensure no leftover snapping continues into menu
+        CancelSnapX(); 
         transform.position = _initPosition;
         transform.rotation = Quaternion.identity;
         _rigidbody.linearVelocity = Vector2.zero;
@@ -106,7 +103,7 @@ public class Player : MonoBehaviour
     public void DisableMovements()
     {
         _movementsEnabled = false;
-        CancelSnapX(); // stop snapping while disabled
+        CancelSnapX(); 
         DisableControls();
         _rigidbody.bodyType = RigidbodyType2D.Kinematic;
         _rigidbody.linearVelocity = Vector2.zero;
@@ -125,12 +122,10 @@ public class Player : MonoBehaviour
         _jumpHeld = false;
     }
 
-    // ---- NEW: read inputs in Update to avoid missing frames ----
     void Update()
     {
         if (!_controlsEnabled || _jump == null) return;
 
-        // Block if pointer over UI (same check you used)
         if (EventSystem.current != null && EventSystem.current.IsPointerOverGameObject())
         {
             _jumpPressedThisFrame = false;
@@ -161,14 +156,12 @@ public class Player : MonoBehaviour
 
     void HandleJump()
     {
-        // Start jump (consume one-shot flag)
         if (_jumpPressedThisFrame)
         {
             _jumpPressedThisFrame = false;
             PerformJump();
         }
 
-        // Hold boost (physics time)
         if (_jumpHeld && _holdTimer > 0f && _rigidbody.linearVelocity.y > 0f)
         {
             float strength = _holdTimer / holdTime;
@@ -181,24 +174,22 @@ public class Player : MonoBehaviour
     {
         if (_rigidbody.linearVelocity.y < -3f)
         {
-            _rigidbody.gravityScale = fallGravity; // Falling fast
+            _rigidbody.gravityScale = fallGravity; 
         }
         else if (_rigidbody.linearVelocity.y > 0f && _jumpHeld && _holdTimer > 0f)
         {
-            _rigidbody.gravityScale = holdGravity; // Rising with hold
+            _rigidbody.gravityScale = holdGravity; 
         }
         else
         {
-            _rigidbody.gravityScale = normalGravity; // Normal state
+            _rigidbody.gravityScale = normalGravity;
         }
     }
 
     void HandleRotation()
     {
-        // Map velocity to rotation angle (-maxRotation to +maxRotation)
         float targetRotation = Mathf.Clamp(_rigidbody.linearVelocity.y * 5f, -maxRotation, maxRotation);
 
-        // Smoothly rotate towards target (physics time)
         float currentZ = transform.eulerAngles.z;
         if (currentZ > 180f) currentZ -= 360f; // unwrap
 
@@ -263,7 +254,6 @@ public class Player : MonoBehaviour
             yield break;
         }
 
-        // Setup for snapping (unfreeze X)
         _constraintsBeforeSnap = _rigidbody.constraints;
         if (_freezeXWhenIdle)
             _rigidbody.constraints &= ~RigidbodyConstraints2D.FreezePositionX;
@@ -274,7 +264,6 @@ public class Player : MonoBehaviour
         {
             if (!_movementsEnabled)
             {
-                // abort if movements disabled (e.g., menu / game over)
                 break;
             }
             currentX = transform.position.x;
@@ -298,7 +287,6 @@ public class Player : MonoBehaviour
             }
             yield return new WaitForFixedUpdate();
         }
-        // cleanup (both normal completion & aborted)
         _rigidbody.constraints = _freezeXWhenIdle
             ? (_constraintsBeforeSnap | RigidbodyConstraints2D.FreezePositionX)
             : _constraintsBeforeSnap;
@@ -311,13 +299,10 @@ public class Player : MonoBehaviour
         if (!_cam) _cam = Camera.main;
         if (!_cam) return;
 
-        // Compute the world Y of the top limit (with viewport margin)
-        // We use player's Z so the conversion works for ortho/persp.
         float depth = Mathf.Abs(_cam.transform.position.z - transform.position.z);
         Vector3 topWorld = _cam.ViewportToWorldPoint(new Vector3(0.5f, 1f - viewportTopMargin, depth));
         float maxY = topWorld.y;
 
-        // Soft band starts this far below the top limit
         float softStartY = maxY - softZoneWorld;
 
         Vector3 pos = transform.position;
@@ -325,22 +310,17 @@ public class Player : MonoBehaviour
 
         if (pos.y >= softStartY)
         {
-            // How deep into the soft band are we? (0 at softStart, 1 at max)
             float t = Mathf.InverseLerp(softStartY, maxY, pos.y);
 
-            // 1) Reduce upward velocity as we approach the cap
             if (vel.y > 0f)
             {
-                // Scale down upward speed proportionally to depth in band
                 float damping = clampDamping * t * Time.fixedDeltaTime;
                 vel.y = Mathf.Lerp(vel.y, 0f, damping);
             }
 
-            // 2) Apply a gentle downward acceleration that ramps up in the band
             float push = clampPushStrength * t * Time.fixedDeltaTime;
             vel.y -= push;
 
-            // 3) Safety net: never allow crossing above the absolute cap
             if (pos.y > maxY)
             {
                 pos.y = maxY;
@@ -353,7 +333,6 @@ public class Player : MonoBehaviour
 
     public void AnimateMenuAppear()
     {
-        // Immediately set scale to 0, then after delay animate to original scale
         if (_menuScaleTween != null && _menuScaleTween.IsActive()) _menuScaleTween.Kill();
         transform.localScale = Vector3.zero;
         _menuScaleTween = transform.DOScale(_originalScale, 0.5f)

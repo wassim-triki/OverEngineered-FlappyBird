@@ -5,19 +5,18 @@ using DefaultNamespace;
 public class DamageSource : MonoBehaviour
 {
     [Header("Behavior")]
-    [SerializeField] private bool fatal;         // ← ground: ON
+    [SerializeField] private bool fatal;      
     [SerializeField, Min(1)] private int damage = 1; 
     [SerializeField] private bool disableSelfOnHit = true;
 
     [Header("Filtering")]
-    [SerializeField] private LayerMask targetLayers = ~0; // who we can hurt
+    [SerializeField] private LayerMask targetLayers = ~0; 
     [SerializeField] private bool ignoreSelfHierarchy = true;
     
     private Collider2D _collider;
 
     private void Awake()
     {
-        // Cache own collider to avoid repeated GetComponent calls on hit.
         _collider = GetComponent<Collider2D>();
     }
     

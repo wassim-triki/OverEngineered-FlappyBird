@@ -12,4 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f2ff9d008dc049519074062fc8fbf970, type: 3}
   m_Name: LifeCollectibleEffect
   m_EditorClassIdentifier: Assembly-CSharp::DefaultNamespace.LifeCollectibleEffect
+  sfxOnPickup: 6
   amount: 1

@@ -41,25 +41,23 @@ public class IdleBob : MonoBehaviour
     void Start()
     {
         var s = GameStateManager.Instance?.CurrentState ?? GameState.Menu;
-        if (s == GameState.Menu) StartBob(); // scene boot into menu
+        if (s == GameState.Menu) StartBob();
     }
 
     public void StartBob()
     {
-        // Ensure only one pending starter
+        
         if (_startCo != null) StopCoroutine(_startCo);
         KillTweens();
 
-        // Delay one frame so GameManager.ResetPlayer has run
         _startCo = StartCoroutine(StartBobNextFrame());
     }
 
     IEnumerator StartBobNextFrame()
     {
-        yield return null; // wait a frame (after all listeners handle OnMenu)
+        yield return null;
         _startCo = null;
 
-        // Sample current as baseline AFTER ResetPlayer()
         _startY = transform.localPosition.y;
 
         _bobTween = transform.DOLocalMoveY(_startY + amplitude, period * 0.5f)
@@ -83,7 +81,6 @@ public class IdleBob : MonoBehaviour
 
     public void StopBob()
     {
-        // Just stop; keep whatever pose/rotation the player currently has
         if (_startCo != null) { StopCoroutine(_startCo); _startCo = null; }
         KillTweens();
     }

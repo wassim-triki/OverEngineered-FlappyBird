@@ -16,6 +16,7 @@ public sealed class Lives : MonoBehaviour
     public event Action<DamageContext>OnDeath;
     public event Action<DamageContext> OnLifeLost;
 
+    public event Action OnFullHeal;
 
     public void ResetLives()
     {
@@ -36,20 +37,7 @@ public sealed class Lives : MonoBehaviour
         }
     }
     
-    // public void GainMaxLife(int amount = 1)
-    // {
-    //     if(amount <= 0 ||!IsAlive) return;
-    //     int oldMaxLives = MaxLives;
-    //     MaxLives = Mathf.Clamp(MaxLives+amount,1,99);
-    //     CurrentLives = MaxLives;
-    //     bool maxLifeGained = oldMaxLives != MaxLives;
-    //     if (maxLifeGained)
-    //     {
-    //         OnLivesChanged?.Invoke(CurrentLives);
-    //         Debug.Log($"[Lives] Max +{amount} → {CurrentLives}/{MaxLives}", this);
-    //     }
-    // }
-    //
+
     public void Max()
     {
         if(!IsAlive) return;
@@ -61,6 +49,7 @@ public sealed class Lives : MonoBehaviour
             OnLivesChanged?.Invoke(CurrentLives);
             Debug.Log($"[Lives] MAX → {CurrentLives}/{MaxObtainableLives}", this);
         }
+        OnFullHeal?.Invoke();
     }
 
     public void LoseLife(int amount = 1, DamageContext ctx = null)

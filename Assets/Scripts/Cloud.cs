@@ -15,7 +15,6 @@ public class Cloud : MonoBehaviour
         if (!spriteRenderer) spriteRenderer = GetComponent<SpriteRenderer>();
     }
 
-    // Called by the spawner
     public void Init(float speed, float despawnX)
     {
         _speed = speed;

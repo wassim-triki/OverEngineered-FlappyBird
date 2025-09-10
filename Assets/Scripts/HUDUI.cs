@@ -27,32 +27,27 @@ public class HUDUI : MonoBehaviour
 
     void HandleOnGameStarted()
     {
-        // highScoreUI.SetActive(false);
         highScoreUI.Hide();
     }
     
     void HandleOnGameResumed()
     {
-        // highScoreUI.SetActive(false);
         highScoreUI.Hide();
     }
     
     
     void HandleOnMenu()
     {
-        // highScoreUI.gameObject.SetActive(true);
         highScoreUI.Show();
     }
 
     void HandleOnGameOver()
     {
-        // highScoreUI.gameObject.SetActive(true);
         highScoreUI.Show();
     }
 
     void HandleOnGamePaused()
     {
-        // highScoreUI.gameObject.SetActive(true);
         highScoreUI.Show();
     }
 

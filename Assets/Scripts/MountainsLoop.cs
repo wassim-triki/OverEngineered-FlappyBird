@@ -3,17 +3,17 @@
 public class MountainsLoop : MonoBehaviour
 {
     [Header("Segments (same sprite, seamless)")]
-    [SerializeField] private SpriteRenderer mountainSprite;   // A (assign in Inspector or on this GO)
-    private SpriteRenderer _segmentB;                         // auto-cloned from A
+    [SerializeField] private SpriteRenderer mountainSprite;   
+    private SpriteRenderer _segmentB;                         
 
     [Header("Motion")]
-    [SerializeField] private float speed = 0.4f;              // world units/sec, constant
+    [SerializeField] private float speed = 0.4f;             
 
     [Header("Screen / Seam")]
-    private Camera _cam;                                      // auto-grab Main if null
-    [SerializeField] private float smallOverlap = 0.25f;      // world units; prevents tiny gaps
+    private Camera _cam;                                     
+    [SerializeField] private float smallOverlap = 0.25f;     
 
-    float _width;    // world width of a segment
+    float _width;    
     float _halfW;
 
     void Awake()
@@ -30,18 +30,15 @@ public class MountainsLoop : MonoBehaviour
             return;
         }
 
-        // Auto-clone B if missing
         if (_segmentB == null)
         {
             _segmentB = Instantiate(mountainSprite, mountainSprite.transform.parent);
             _segmentB.name = mountainSprite.name + "_B";
         }
 
-        // Cache world width from A (both segments share sprite/scale)
         _width = mountainSprite.bounds.size.x;
         _halfW = _width * 0.5f;
 
-        // Place B immediately to the right of A
         Vector3 posB = mountainSprite.transform.position;
         posB.x += _width - smallOverlap;
         _segmentB.transform.position = posB;
@@ -49,16 +46,14 @@ public class MountainsLoop : MonoBehaviour
 
     void Update()
     {
-        if (_cam == null) return; // avoid NRE if no MainCamera
+        if (_cam == null) return; 
 
         float dx = speed * Time.deltaTime;
         Move(mountainSprite.transform, -dx);
         Move(_segmentB.transform, -dx);
 
-        // Left screen edge (world coords)
         float leftEdgeX = _cam.ViewportToWorldPoint(new Vector3(0f, 0.5f, 0f)).x;
 
-        // If a segment’s right edge is left of the screen, move it to the right of the other
         RecycleIfOffscreen(mountainSprite, _segmentB, leftEdgeX);
         RecycleIfOffscreen(_segmentB, mountainSprite, leftEdgeX);
     }

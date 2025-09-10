@@ -16,14 +16,9 @@ public class AudioLibrary : ScriptableObject
 
     [SerializeField] private Entry[] entries;
 
-    // Map Sfx -> index into entries[] (not a copy of Entry!)
     Dictionary<Sfx, int> _indexMap;
 
     void OnEnable() => RebuildIndex();
-#if UNITY_EDITOR
-    // Runs when you tweak values in the Inspector (even in Play Mode)
-    void OnValidate() => RebuildIndex();
-#endif
 
     void RebuildIndex()
     {
@@ -44,7 +39,7 @@ public class AudioLibrary : ScriptableObject
         if (_indexMap == null || !_indexMap.TryGetValue(id, out int idx)) return false;
         if (idx < 0 || idx >= entries.Length) return false;
 
-        ref Entry e = ref entries[idx]; // read live data
+        ref Entry e = ref entries[idx];
         if (e.clips == null || e.clips.Length == 0) return false;
 
         defaultVolume = Mathf.Clamp01(e.volume); // allow 0..1
