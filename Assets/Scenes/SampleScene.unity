@@ -1986,7 +1986,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7c77629639014f1468b53a7f46172df5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DifficultyController
-  rampScore: 60
+  rampScore: 1
   score: {fileID: 491258287}
   enableGapScaling: 1
   enableSpeedScaling: 1
@@ -3073,9 +3073,9 @@ MonoBehaviour:
   lifeCollectiblePrefab: {fileID: 1665902087951113465, guid: 2e48f69edbe5102409ac3bb095fc4210, type: 3}
   healCollectiblePrefab: {fileID: 1665902087951113465, guid: a6f41958b26b3d54f9143874dfdcadbe, type: 3}
   slomoCollectiblePrefab: {fileID: 556974041706765229, guid: 7fc1f3f6b29a97844a8aa7d9fe7dfd0e, type: 3}
-  lifeSpawnChance: 0.04
-  healSpawnChance: 0.08
-  slomoSpawnChance: 0.08
+  lifeSpawnChance: 0.08
+  healSpawnChance: 0.2
+  slomoSpawnChance: 0.1
   gapInnerMargin: 0.75
   xOffsetWithinPair: 0.8
   parentCollectibleToPipe: 1
@@ -3437,7 +3437,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1929863819
 RectTransform:
   m_ObjectHideFlags: 0
