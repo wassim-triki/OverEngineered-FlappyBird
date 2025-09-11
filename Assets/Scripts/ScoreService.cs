@@ -12,7 +12,8 @@ public class ScoreService : MonoBehaviour
 
     private void Awake()
     {
-        High = PlayerPrefs.GetInt("HighScore", 0);
+        // High = PlayerPrefs.GetInt("HighScore", 0);
+        High=0;
     }
 
     public void ResetScore()
